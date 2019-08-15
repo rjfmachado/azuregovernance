@@ -1,0 +1,48 @@
+parameters:
+  client_secret: ''
+  client_id: ''
+  tenant_id: ''
+  subscription_id: ''
+  storage_account_name: ''
+  container_name: ''
+  key: ''
+  deploymentStage: ''
+
+steps:
+
+- bash: |
+    terraform init \
+    -input=false \
+    -backend=true \
+    -backend-config="client_secret=${{parameters.client_secret}}" \
+    -backend-config="storage_account_name=${{parameters.storage_account_name}}" \
+    -backend-config="container_name=${{parameters.container_name}}" \
+    -backend-config="key=${{parameters.key}}"
+  displayName: "Terraform Init"
+  workingDirectory: src/terraform
+  enabled: "true"
+
+- bash: |
+    terraform plan \
+    -input=false \
+    -var "client_secret=${{parameters.client_secret}}" \
+    -var "client_id=${{parameters.client_id}}" \
+    -var "tenant_id=${{parameters.tenant_id}}" \
+    -var "subscription_id=${{parameters.subscription_id}}" \
+    -var="deploymentStage=${{parameters.deploymentStage}}"
+  displayName: "Terraform Plan"
+  workingDirectory: src/terraform
+  enabled: "true"
+
+- bash: |
+    terraform apply \
+    -input=false \
+    -auto-approve \
+    -var "client_secret=${{parameters.client_secret}}" \
+    -var "client_id=${{parameters.client_id}}" \
+    -var "tenant_id=${{parameters.tenant_id}}" \
+    -var "subscription_id=${{parameters.subscription_id}}" \
+    -var "deploymentStage=${{parameters.deploymentStage}}"
+  displayName: "Terraform Apply"
+  workingDirectory: src/terraform
+  enabled: "true"
