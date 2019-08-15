@@ -29,13 +29,13 @@ stages:
     steps:
 
     - publish: src/terraform
-      displayName: "Publish Management Groups build artifact."
-      artifact: terraformManagementGroups
+      displayName: "Publish Azure Governance artifact."
+      artifact: terraformAzureGovernance
       enabled: "true"
 
     - publish: build/
-      displayName: "Publish Management Groups build artifact."
-      artifact: pipelinesManagementGroups
+      displayName: "Publish Azure Governance build artifact."
+      artifact: pipelinesAzureGovernance
       enabled: "true"
 
 - stage: dev

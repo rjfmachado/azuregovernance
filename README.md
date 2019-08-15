@@ -71,6 +71,7 @@ TODO: Add more guidance to this step.
 ```bash
 az account set --subscription 4c84d56c-f15b-4c6b-ae04-e541dd8d18e8
 ```
+
 - In Azure Cloud Shell, set the stage name.
 
 ```bash
