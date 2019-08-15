@@ -11,6 +11,8 @@ trigger:
     - build/ci/azure-pipelines.yml
     - build/templates/terraform-stage.yml
 
+pr: none
+
 variables:
 - name: terraformVersion
   value: 0.12.6
