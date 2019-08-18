@@ -100,6 +100,7 @@ SERVICE_PRINCIPAL_ID=$(az ad sp show --id "http://$SERVICE_PRINCIPAL_NAME" --que
 
 # Assign Owner role to Service Principal at the Tenant Root Management Group
 az role assignment create --role "Owner" --assignee $SERVICE_PRINCIPAL_ID --scope "/providers/Microsoft.Management/managementGroups/$TENANT_ID"
+#TODO: add Service Principal to Azure AD User administrator role
 ```
 
 - In Azure Cloud Shell, configure the stage Variable Group.

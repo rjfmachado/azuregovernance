@@ -15,7 +15,7 @@ resource "random_uuid" "uuidProject01CustomSupportAssignment" {}
 
 resource "azurerm_role_assignment" "assProject01CustomSupportAssignment" {
   name               = "$random_uuid.uuidProject01CustomSupportAssignment.result"
-  scope              = "$azurerm_subscription.sProject01.id}"
+  scope              = "$azurerm_subscription.sProject01.subscription_id"
   role_definition_id = "$azurerm_role_definition.roleCustomSupport.id"
   principal_id       = "$azuread_group.gProject01Support.id"
 }
