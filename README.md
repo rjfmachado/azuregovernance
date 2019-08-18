@@ -22,7 +22,7 @@ This repo contains samples for using Terraform to deploy Azure Governance relate
 - TODO: Add Azure DevOps custom dashboard with relevant visuals
 - TODO: Improve deployment safety
   - TODO: Added Scheduled plan/verify pipeline (gitops) and notifications
-  - TODO: Add pr pipeline to validate/plan in prod (need to test)
+  - PR pipeline to validate/plan in dev/prod
   - TODO: Add Stage checks https://docs.microsoft.com/en-us/azure/devops/pipelines/process/checks?view=azure-devops
 
 ## Configuration
