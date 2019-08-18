@@ -24,12 +24,11 @@ steps:
 
 - bash: |
     terraform validate \
-    -check-variables=true \
     -var "client_secret=${{parameters.client_secret}}" \
     -var "client_id=${{parameters.client_id}}" \
     -var "tenant_id=${{parameters.tenant_id}}" \
     -var "subscription_id=${{parameters.subscription_id}}" \
-    -var="deploymentStage=${{parameters.deploymentStage}}"
+    -var "deploymentStage=${{parameters.deploymentStage}}"
   displayName: "Terraform Validate"
   workingDirectory: src/terraform
   enabled: "true"
@@ -41,7 +40,7 @@ steps:
     -var "client_id=${{parameters.client_id}}" \
     -var "tenant_id=${{parameters.tenant_id}}" \
     -var "subscription_id=${{parameters.subscription_id}}" \
-    -var="deploymentStage=${{parameters.deploymentStage}}"
+    -var "deploymentStage=${{parameters.deploymentStage}}"
   displayName: "Terraform Plan"
   workingDirectory: src/terraform
   enabled: "true"

@@ -24,6 +24,9 @@ This repo contains samples for using Terraform to deploy Azure Governance relate
   - TODO: Added Scheduled plan/verify pipeline (gitops) and notifications
   - PR pipeline to validate/plan in dev/prod
   - TODO: Add Stage checks https://docs.microsoft.com/en-us/azure/devops/pipelines/process/checks?view=azure-devops
+  -TODO: Rename PR build in Azure DevOps or respect name: in YAML.
+- Add Security Center configuration
+- Add Azure Monitor
 
 ## Configuration
 
@@ -44,8 +47,9 @@ az devops login
 ### Configure Azure Pipelines
 
 - Install the [Azure Pipelines GitHub Application](https://github.com/apps/azure-pipelines) and authorize the repo.
-- Follow the steps to create the Azure Pipelines Continuous Delivery Pipeline using the yaml definition: build/cd/azure-pipelines.yml.
+- Follow the steps to create the Azure Pipelines Continuous Delivery Pipeline, PR Pipeline using the yaml definitions
 - TODO: move as much to az cli/automation, following code is failing across tenants, open gh issue
+- TODO: Open Azure Devops Issue to rename builds or respect YAML name:
 
 ```bash
 #DEVOPS_ACCOUNT='https://dev.azure.com/rjfmachado'
@@ -53,11 +57,17 @@ az devops login
 #az devops configure --defaults organization="$DEVOPS_ACCOUNT"
 #az devops configure --defaults project="$DEVOPS_PROJECT"
 
-#CD_BUILD_NAME='governanceManagementGroups - CD'
+#CD_BUILD_NAME='Azure Governance CI'
 #CD_BUILD_DESCRIPTION='Deploy Azure Governance'
 #REPO_AZURE_GOVERNANCE='rjfmachado/azuregovernance'
 
 #az pipelines create --name "$CD_BUILD_NAME" --description "$CD_BUILD_DESCRIPTION" --repository $REPO_AZURE_GOVERNANCE --branch master --yml-path build/cd/azure-pipelines.yml --service-connection rjfmachado --repository-type github
+
+#CD_BUILD_NAME='Azure Governance PR'
+#CD_BUILD_DESCRIPTION='Validate Azure Governance Pull Requests'
+
+#az pipelines create --name "$CD_BUILD_NAME" --description "$CD_BUILD_DESCRIPTION" --repository $REPO_AZURE_GOVERNANCE --branch master --yml-path build/cd/azure-pipelines.yml --service-connection rjfmachado --repository-type github
+
 ```
 
 ### Stage configuration

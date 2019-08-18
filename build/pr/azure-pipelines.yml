@@ -4,6 +4,9 @@ trigger: none
 
 pr:
   autoCancel: "true"
+  branches:
+    include:
+    - master
   paths:
     include:
     - src/terraform

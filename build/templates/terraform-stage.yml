@@ -29,7 +29,7 @@ steps:
     -var "client_id=${{parameters.client_id}}" \
     -var "tenant_id=${{parameters.tenant_id}}" \
     -var "subscription_id=${{parameters.subscription_id}}" \
-    -var="deploymentStage=${{parameters.deploymentStage}}"
+    -var "deploymentStage=${{parameters.deploymentStage}}"
   displayName: "Terraform Plan"
   workingDirectory: src/terraform
   enabled: "true"

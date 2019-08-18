@@ -28,5 +28,8 @@ provider "azurerm" {
 }
 
 provider "azuread" {
-  version = "=0.5.1"
+  version       = "=0.5.1"
+  client_id     = var.client_id
+  tenant_id     = var.tenant_id
+  client_secret = var.client_secret
 }
