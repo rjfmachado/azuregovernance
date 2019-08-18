@@ -1,4 +1,4 @@
-name: $(Build.DefinitionName)_$(Rev:.r)
+name: Azure_Governance_PR_$(Rev:.r)
 
 trigger: none
 

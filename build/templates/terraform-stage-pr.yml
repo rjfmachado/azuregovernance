@@ -12,7 +12,7 @@ steps:
 
 - bash: |
     terraform validate \
-    -check-variables=true
+    -check-variables=true \
     -var "client_secret=${{parameters.client_secret}}" \
     -var "client_id=${{parameters.client_id}}" \
     -var "tenant_id=${{parameters.tenant_id}}" \
