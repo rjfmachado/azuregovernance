@@ -11,6 +11,10 @@ resource "azuread_group" "gProject01Support" {
   name = "Project 01 Support"
 }
 
+resource "azuread_group" "gProject01VMOperators" {
+  name = "Project 01 VMOperators"
+}
+
 resource "random_uuid" "uuidProject01CustomSupportAssignment" {}
 
 resource "azurerm_role_assignment" "assProject01CustomSupportAssignment" {
@@ -18,6 +22,36 @@ resource "azurerm_role_assignment" "assProject01CustomSupportAssignment" {
   scope              = data.azurerm_subscription.sProject01.id
   role_definition_id = azurerm_role_definition.roleCustomSupport.id
   principal_id       = azuread_group.gProject01Support.id
+}
+
+resource "random_uuid" "uuidProject01VMRestarterAssignment" {}
+
+resource "azurerm_role_assignment" "assProject01VMRestarterAssignment" {
+  name               = random_uuid.uuidProject01VMRestarterAssignment.result
+  scope              = data.azurerm_subscription.sProject01.id
+  role_definition_id = azurerm_role_definition.roleVMRestarter.id
+  principal_id       = azuread_group.gProject01VMOperators.id
+}
+
+resource "azurerm_role_definition" "roleVMRestarter" {
+  name = "VM Restart"
+  //Store in the Management Group Root
+  scope       = data.azurerm_subscription.sProject01.id
+  description = "Members can restart Virtual Machines."
+
+  permissions {
+    actions = [
+      "Microsoft.Compute/virtualMachines/start",
+      "Microsoft.Compute/virtualMachines/stop",
+      "*/read"
+    ]
+    not_actions = []
+  }
+
+  //Assignable to all Management Groups & Subscriptions
+  assignable_scopes = [
+    data.azurerm_subscription.sProject01.id
+  ]
 }
 
 #TODO: Add Policy Definition/Assignment
