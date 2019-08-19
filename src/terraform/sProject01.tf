@@ -41,8 +41,9 @@ resource "azurerm_role_definition" "roleVMRestarter" {
 
   permissions {
     actions = [
-      "Microsoft.Compute/virtualMachines/start",
-      "Microsoft.Compute/virtualMachines/stop",
+      "Microsoft.Compute/virtualMachines/start/action",
+      "Microsoft.Compute/virtualMachines/powerOff/action",
+      "Microsoft.Compute/virtualMachines/restart/action",
       "*/read"
     ]
     not_actions = []
