@@ -12,6 +12,7 @@ This repo contains samples for using Terraform to deploy Azure Governance relate
 - Implement Azure Governance Resources
   - Subscription assignment to Management Groups
   - Custom Role Based Access Control definitons scoped to Management Groups
+    - TODO: File GitHub issue as assignment keeps getting recreated
   - TODO:Custom Role Based Access Control definitons scoped to Subscriptions, Resource Groups
   - TODO: Role Based Access Control assignments with builtin and custom roles.
   - TODO: Azure Policy definitions scoped to Management Groups, Subscriptions, Resource Groups
@@ -23,10 +24,15 @@ This repo contains samples for using Terraform to deploy Azure Governance relate
 - TODO: Improve deployment safety
   - Added Scheduled plan pipeline (gitops) and notifications
   - PR pipeline to validate/plan in dev/prod
+  - TODO: Add tflint, investigate terratest
+  - TODO: Add tests to PR builds
   - TODO: Add Stage checks https://docs.microsoft.com/en-us/azure/devops/pipelines/process/checks?view=azure-devops
   -TODO: Rename PR build in Azure DevOps or respect name: in YAML.
 - Add Security Center configuration
 - Add Azure Monitor
+- TODO: Review repo badges, eg https://raw.githubusercontent.com/wata727/tflint/master/README.md
+- TODO: seriously improve this guidance :)
+- TODO: Monitor secret age and alert.
 
 ## Configuration
 
