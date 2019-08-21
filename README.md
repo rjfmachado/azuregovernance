@@ -19,6 +19,7 @@ This repo contains samples for using Terraform to deploy Azure Governance relate
   - TODO: Azure Policy assignments scoped to Management Groups, Subscriptions, Resource Groups
     - TODO: Support for Audit, Deny, Add.
     - TODO: Support for DeployIfNotExists and Managed Service Identities.
+  - TODO: Add Blueprints definitions/assignments
 - TODO: Add terraform graph and GraphViz support
 - TODO: Add Azure DevOps custom dashboard with relevant visuals
 - TODO: Improve deployment safety

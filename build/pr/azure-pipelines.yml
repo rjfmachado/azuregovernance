@@ -13,8 +13,8 @@ pr:
     - build/ci/azure-pipelines.yml
     - build/templates/terraform-stage.yml
     exclude:
-      - build/pr/azure-pipelines.yml
-      - build/templates/terraform-stage-pr.yml
+    - build/pr/azure-pipelines.yml
+    - build/templates/terraform-stage-pr.yml
 
 variables:
 - name: terraformVersion
