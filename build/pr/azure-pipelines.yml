@@ -1,4 +1,4 @@
-name: Azure_Governance_PR_$(Rev:.r)
+name: Azure_Governance_PR$(Rev:.r)
 
 trigger: none
 
@@ -37,7 +37,7 @@ stages:
     jobs:
 
     - job: Terraform
-      displayName: Terraform Management Groups Build
+      displayName: Azure Governance Pull Request
       pool:
         vmImage: 'ubuntu-latest'
 

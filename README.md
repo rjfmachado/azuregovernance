@@ -1,6 +1,6 @@
 # Azure Governance with Terraform
 
-[![Build Status](https://dev.azure.com/rjfmachado/azuredemos/_apis/build/status/rjfmachado.azuregovernance?branchName=master)](https://dev.azure.com/rjfmachado/azuredemos/_build/latest?definitionId=20&branchName=master)
+[![Build Status](https://dev.azure.com/rjfmachado/azuredemos/_apis/build/status/rjfmachado.azuregovernance.ci?branchName=master)](https://dev.azure.com/rjfmachado/azuredemos/_build/latest?definitionId=32&branchName=master)
 
 This repo contains samples for using Terraform to deploy Azure Governance related resources using Azure Devops and is configured to:
 
@@ -25,6 +25,7 @@ This repo contains samples for using Terraform to deploy Azure Governance relate
 - TODO: Improve deployment safety
   - Added Scheduled plan pipeline (gitops) and notifications
   - PR pipeline to validate/plan in dev/prod
+    - TODO: Pipeline not running on schedule, verify
   - TODO: Add tflint, investigate terratest
   - TODO: Add tests to PR builds
   - TODO: Add Stage checks https://docs.microsoft.com/en-us/azure/devops/pipelines/process/checks?view=azure-devops
@@ -34,6 +35,10 @@ This repo contains samples for using Terraform to deploy Azure Governance relate
 - TODO: Review repo badges, eg https://raw.githubusercontent.com/wata727/tflint/master/README.md
 - TODO: seriously improve this guidance :)
 - TODO: Monitor secret age and alert.
+- Azure AD Roles
+  - <https://techcommunity.microsoft.com/t5/Azure-Active-Directory-Identity/Custom-roles-for-app-registration-management-is-now-in-public/ba-p/789101>
+  - <https://docs.microsoft.com/en-us/azure/active-directory/users-groups-roles/roles-custom-available-permissions>
+  - <https://docs.microsoft.com/en-us/azure/active-directory/users-groups-roles/roles-custom-overview>
 
 ## Configuration
 
@@ -51,29 +56,44 @@ az devops login
 
 > If you wish to pin Terraform to a specific version, you can use my [Terraform Container](https://github.com/rjfmachado/containers/tree/master/src/terraform). You'll also need to setup your own registry, Docker Registry service connection, and configure the continuous delivery pipeline accordingly.
 
+### Environments
+
+TODO: Document environments and checks
+
 ### Configure Azure Pipelines
 
-- Install the [Azure Pipelines GitHub Application](https://github.com/apps/azure-pipelines) and authorize the repo.
-- Follow the steps to create the Azure Pipelines Continuous Delivery Pipeline, PR Pipeline using the yaml definitions
-- TODO: move as much to az cli/automation, following code is failing across tenants, open gh issue
-- TODO: Open Azure Devops Issue to rename builds or respect YAML name:
+- Install the [Azure Pipelines GitHub Application](https://github.com/apps/azure-pipelines) and authorize the repo to create the service connection in azure devops.
+  - TODO: Needs a GH API Key - az devops service-endpoint github create --name test --github-url github.com/rjfmachado
+
+> Note: Pipelines are retained for 30 days after deletion. If you are required to rerun the pipeline creation process, you will need to rename your pipelines.
 
 ```bash
-#DEVOPS_ACCOUNT='https://dev.azure.com/rjfmachado'
-#DEVOPS_PROJECT='Azure Platform Engineering'
-#az devops configure --defaults organization="$DEVOPS_ACCOUNT"
-#az devops configure --defaults project="$DEVOPS_PROJECT"
+DEVOPS_ACCOUNT='https://dev.azure.com/rjfmachado'
+DEVOPS_PROJECT='azuredemos'
+az devops configure --defaults organization="$DEVOPS_ACCOUNT"
+az devops configure --defaults project="$DEVOPS_PROJECT"
 
-#CD_BUILD_NAME='Azure Governance CI'
-#CD_BUILD_DESCRIPTION='Deploy Azure Governance'
-#REPO_AZURE_GOVERNANCE='rjfmachado/azuregovernance'
+# TODO: Need to move this to a query az devops service-connection list
+SC_GITHUB_ID='cb07f904-3076-4d67-8ffd-efceab6f21a8'
+REPO_AZURE_GOVERNANCE='rjfmachado/azuregovernance'
 
-#az pipelines create --name "$CD_BUILD_NAME" --description "$CD_BUILD_DESCRIPTION" --repository $REPO_AZURE_GOVERNANCE --branch master --yml-path build/cd/azure-pipelines.yml --service-connection rjfmachado --repository-type github
+PIPELINE_NAME='rjfmachado.azuregovernance.ci'
+PIPELINE_DESCRIPTION='Azure Governance - Continuous Integration pipeline.'
+REPO_YAML_PATH='build/ci/azure-pipelines.yml'
 
-#CD_BUILD_NAME='Azure Governance PR'
-#CD_BUILD_DESCRIPTION='Validate Azure Governance Pull Requests'
+az pipelines create --name "$PIPELINE_NAME" --description "$PIPELINE_DESCRIPTION" --repository "$REPO_AZURE_GOVERNANCE" --repository-type github --branch master --service-connection "$SC_GITHUB_ID" --yml-path "$REPO_YAML_PATH" --skip-first-run
 
-#az pipelines create --name "$CD_BUILD_NAME" --description "$CD_BUILD_DESCRIPTION" --repository $REPO_AZURE_GOVERNANCE --branch master --yml-path build/cd/azure-pipelines.yml --service-connection rjfmachado --repository-type github
+PIPELINE_NAME='rjfmachado.azuregovernance.pr'
+PIPELINE_DESCRIPTION='Azure Governance - Pull Request validation pipeline.'
+REPO_YAML_PATH='build/pr/azure-pipelines.yml'
+
+az pipelines create --name "$PIPELINE_NAME" --description "$PIPELINE_DESCRIPTION" --repository "$REPO_AZURE_GOVERNANCE" --repository-type github --branch master --service-connection "$SC_GITHUB_ID" --yml-path "$REPO_YAML_PATH" --skip-first-run
+
+PIPELINE_NAME='rjfmachado.azuregovernance.ops'
+PIPELINE_DESCRIPTION='Azure Governance - Verify deployed environments against expected configuration - Every day at midnight.'
+REPO_YAML_PATH='build/ops/azure-pipelines.yml'
+
+az pipelines create --name "$PIPELINE_NAME" --description "$PIPELINE_DESCRIPTION" --repository "$REPO_AZURE_GOVERNANCE" --repository-type github --branch master --service-connection "$SC_GITHUB_ID" --yml-path "$REPO_YAML_PATH" --skip-first-run
 
 ```
 

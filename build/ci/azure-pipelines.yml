@@ -1,4 +1,4 @@
-name: Azure_Governance_$(Rev:.r)
+name: Azure_Governance_CI$(Rev:.r)
 
 trigger:
   batch: "true"
@@ -56,13 +56,15 @@ stages:
   jobs:
 
   - job: Terraform
-    displayName: Terraform Management Groups Build
+    displayName: Azure Governance CI - Dev
     pool:
       vmImage: 'ubuntu-latest'
 
     container:
       image: rjfmachado.azurecr.io/terraform:${{ variables['terraformVersion'] }}
       endpoint: containers
+
+    environment: 'dev'
 
     steps:
 
@@ -93,13 +95,15 @@ stages:
   jobs:
 
   - job: Terraform
-    displayName: Terraform Management Groups Build
+    displayName: Azure Governance CI - Production
     pool:
       vmImage: 'ubuntu-latest'
 
     container:
       image: rjfmachado.azurecr.io/terraform:${{ variables['terraformVersion'] }}
       endpoint: containers
+
+    environment: 'prod'
 
     steps:
 

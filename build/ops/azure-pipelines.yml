@@ -34,7 +34,7 @@ stages:
   jobs:
 
   - job: Terraform
-    displayName: Terraform Azure Governance
+    displayName: Azure Governance Ops - Dev
     pool:
       vmImage: 'ubuntu-latest'
 
@@ -71,7 +71,7 @@ stages:
   jobs:
 
   - job: Terraform
-    displayName: Terraform Azure Governance
+    displayName: Azure Governance Ops - Production
     pool:
       vmImage: 'ubuntu-latest'
 
