@@ -23,8 +23,8 @@ stages:
 
   jobs:
 
-  - job: PublishArtifact
-    displayName: Terraform Management Groups
+  - job: publishArtifacts
+    displayName: Publish Azure Governance Terraform and pipelines.
     pool:
       vmImage: 'ubuntu-latest'
 
@@ -55,7 +55,7 @@ stages:
 
   jobs:
 
-  - job: Terraform
+  - job: terraformDev
     displayName: Azure Governance CI - Dev
 
     pool:
@@ -97,7 +97,7 @@ stages:
 
   jobs:
 
-  - job: Terraform
+  - job: terraformProd
     displayName: Azure Governance CI - Production
     pool:
       vmImage: 'ubuntu-latest'
