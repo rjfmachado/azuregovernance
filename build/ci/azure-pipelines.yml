@@ -55,34 +55,31 @@ stages:
 
   jobs:
 
-  # - job: terraformDev
-  #   displayName: Azure Governance CI - Dev
-
   - deployment: terraform
     displayName: Azure Governance CI - Dev deployment
     environment: dev
 
+  - job: terraformDev
+    displayName: Azure Governance CI - Dev
+
     pool:
       vmImage: 'ubuntu-latest'
 
-    # container:
-    #   image: rjfmachado.azurecr.io/terraform:${{ variables['terraformVersion'] }}
-    #   endpoint: containers
+    container:
+      image: rjfmachado.azurecr.io/terraform:${{ variables['terraformVersion'] }}
+      endpoint: containers
 
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - template: /build/templates/terraform-stage.yml
-            parameters:
-              client_secret: $(ARM_CLIENT_SECRET)
-              client_id: $(ARM_CLIENT_ID)
-              tenant_id: $(ARM_TENANT_ID)
-              subscription_id: $(ARM_SUBSCRIPTION_ID)
-              storage_account_name: $(stateStorageAccountName)
-              container_name: $(stateContainerName)
-              key: $(stateKey)
-              deploymentStage: $(deploymentStage)
+    steps:
+    - template: /build/templates/terraform-stage.yml
+      parameters:
+        client_secret: $(ARM_CLIENT_SECRET)
+        client_id: $(ARM_CLIENT_ID)
+        tenant_id: $(ARM_TENANT_ID)
+        subscription_id: $(ARM_SUBSCRIPTION_ID)
+        storage_account_name: $(stateStorageAccountName)
+        container_name: $(stateContainerName)
+        key: $(stateKey)
+        deploymentStage: $(deploymentStage)
 
 # - stage: prod
 
