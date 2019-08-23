@@ -29,7 +29,6 @@ This repo contains samples for using Terraform to deploy Azure Governance relate
   - TODO: Add tflint, investigate terratest
   - TODO: Add tests to PR builds
   - TODO: Add Stage checks https://docs.microsoft.com/en-us/azure/devops/pipelines/process/checks?view=azure-devops
-  -TODO: Rename PR build in Azure DevOps or respect name: in YAML.
 - Add Security Center configuration
 - Add Azure Monitor
 - TODO: Review repo badges, eg https://raw.githubusercontent.com/wata727/tflint/master/README.md
@@ -63,19 +62,20 @@ TODO: Document environments and checks
 ### Configure Azure Pipelines
 
 - Install the [Azure Pipelines GitHub Application](https://github.com/apps/azure-pipelines) and authorize the repo to create the service connection in azure devops.
-  - TODO: Needs a GH API Key - az devops service-endpoint github create --name test --github-url github.com/rjfmachado
+  - TODO: Provide automation - Needs a GH API Key - az devops service-endpoint github create --name test --github-url github.com/rjfmachado
 
-> Note: Pipelines are retained for 30 days after deletion. If you are required to rerun the pipeline creation process, you will need to rename your pipelines.
+- In Azure Cloud Shell:
 
 ```bash
+GITHUB_ACCOUNT='rjfmachado'
+GITHUB_REPO='azuregovernance'
 DEVOPS_ACCOUNT='https://dev.azure.com/rjfmachado'
 DEVOPS_PROJECT='azuredemos'
 az devops configure --defaults organization="$DEVOPS_ACCOUNT"
 az devops configure --defaults project="$DEVOPS_PROJECT"
 
-# TODO: Need to move this to a query az devops service-connection list
-SC_GITHUB_ID='cb07f904-3076-4d67-8ffd-efceab6f21a8'
-REPO_AZURE_GOVERNANCE='rjfmachado/azuregovernance'
+SC_GITHUB_ID=$(az devops service-endpoint list --query "[?contains(name, '$GITHUB_ACCOUNT')].id" --output tsv)
+REPO_AZURE_GOVERNANCE="$GITHUB_ACCOUNT/$GITHUB_REPO"
 
 PIPELINE_NAME='rjfmachado.azuregovernance.ci'
 PIPELINE_DESCRIPTION='Azure Governance - Continuous Integration pipeline.'
@@ -94,8 +94,9 @@ PIPELINE_DESCRIPTION='Azure Governance - Verify deployed environments against ex
 REPO_YAML_PATH='build/ops/azure-pipelines.yml'
 
 az pipelines create --name "$PIPELINE_NAME" --description "$PIPELINE_DESCRIPTION" --repository "$REPO_AZURE_GOVERNANCE" --repository-type github --branch master --service-connection "$SC_GITHUB_ID" --yml-path "$REPO_YAML_PATH" --skip-first-run
-
 ```
+
+> Note: Pipelines are retained for 30 days after deletion. If you are required to rerun the pipeline creation process, you will need to rename your pipelines.
 
 ### Stage configuration
 
@@ -127,6 +128,7 @@ SERVICE_PRINCIPAL_ID=$(az ad sp show --id "http://$SERVICE_PRINCIPAL_NAME" --que
 
 # Assign Owner role to Service Principal at the Tenant Root Management Group
 az role assignment create --role "Owner" --assignee $SERVICE_PRINCIPAL_ID --scope "/providers/Microsoft.Management/managementGroups/$TENANT_ID"
+
 #TODO: add Service Principal to Azure AD User administrator role
 ```
 
@@ -134,7 +136,9 @@ az role assignment create --role "Owner" --assignee $SERVICE_PRINCIPAL_ID --scop
 
 ```bash
 # Configure the Variable Group
+
 # TODO: Open GitHub issue to support cross tenant variable-group create with PAT auth. use az login to the tenant connected to Azure DevOps as a workaround.
+
 VARIABLE_GROUP="azuregovernance$STAGE_NAME"
 GROUP_ID=$(az pipelines variable-group create --name $VARIABLE_GROUP --authorize false --variables ARM_CLIENT_ID=$SERVICE_PRINCIPAL_ID ARM_SUBSCRIPTION_ID=$SUBSCRIPTION_ID ARM_TENANT_ID=$TENANT_ID --query id --output tsv)
 az pipelines variable-group variable create --group-id $GROUP_ID --name ARM_CLIENT_SECRET --value $CLIENT_SECRET --secret true
