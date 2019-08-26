@@ -3,7 +3,7 @@ name: Azure_Governance_Ops$(Rev:.r)
 trigger: none
 
 schedules:
-- cron: "0 0 * * *"
+- cron: 0 0 * * *
   displayName: Ops Validation Build (Midnight)
   branches:
     include:
