@@ -28,7 +28,8 @@ This repo contains samples for using Terraform to deploy Azure Governance relate
     - TODO: Pipeline not running on schedule, verify
   - TODO: Add tflint, investigate terratest
   - TODO: Add tests to PR builds
-  - TODO: Add Stage checks https://docs.microsoft.com/en-us/azure/devops/pipelines/process/checks?view=azure-devops
+  - TODO: Add Stage checks <https://docs.microsoft.com/en-us/azure/devops/pipelines/process/checks?view=azure-devops>
+    <https://github.com/microsoft/azure-pipelines-yaml/issues/288>
 - Add Security Center configuration
 - Add Azure Monitor
 - TODO: Review repo badges, eg https://raw.githubusercontent.com/wata727/tflint/master/README.md
@@ -38,6 +39,7 @@ This repo contains samples for using Terraform to deploy Azure Governance relate
   - <https://techcommunity.microsoft.com/t5/Azure-Active-Directory-Identity/Custom-roles-for-app-registration-management-is-now-in-public/ba-p/789101>
   - <https://docs.microsoft.com/en-us/azure/active-directory/users-groups-roles/roles-custom-available-permissions>
   - <https://docs.microsoft.com/en-us/azure/active-directory/users-groups-roles/roles-custom-overview>
+- TODO: Action Groups/Alerts
 
 ## Configuration
 

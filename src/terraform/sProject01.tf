@@ -15,23 +15,23 @@ resource "azuread_group" "gProject01VMOperators" {
   name = "Project 01 VMOperators"
 }
 
-resource "random_uuid" "uuidProject01CustomSupportAssignment" {}
+# resource "random_uuid" "uuidProject01CustomSupportAssignment" {}
 
-resource "azurerm_role_assignment" "assProject01CustomSupportAssignment" {
-  name               = random_uuid.uuidProject01CustomSupportAssignment.result
-  scope              = data.azurerm_subscription.sProject01.id
-  role_definition_id = azurerm_role_definition.roleCustomSupport.id
-  principal_id       = azuread_group.gProject01Support.id
-}
+# resource "azurerm_role_assignment" "assProject01CustomSupportAssignment" {
+#   name               = random_uuid.uuidProject01CustomSupportAssignment.result
+#   scope              = data.azurerm_subscription.sProject01.id
+#   role_definition_id = azurerm_role_definition.roleCustomSupport.id
+#   principal_id       = azuread_group.gProject01Support.id
+# }
 
-resource "random_uuid" "uuidProject01VMRestarterAssignment" {}
+# resource "random_uuid" "uuidProject01VMRestarterAssignment" {}
 
-resource "azurerm_role_assignment" "assProject01VMRestarterAssignment" {
-  name               = random_uuid.uuidProject01VMRestarterAssignment.result
-  scope              = data.azurerm_subscription.sProject01.id
-  role_definition_id = azurerm_role_definition.roleVMRestarter.id
-  principal_id       = azuread_group.gProject01VMOperators.id
-}
+# resource "azurerm_role_assignment" "assProject01VMRestarterAssignment" {
+#   name               = random_uuid.uuidProject01VMRestarterAssignment.result
+#   scope              = data.azurerm_subscription.sProject01.id
+#   role_definition_id = azurerm_role_definition.roleVMRestarter.id
+#   principal_id       = azuread_group.gProject01VMOperators.id
+# }
 
 resource "azurerm_role_definition" "roleVMRestarter" {
   name = "VM Restart"
