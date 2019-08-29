@@ -11,6 +11,7 @@ This repo contains samples for using Terraform to deploy Azure Governance relate
 - Maintain Terraform state with the azurerm storage account backend.
 - Implement Azure Governance Resources
   - Subscription assignment to Management Groups
+  - Support for external management of Subscription Assignment via lifecycle/ignore_changes
   - Custom Role Based Access Control definitons scoped to Management Groups
     - TODO: File GitHub issue as assignment keeps getting recreated
   - TODO:Custom Role Based Access Control definitons scoped to Subscriptions, Resource Groups
@@ -40,6 +41,7 @@ This repo contains samples for using Terraform to deploy Azure Governance relate
   - <https://docs.microsoft.com/en-us/azure/active-directory/users-groups-roles/roles-custom-available-permissions>
   - <https://docs.microsoft.com/en-us/azure/active-directory/users-groups-roles/roles-custom-overview>
 - TODO: Action Groups/Alerts
+- TODO: Add a provisioners/connections scenario
 
 ## Configuration
 
