@@ -8,7 +8,7 @@ schedules:
   branches:
     include:
     - master
-  always: true
+  always: "true"
 
 pr: none
 
