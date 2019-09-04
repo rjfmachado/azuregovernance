@@ -27,7 +27,11 @@ resource "azuread_group" "gProject01Auditors" {
   name = "Project 01 Auditors"
 }
 
-# Assignment of a Role scoped to a Management Group
+resource "azuread_group" "gProject01DeploymentAuditors" {
+  name = "Project 01 Deployment Auditors"
+}
+
+# Assignment of a Management Group scoped role to a subscription
 resource "azurerm_role_assignment" "assProject01CustomSupport" {
   provider           = "azurerm.Project01"
   scope              = data.azurerm_subscription.sProject01.id
@@ -35,7 +39,15 @@ resource "azurerm_role_assignment" "assProject01CustomSupport" {
   principal_id       = azuread_group.gProject01Support.id
 }
 
-# Assignment of a Role scoped to the subscription
+# Assignment of a Child Management Group scoped role to a subscription
+resource "azurerm_role_assignment" "assProject01DeploymentAuditor" {
+  provider           = "azurerm.Project01"
+  scope              = data.azurerm_subscription.sProject01.id
+  role_definition_id = azurerm_role_definition.roleDeploymentManagerAuditor.id
+  principal_id       = azuread_group.gProject01DeploymentAuditors.id
+}
+
+# Assignment of a subscription scoped Role scoped to a subscription
 resource "azurerm_role_assignment" "assProject01VMRestarter" {
   provider           = "azurerm.Project01"
   scope              = data.azurerm_subscription.sProject01.id
@@ -43,6 +55,7 @@ resource "azurerm_role_assignment" "assProject01VMRestarter" {
   principal_id       = azuread_group.gProject01VMOperators.id
 }
 
+# Assignment of a built in role to a subscription
 resource "azurerm_role_assignment" "assProject01Auditors" {
   provider             = "azurerm.Project01"
   scope                = data.azurerm_subscription.sProject01.id
@@ -79,6 +92,7 @@ resource "azurerm_resource_group" "rgTestRBACAssignment" {
   location = "West Europe"
 }
 
+# Assignment of a Management Group scoped role to a Resource Group
 resource "azurerm_role_assignment" "assTestCustomSupport" {
   provider           = "azurerm.Project01"
   scope              = azurerm_resource_group.rgTestRBACAssignment.id
@@ -86,6 +100,7 @@ resource "azurerm_role_assignment" "assTestCustomSupport" {
   principal_id       = azuread_group.gProject01Support.id
 }
 
+# Assignment of a Subscription scoped role to a Resource Group
 resource "azurerm_role_assignment" "assTestVMRestarter" {
   provider           = "azurerm.Project01"
   scope              = azurerm_resource_group.rgTestRBACAssignment.id
@@ -93,40 +108,10 @@ resource "azurerm_role_assignment" "assTestVMRestarter" {
   principal_id       = azuread_group.gProject01VMOperators.id
 }
 
+# Assignment of a built-in role to a resource group
 resource "azurerm_role_assignment" "assTest01Auditors" {
   provider             = "azurerm.Project01"
   scope                = azurerm_resource_group.rgTestRBACAssignment.id
   role_definition_name = "Reader"
   principal_id         = azuread_group.gProject01Auditors.id
 }
-
-#TODO: Add Policy Definition/Assignment
-
-# resource "azurerm_security_center_contact" "example" {
-#   email = "contact@example.com"
-#   phone = "+1-555-555-5555"
-
-#   alert_notifications = true
-#   alerts_to_admins    = true
-# }
-
-# resource "azurerm_security_center_subscription_pricing" "example" {
-#   tier = "Standard"
-# }
-
-# resource "azurerm_resource_group" "example" {
-#   name     = "tfex-security-workspace"
-#   location = "westus"
-# }
-
-# resource "azurerm_log_analytics_workspace" "example" {
-#   name                = "tfex-security-workspace"
-#   location            = "${azurerm_resource_group.example.location}"
-#   resource_group_name = "${azurerm_resource_group.example.name}"
-#   sku                 = "PerGB2018"
-# }
-
-# resource "azurerm_security_center_workspace" "example" {
-#   scope        = "/subscriptions/00000000-0000-0000-0000-000000000000"
-#   workspace_id = "${azurerm_log_analytics_workspace.example.id}"
-# }

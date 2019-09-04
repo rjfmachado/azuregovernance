@@ -11,11 +11,10 @@ This repo contains samples for using Terraform to deploy Azure Governance relate
 - Maintain Terraform state with the azurerm storage account backend.
 - Implement Azure Governance Resources
   - Subscription assignment to Management Groups
-  - Support for external management of Subscription Assignment via lifecycle/ignore_changes
-  - Custom Role Based Access Control definitons scoped to Management Groups
-    - TODO: File GitHub issue as assignment keeps getting recreated
-  - TODO:Custom Role Based Access Control definitons scoped to Subscriptions, Resource Groups
-  - TODO: Role Based Access Control assignments with builtin and custom roles.
+    - Support for external management of Subscription Assignment via lifecycle/ignore_changes
+  - Custom Role Based Access Control definitons scoped to Management Groups, Subscriptions and Resource Groups.
+    - TODO: File GitHub issue as assignments for roles scoped to Management Groups keep getting recreated.
+  - Role Based Access Control assignments with builtin and custom roles to Management Groups, Subscriptions and Resource Groups.
   - TODO: Azure Policy definitions scoped to Management Groups, Subscriptions, Resource Groups
   - TODO: Azure Policy assignments scoped to Management Groups, Subscriptions, Resource Groups
     - TODO: Support for Audit, Deny, Add.
@@ -93,7 +92,7 @@ REPO_YAML_PATH='build/pr/azure-pipelines.yml'
 
 az pipelines create --name "$PIPELINE_NAME" --description "$PIPELINE_DESCRIPTION" --repository "$REPO_AZURE_GOVERNANCE" --repository-type github --branch master --service-connection "$SC_GITHUB_ID" --yml-path "$REPO_YAML_PATH" --skip-first-run
 
-PIPELINE_NAME='rjfmachado.azuregovernance.ops'
+PIPELINE_NAME='rjfmachado.azuregovernance.opstest'
 PIPELINE_DESCRIPTION='Azure Governance - Verify deployed environments against expected configuration - Every day at midnight.'
 REPO_YAML_PATH='build/ops/azure-pipelines.yml'
 
