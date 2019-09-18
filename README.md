@@ -41,6 +41,7 @@ This repo contains samples for using Terraform to deploy Azure Governance relate
   - <https://docs.microsoft.com/en-us/azure/active-directory/users-groups-roles/roles-custom-overview>
 - TODO: Action Groups/Alerts
 - TODO: Add a provisioners/connections scenario
+- TODO: Connect Activity Log to Workspace
 
 ## Configuration
 
