@@ -5,7 +5,7 @@ data "azurerm_management_group" "mgTenantRoot" {
 
 //Custom role definition scoped to tenant root management group
 resource "azurerm_role_definition" "roleCustomSupport" {
-  name = "Custom Support Agent"
+  name        = "Custom Support Agent"
   scope       = data.azurerm_management_group.mgTenantRoot.id
   description = "Members can create and manage Azure support tickets."
 
@@ -41,12 +41,12 @@ data "azurerm_policy_definition" "polAllowedLocations" {
 
 //Assign builtin policy "Allowed locations" to Root Management Group
 resource "azurerm_policy_assignment" "polassAllowedLocations" {
-  name = "polassAllowedLocations"
-  scope = data.azurerm_management_group.mgTenantRoot.id
+  name                 = "polassAllowedLocations"
+  scope                = data.azurerm_management_group.mgTenantRoot.id
   policy_definition_id = data.azurerm_policy_definition.polAllowedLocations.id
-  parameters = <<PARAMETERS
+  parameters           = <<PARAMETERS
 {
-  "allowedLocations": {
+  "listOfAllowedLocations": {
     "value": [
       "West Europe",
       "North Europe"
