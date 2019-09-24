@@ -1,3 +1,4 @@
+# Create the Managed Subscriptions Management Group
 resource "azurerm_management_group" "mgManaged" {
   display_name               = "Managed Projects"
   parent_management_group_id = data.azurerm_management_group.mgTenantRoot.id
@@ -5,7 +6,7 @@ resource "azurerm_management_group" "mgManaged" {
   subscription_ids           = []
 }
 
-# Assignment of a tenant root scoped role to a child management group
+# Assignment of a Tenant Root Management Group scoped role to a child Management Group
 resource "azurerm_role_assignment" "assManagedProjectsCustomSupport" {
   scope              = azurerm_management_group.mgManaged.id
   role_definition_id = azurerm_role_definition.roleCustomSupport.id
@@ -17,7 +18,7 @@ resource "azuread_group" "gManagedProjectsSupport" {
 }
 
 resource "azurerm_role_definition" "roleDeploymentManagerAuditor" {
-  name = "Deployment Manager Auditor"
+  name        = "Deployment Manager Auditor"
   scope       = azurerm_management_group.mgManaged.id
   description = "Members can read the Deployment Manager configuration."
 

@@ -25,7 +25,7 @@ This repo contains samples for using Terraform to deploy Azure Governance relate
 - TODO: Improve deployment safety
   - Added Scheduled plan pipeline (gitops) and notifications
   - PR pipeline to validate/plan in dev/prod
-    - TODO: Pipeline not running on schedule, verify
+    - TODO: Pipeline not running on schedule, verify - issue with OAUTH and GitHub triggers
   - TODO: Add tflint, investigate terratest
   - TODO: Add tests to PR builds
   - TODO: Add Stage checks <https://docs.microsoft.com/en-us/azure/devops/pipelines/process/checks?view=azure-devops>
@@ -43,7 +43,9 @@ This repo contains samples for using Terraform to deploy Azure Governance relate
 - TODO: Add a provisioners/connections scenario
 - TODO: Connect Activity Log to Workspace
 - TODO: Connect Azure AD Logs
-- TODO: Test subscription standards as a module
+- Subscription Configuration provided as a module
+  - TODO: Parameterize module location
+  - TODO: Add versioning support
 
 ## Configuration
 
