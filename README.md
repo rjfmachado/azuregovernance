@@ -20,7 +20,7 @@ This repo contains samples for using Terraform to deploy Azure Governance relate
     - TODO: Support for Audit, Deny, Add.
     - TODO: Support for DeployIfNotExists and Managed Service Identities.
   - TODO: Add Blueprints definitions/assignments
-- TODO: Add terraform graph and GraphViz support
+- TODO: Add terraform graph and GraphViz support, review terraform-docs
 - TODO: Add Azure DevOps custom dashboard with relevant visuals
 - TODO: Improve deployment safety
   - Added Scheduled plan pipeline (gitops) and notifications
@@ -42,6 +42,8 @@ This repo contains samples for using Terraform to deploy Azure Governance relate
 - TODO: Action Groups/Alerts
 - TODO: Add a provisioners/connections scenario
 - TODO: Connect Activity Log to Workspace
+- TODO: Connect Azure AD Logs
+- TODO: Test subscription standards as a module
 
 ## Configuration
 
@@ -93,11 +95,12 @@ REPO_YAML_PATH='build/pr/azure-pipelines.yml'
 
 az pipelines create --name "$PIPELINE_NAME" --description "$PIPELINE_DESCRIPTION" --repository "$REPO_AZURE_GOVERNANCE" --repository-type github --branch master --service-connection "$SC_GITHUB_ID" --yml-path "$REPO_YAML_PATH" --skip-first-run
 
-PIPELINE_NAME='rjfmachado.azuregovernance.opstest'
-PIPELINE_DESCRIPTION='Azure Governance - Verify deployed environments against expected configuration - Every day at midnight.'
-REPO_YAML_PATH='build/ops/azure-pipelines.yml'
+# Currently this pipeline is required to be configured manually using the azure devops app, as the oauth method does not carry the event notifications for schedules.
+# PIPELINE_NAME='rjfmachado.azuregovernance.opstest'
+# PIPELINE_DESCRIPTION='Azure Governance - Verify deployed environments against expected configuration - Every day at midnight.'
+# REPO_YAML_PATH='build/ops/azure-pipelines.yml'
 
-az pipelines create --name "$PIPELINE_NAME" --description "$PIPELINE_DESCRIPTION" --repository "$REPO_AZURE_GOVERNANCE" --repository-type github --branch master --service-connection "$SC_GITHUB_ID" --yml-path "$REPO_YAML_PATH" --skip-first-run
+# az pipelines create --name "$PIPELINE_NAME" --description "$PIPELINE_DESCRIPTION" --repository "$REPO_AZURE_GOVERNANCE" --repository-type github --branch master --service-connection "$SC_GITHUB_ID" --yml-path "$REPO_YAML_PATH" --skip-first-run
 ```
 
 > Note: Pipelines are retained for 30 days after deletion. If you are required to rerun the pipeline creation process, you will need to rename your pipelines.
