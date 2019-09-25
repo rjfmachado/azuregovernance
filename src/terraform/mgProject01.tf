@@ -1,5 +1,5 @@
 variable "mgManagedProject01Subscriptions" {
-  description = "The subscriptions linked to Project 01 Management Group"
+  description = "The subscriptions linked to the Project 01 Management Group"
   default     = null
 }
 

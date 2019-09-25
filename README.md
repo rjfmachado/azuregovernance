@@ -17,6 +17,7 @@ This repo contains samples for using Terraform to deploy Azure Governance relate
   - Role Based Access Control assignments with builtin and custom roles to Management Groups, Subscriptions and Resource Groups.
   - TODO: Azure Policy definitions scoped to Management Groups, Subscriptions, Resource Groups
   - TODO: Azure Policy assignments scoped to Management Groups, Subscriptions, Resource Groups
+    - TODO: https://github.com/terraform-providers/terraform-provider-azurerm/issues/3762
     - TODO: Support for Audit, Deny, Add.
     - TODO: Support for DeployIfNotExists and Managed Service Identities.
   - TODO: Add Blueprints definitions/assignments

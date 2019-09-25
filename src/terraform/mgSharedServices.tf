@@ -1,5 +1,5 @@
 variable "mgSharedServicesSubscriptions" {
-  description = "The subscription lists for each deployment stage"
+  description = "The subscriptions linked to the Shared Services Management Group"
   default     = null
 }
 
