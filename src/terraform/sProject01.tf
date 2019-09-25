@@ -7,7 +7,7 @@ provider "azurerm" {
 }
 
 variable "sProject01id" {
-  description = "The subscription id for Project 01 Subscription"
+  description = "The subscription ids for Project 01 Subscription"
   default     = null
 }
 
@@ -15,7 +15,7 @@ data "azurerm_subscription" "sProject01" {
   subscription_id = var.sProject01id[var.deploymentStage]
 }
 
-module "subscriptionManaged" {
+module "subscriptionManagedProject01" {
   providers = {
     azurerm = "azurerm.Project01"
   }

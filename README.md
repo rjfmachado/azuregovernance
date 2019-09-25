@@ -67,6 +67,15 @@ az devops login
 
 TODO: Document environments and checks
 
+Configure Management Groups Tenant backfill.
+
+>Use this process if you have missing subscriptions in your Management Group structure. Wait a few minutes after the API calls and verify the Security Principal for Terraform is assigned rights to subscriptions before applying changes to target subscriptions. I've seen this take a few hours...
+
+```bash
+az rest --method post --uri https://management.azure.com/providers/Microsoft.Management/startTenantBackfill?api-version=2018-03-01-preview
+az rest --method post --uri https://management.azure.com/providers/Microsoft.Management/tenantBackfillStatus?api-version=2018-03-01-preview
+```
+
 ### Configure Azure Pipelines
 
 - Install the [Azure Pipelines GitHub Application](https://github.com/apps/azure-pipelines) and authorize the repo to create the service connection in azure devops.
