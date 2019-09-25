@@ -15,12 +15,16 @@ data "azurerm_subscription" "sProject01" {
   subscription_id = var.sProject01id[var.deploymentStage]
 }
 
-module "subscriptionManagedProject01" {
-  providers = {
-    azurerm = "azurerm.Project01"
-  }
-  source                    = "github.com/rjfmachado/azuresubscription/modules/azuresubscription-managed"
-  subscriptionId            = data.azurerm_subscription.sProject01.id
-  subscriptionName          = "Project 01"
-  subscriptionObjectPreffix = "project01"
-}
+# module "subscriptionManagedProject01" {
+#   providers = {
+#     azurerm = "azurerm.Project01"
+#   }
+#   source                    = "github.com/rjfmachado/azuresubscription/modules/azuresubscription-managed"
+#   subscriptionId            = data.azurerm_subscription.sProject01.id
+#   subscriptionName          = "Project 01"
+#   subscriptionObjectPreffix = "project01"
+#   depends_on = [
+#     roleDeploymentManagerAuditor,
+#     roleCustomSupport
+#   ]
+# }
