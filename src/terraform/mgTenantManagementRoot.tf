@@ -41,7 +41,8 @@ data "azurerm_policy_definition" "polAllowedLocations" {
 
 //Assign builtin policy "Allowed locations" to Root Management Group
 resource "azurerm_policy_assignment" "polassAllowedLocations" {
-  name                 = "polassAllowedLocations"
+  name                 = "polassP0165"
+  display_name         = "P0165 - Data Residency - Allowed Regions"
   scope                = data.azurerm_management_group.mgTenantRoot.id
   policy_definition_id = data.azurerm_policy_definition.polAllowedLocations.id
   parameters           = <<PARAMETERS
@@ -51,6 +52,26 @@ resource "azurerm_policy_assignment" "polassAllowedLocations" {
       "West Europe",
       "North Europe"
      ]
+  }
+}
+PARAMETERS
+}
+
+//Get a built-in policy definition
+data "azurerm_policy_definition" "polAuditStorageAccountSSL" {
+  display_name = "Secure transfer to storage accounts should be enabled"
+}
+
+//Assign builtin policy "Allowed locations" to Root Management Group
+resource "azurerm_policy_assignment" "polassAuditStorageAccountSSL" {
+  name                 = "polassP0001"
+  display_name         = "P0001 - Audit Storage Account encryption in transit"
+  scope                = data.azurerm_management_group.mgTenantRoot.id
+  policy_definition_id = data.azurerm_policy_definition.polAuditStorageAccountSSL.id
+  parameters           = <<PARAMETERS
+{
+  "effect": {
+    "value": "Audit"
   }
 }
 PARAMETERS
