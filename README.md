@@ -7,7 +7,8 @@ This repo contains samples for using Terraform to deploy Azure Governance relate
 - Support multiple Azure AD Tenants in a multistage pipeline - Currently dev and prod, but designed to support easy addition of more stages.
   - Azure Pipelines YAML templates.
   - Use of containers to support Terraform version pinning.
-    - TODO: Add support for Visual Studio Code remote container for terraform dev/debug
+  - TODO: Add support for Visual Studio Code remote container for terraform dev/debug
+- TODO: Review partner scenarios with multiple customers and Azure Lighthouse/CSP model.
 - Maintain Terraform state with the azurerm storage account backend.
 - Implement Azure Governance Resources
   - Subscription assignment to Management Groups
@@ -29,7 +30,7 @@ This repo contains samples for using Terraform to deploy Azure Governance relate
     - TODO: Pipeline not running on schedule, verify - issue with OAUTH and GitHub triggers
   - TODO: Add tflint, investigate terratest
   - TODO: Add tests to PR builds
-  - TODO: Add Stage checks <https://docs.microsoft.com/en-us/azure/devops/pipelines/process/checks?view=azure-devops>
+  - TODO: Add Environments,Stage checks <https://docs.microsoft.com/en-us/azure/devops/pipelines/process/checks?view=azure-devops>
     <https://github.com/microsoft/azure-pipelines-yaml/issues/288>
 - Add Security Center configuration
 - Add Azure Monitor
