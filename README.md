@@ -16,9 +16,9 @@ This repo contains samples for using Terraform to deploy Azure Governance relate
   - Custom Role Based Access Control definitons scoped to Management Groups, Subscriptions and Resource Groups.
     - TODO: File GitHub issue as assignments for roles scoped to Management Groups keep getting recreated.
   - Role Based Access Control assignments with builtin and custom roles to Management Groups, Subscriptions and Resource Groups.
-  - TODO: Azure Policy definitions scoped to Management Groups, Subscriptions, Resource Groups
-  - TODO: Azure Policy assignments scoped to Management Groups, Subscriptions, Resource Groups
-    - TODO: https://github.com/terraform-providers/terraform-provider-azurerm/issues/3762
+  - TODO: Azure Policy definitions scoped to Management Groups
+  - TODO: Azure Policy assignments to Management Groups
+    - TODO: <https://github.com/terraform-providers/terraform-provider-azurerm/issues/3762>
     - TODO: Support for Audit, Deny, Add, Modify (Tags)
     - TODO: Support for DeployIfNotExists and Managed Service Identities.
   - TODO: Add Blueprints definitions/assignments
@@ -34,7 +34,7 @@ This repo contains samples for using Terraform to deploy Azure Governance relate
     <https://github.com/microsoft/azure-pipelines-yaml/issues/288>
 - Add Security Center configuration
 - Add Azure Monitor
-- TODO: Review repo badges, eg https://raw.githubusercontent.com/wata727/tflint/master/README.md
+- TODO: Review repo badges, eg <https://raw.githubusercontent.com/wata727/tflint/master/README.md>
 - TODO: seriously improve this guidance :)
 - TODO: Monitor secret age and alert.
 - Azure AD Roles
@@ -45,10 +45,8 @@ This repo contains samples for using Terraform to deploy Azure Governance relate
 - TODO: Add a provisioners/connections scenario
 - TODO: Connect Activity Log to Workspace
 - TODO: Connect Azure AD Logs
-- Subscription Configuration provided as a module
-  - TODO: Parameterize module location
-  - TODO: Add versioning support
 - TODO: Verify usage of *dynamic* block
+- TODO: investigate CNAB bundle as a release tool?
 
 ## Configuration
 

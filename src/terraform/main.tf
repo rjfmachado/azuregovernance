@@ -5,10 +5,26 @@ terraform {
   required_version = ">= 0.12"
 }
 
-variable "client_secret" {}
-variable "client_id" {}
-variable "tenant_id" {}
-variable "subscription_id" {}
+variable "client_secret" {
+  type        = string
+  description = "The service principal client secred for the azurerm/ad client context."
+  default     = null
+}
+variable "client_id" {
+  type        = string
+  description = "The service principal client id for the azurerm/ad client context."
+  default     = null
+}
+variable "tenant_id" {
+  type        = string
+  description = "The default tenant for the azurerm client/ad context."
+  default     = null
+}
+variable "subscription_id" {
+  type        = string
+  description = "The default subscription for the azurerm client context."
+  default     = null
+}
 variable "deploymentStage" {
   type        = string
   description = "dev, qa, prod"
@@ -20,11 +36,10 @@ data "azurerm_client_config" "current" {
 
 provider "azurerm" {
   version         = "=1.34.0"
-  subscription_id = var.subscription_id
   client_id       = var.client_id
+  subscription_id = var.subscription_id
   tenant_id       = var.tenant_id
   client_secret   = var.client_secret
-  #skip_provider_registration = true
 }
 
 provider "azuread" {

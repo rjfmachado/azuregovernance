@@ -1,4 +1,5 @@
 variable "mgSharedServicesSubscriptions" {
+  type        = map(list(string))
   description = "The subscriptions linked to the Shared Services Management Group"
   default     = null
 }
