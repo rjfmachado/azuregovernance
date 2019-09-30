@@ -1,4 +1,5 @@
 variable "mgManagedProject01Subscriptions" {
+  type        = map(list(string))
   description = "The subscriptions linked to the Project 01 Management Group"
   default     = null
 }

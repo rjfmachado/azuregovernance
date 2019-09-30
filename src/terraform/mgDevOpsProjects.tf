@@ -1,4 +1,5 @@
 variable "mgDevOpsSubscriptions" {
+  type        = map(list(string))
   description = "The subscriptions linked to the DevOps Management Group"
   default     = null
 }
