@@ -62,6 +62,12 @@ az extensions add --name azure-devops
 az devops login
 ```
 
+or
+
+```bash
+az extension update --name azure-devops
+```
+
 > If you wish to pin Terraform to a specific version, you can use my [Terraform Container](https://github.com/rjfmachado/containers/tree/master/src/terraform). You'll also need to setup your own registry, Docker Registry service connection, and configure the continuous delivery pipeline accordingly.
 
 ### Environments
