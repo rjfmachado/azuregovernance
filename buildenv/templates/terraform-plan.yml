@@ -49,9 +49,3 @@ steps:
     workingDirectory: src/terraform
     enabled: "true"
     name: plan
-
-  - publish:
-      path: ${{ variables['Pipeline.Workspace'] }}/terraformAzureGovernance/dev.plan
-      displayName: "Publish Azure Governance."
-      artifact: terraformPlan
-      enabled: "true"
