@@ -1,0 +1,24 @@
+parameters:
+  client_secret: ""
+  client_id: ""
+  tenant_id: ""
+  subscription_id: ""
+  storage_account_name: ""
+  container_name: ""
+  key: ""
+  deploymentStage: ""
+
+steps:
+  - bash: |
+      terraform init \
+      -input=false \
+      -backend=true \
+      -backend-config="client_secret=${{parameters.client_secret}}" \
+      -backend-config="storage_account_name=${{parameters.storage_account_name}}" \
+      -backend-config="container_name=${{parameters.container_name}}" \
+      -backend-config="key=${{parameters.key}}"
+    displayName: "Terraform Init"
+    name: init
+
+    workingDirectory: src/terraform
+    enabled: "true"
