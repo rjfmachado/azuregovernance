@@ -10,7 +10,7 @@ parameters:
 
 steps:
   - bash: |
-      ls -la
+      ls -la && terraform version
     displayName: "ls"
     name: ls
 
