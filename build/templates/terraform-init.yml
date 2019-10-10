@@ -28,5 +28,5 @@ steps:
     displayName: "Terraform Init"
     name: init
 
-    workingDirectory: $(Pipeline.Workspace)/terraformAzureGovernance/src/terraform
+    workingDirectory: $(Pipeline.Workspace)/terraformAzureGovernance
     enabled: "true"
