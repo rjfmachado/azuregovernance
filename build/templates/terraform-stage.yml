@@ -37,7 +37,6 @@ steps:
     name: plan
 
   - bash: |
-      if [ $? -eq 2 ]; then \
       terraform apply \
       -input=false \
       -auto-approve \
