@@ -18,6 +18,7 @@ steps:
       -backend-config="container_name=${{parameters.container_name}}" \
       -backend-config="key=${{parameters.key}}"
     displayName: "Terraform Init"
+    name: init
 
     workingDirectory: src/terraform
     enabled: "true"
@@ -32,15 +33,17 @@ steps:
       -var "tenant_id=${{parameters.tenant_id}}" \
       -var "subscription_id=${{parameters.subscription_id}}" \
       -var "deploymentStage=${{parameters.deploymentStage}}" \
+      && echo "##vso[task.setvariable variable=TF_PLAN_RESULT;isOutput=true]$?"
     displayName: "Terraform Plan"
     workingDirectory: src/terraform
     enabled: "true"
+    name: plan
 
   - bash: |
       if [ $? -eq 2 ]; then \
       terraform apply \
       tfplan \
-      -input=false \
+      -input=false \t
       -auto-approve \
       -var "client_secret=${{parameters.client_secret}}" \
       -var "client_id=${{parameters.client_id}}" \
@@ -51,3 +54,5 @@ steps:
     displayName: "Terraform Apply"
     workingDirectory: src/terraform
     enabled: "true"
+    depends_on: eq(variables['plan.TF_PLAN_RESULT'], '2')
+    name: apply
