@@ -26,14 +26,11 @@ steps:
   - bash: |
       terraform plan \
       -input=false \
-      -out=tfplan \
-      -detailed-exitcode \
       -var "client_secret=${{parameters.client_secret}}" \
       -var "client_id=${{parameters.client_id}}" \
       -var "tenant_id=${{parameters.tenant_id}}" \
       -var "subscription_id=${{parameters.subscription_id}}" \
-      -var "deploymentStage=${{parameters.deploymentStage}}" \
-      && echo "##vso[task.setvariable variable=TF_PLAN_RESULT;isOutput=true]$?"
+      -var "deploymentStage=${{parameters.deploymentStage}}"
     displayName: "Terraform Plan"
     workingDirectory: src/terraform
     enabled: "true"
@@ -42,17 +39,14 @@ steps:
   - bash: |
       if [ $? -eq 2 ]; then \
       terraform apply \
-      tfplan \
-      -input=false \t
+      -input=false \
       -auto-approve \
       -var "client_secret=${{parameters.client_secret}}" \
       -var "client_id=${{parameters.client_id}}" \
       -var "tenant_id=${{parameters.tenant_id}}" \
       -var "subscription_id=${{parameters.subscription_id}}" \
-      -var "deploymentStage=${{parameters.deploymentStage}}"\
-      fi
+      -var "deploymentStage=${{parameters.deploymentStage}}"
     displayName: "Terraform Apply"
     workingDirectory: src/terraform
     enabled: "true"
-    depends_on: eq(variables['plan.TF_PLAN_RESULT'], '2')
     name: apply
