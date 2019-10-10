@@ -14,8 +14,8 @@ steps:
     displayName: "ls"
     name: ls
 
-    workingDirectory: $(Pipeline.Workspace)
-    enabled: false
+    workingDirectory: $(Pipeline.Workspace)/terraformAzureGovernance
+    enabled: true
 
   - bash: |
       terraform init \
