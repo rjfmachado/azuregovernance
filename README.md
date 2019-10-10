@@ -47,6 +47,8 @@ This repo contains samples for using Terraform to deploy Azure Governance relate
 - TODO: Connect Azure AD Logs
 - TODO: Verify usage of *dynamic* block
 - TODO: investigate CNAB bundle as a release tool?
+- TODO: move my vars to samples
+- TODO: add guidance for local development
 
 ## Configuration
 
