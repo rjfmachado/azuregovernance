@@ -10,6 +10,14 @@ parameters:
 
 steps:
   - bash: |
+      ls -la
+    displayName: "ls"
+    name: ls
+
+    workingDirectory: $(Pipeline.Workspace)
+    enabled: "true"
+
+  - bash: |
       terraform init \
       -input=false \
       -backend=true \
