@@ -15,7 +15,7 @@ steps:
     name: ls
 
     workingDirectory: $(Pipeline.Workspace)
-    enabled: "true"
+    enabled: false
 
   - bash: |
       terraform init \
@@ -28,5 +28,5 @@ steps:
     displayName: "Terraform Init"
     name: init
 
-    workingDirectory: $(Pipeline.Workspace)/src/terraform
+    workingDirectory: $(Pipeline.Workspace)/terraformAzureGovernance/src/terraform
     enabled: "true"
