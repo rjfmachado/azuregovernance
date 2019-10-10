@@ -20,5 +20,5 @@ steps:
     displayName: "Terraform Init"
     name: init
 
-    workingDirectory: src/terraform
+    workingDirectory: $(Pipeline.Workspace)/src/terraform
     enabled: "true"
