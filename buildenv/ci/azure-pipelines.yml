@@ -70,17 +70,3 @@ stages:
                   key: $(stateKey)
                   deploymentStage: $(deploymentStage)
                   terraformVersion: $(terraformVersion)
-
-
-# - stage: prod
-
-#   variables:
-#     - name: deploymentStage
-#       value: "prod"
-#     - name: stateStorageAccountName
-#       value: "tfazuregovernanceprod"
-#     - name: stateContainerName
-#       value: "prod"
-#     - name: stateKey
-#       value: "terraform.tfstate"
-#     - group: azuregovernanceprod
