@@ -43,14 +43,6 @@ stages:
       - group: azuregovernancedev
 
     jobs:
-      - job: installTerraform
-        displayName: Install Terraform
-        pool:
-          vmImage: "ubuntu-latest"
-        steps:
-        - task: TerraformInstaller@0
-          inputs:
-            terraformVersion: "0.12.10"
 
       - deployment: TerraformInit
         displayName: Terraform (Init)

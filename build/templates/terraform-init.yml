@@ -9,6 +9,10 @@ parameters:
   deploymentStage: ""
 
 steps:
+  - task: TerraformInstaller@0
+    inputs:
+      terraformVersion: "0.12.10"
+
   - bash: |
       ls -la && terraform version
     displayName: "ls"
