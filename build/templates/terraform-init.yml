@@ -14,12 +14,12 @@ steps:
       terraformVersion: "0.12.10"
 
   - bash: |
-      ls -la && terraform version
-    displayName: "ls"
-    name: ls
+      terraform version
+    displayName: "Terraform Version"
+    name: terraform version
 
     workingDirectory: $(Pipeline.Workspace)/terraformAzureGovernance
-    enabled: true
+    enabled: false
 
   - bash: |
       terraform init \
