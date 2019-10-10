@@ -9,7 +9,7 @@ variables:
     value: 0.12.10
 
 stages:
-  - stage: Publish Artifacts
+  - stage: PublishArtifacts
 
     jobs:
       - job: publishArtifacts
@@ -29,7 +29,7 @@ stages:
             artifact: pipelinesAzureGovernance
             enabled: "true"
 
-  - stage: Development Environment
+  - stage: DevelopmentEnvironment
 
     variables:
       - name: deploymentStage
