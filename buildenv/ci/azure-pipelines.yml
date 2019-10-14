@@ -4,10 +4,6 @@ trigger: none
 
 pr: none
 
-variables:
-  - name: terraformVersion
-    value: "0.12.10"
-
 stages:
   - stage: PublishArtifacts
 
@@ -24,7 +20,7 @@ stages:
             artifact: terraformAzureGovernance
             enabled: "true"
 
-          - publish: build/
+          - publish: buildenv/
             displayName: "Publish YAML Pipelines."
             artifact: pipelinesAzureGovernance
             enabled: "true"
@@ -44,8 +40,8 @@ stages:
 
     jobs:
 
-      - deployment: TerraformInit
-        displayName: Terraform (Init)
+      - deployment: Terraform
+        displayName: Terraform
         pool:
           vmImage: "ubuntu-latest"
         #dependsOn: string
