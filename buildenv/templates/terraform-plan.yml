@@ -7,21 +7,8 @@ parameters:
   container_name: ""
   key: ""
   deploymentStage: ""
-  terraformVersion: ""
 
 steps:
-  - task: TerraformInstaller@0
-    inputs:
-      terraformVersion: ${{parameters.terraformVersion}}"
-
-  - bash: |
-      terraform version
-    displayName: "Terraform Version"
-    name: terraform version
-
-    workingDirectory: $(Pipeline.Workspace)/terraformAzureGovernance
-    enabled: false
-
   - bash: |
       terraform init \
       -input=false \
@@ -46,6 +33,6 @@ steps:
       -var "subscription_id=${{parameters.subscription_id}}" \
       -var "deploymentStage=${{parameters.deploymentStage}}"
     displayName: "Terraform Plan"
-    workingDirectory: src/terraform
+    workingDirectory: $(Pipeline.Workspace)/terraformAzureGovernance
     enabled: "true"
     name: plan
