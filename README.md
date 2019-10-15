@@ -110,21 +110,33 @@ REPO_AZURE_GOVERNANCE="$GITHUB_ACCOUNT/$GITHUB_REPO"
 PIPELINE_NAME='rjfmachado.azuregovernance.ci'
 PIPELINE_DESCRIPTION='Azure Governance - Continuous Integration pipeline.'
 REPO_YAML_PATH='build/ci/azure-pipelines.yml'
+FOLDER_PATH="\governance\ci"
 
-az pipelines create --name "$PIPELINE_NAME" --description "$PIPELINE_DESCRIPTION" --repository "$REPO_AZURE_GOVERNANCE" --repository-type github --branch master --service-connection "$SC_GITHUB_ID" --yml-path "$REPO_YAML_PATH" --skip-first-run
+az pipelines folder create --path "$FOLDER_PATH"
+
+az pipelines create --name "$PIPELINE_NAME" --description "$PIPELINE_DESCRIPTION" --repository "$REPO_AZURE_GOVERNANCE" --repository-type github --branch master --service-connection "$SC_GITHUB_ID" --yml-path "$REPO_YAML_PATH" --folder-path "$FOLDER_PATH" --skip-first-run
 
 PIPELINE_NAME='rjfmachado.azuregovernance.pr'
 PIPELINE_DESCRIPTION='Azure Governance - Pull Request validation pipeline.'
 REPO_YAML_PATH='build/pr/azure-pipelines.yml'
 
-az pipelines create --name "$PIPELINE_NAME" --description "$PIPELINE_DESCRIPTION" --repository "$REPO_AZURE_GOVERNANCE" --repository-type github --branch master --service-connection "$SC_GITHUB_ID" --yml-path "$REPO_YAML_PATH" --skip-first-run
+FOLDER_PATH="\governance\pr"
+
+az pipelines folder create --path "$FOLDER_PATH"
+
+
+az pipelines create --name "$PIPELINE_NAME" --description "$PIPELINE_DESCRIPTION" --repository "$REPO_AZURE_GOVERNANCE" --repository-type github --branch master --service-connection "$SC_GITHUB_ID" --yml-path "$REPO_YAML_PATH" --folder-path "$FOLDER_PATH" --skip-first-run
 
 # Currently this pipeline is required to be configured manually using the azure devops app, as the oauth method does not carry the event notifications for schedules.
 # PIPELINE_NAME='rjfmachado.azuregovernance.opstest'
 # PIPELINE_DESCRIPTION='Azure Governance - Verify deployed environments against expected configuration - Every day at midnight.'
 # REPO_YAML_PATH='build/ops/azure-pipelines.yml'
 
-# az pipelines create --name "$PIPELINE_NAME" --description "$PIPELINE_DESCRIPTION" --repository "$REPO_AZURE_GOVERNANCE" --repository-type github --branch master --service-connection "$SC_GITHUB_ID" --yml-path "$REPO_YAML_PATH" --skip-first-run
+#FOLDER_PATH="\governance\ops"
+
+#az pipelines folder create --path "$FOLDER_PATH"
+
+# az pipelines create --name "$PIPELINE_NAME" --description "$PIPELINE_DESCRIPTION" --repository "$REPO_AZURE_GOVERNANCE" --repository-type github --branch master --service-connection "$SC_GITHUB_ID" --yml-path "$REPO_YAML_PATH" --folder-path "$FOLDER_PATH" --skip-first-run
 ```
 
 > Note: Pipelines are retained for 30 days after deletion. If you are required to rerun the pipeline creation process, you will need to rename your pipelines.
