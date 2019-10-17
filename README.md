@@ -109,7 +109,7 @@ REPO_AZURE_GOVERNANCE="$GITHUB_ACCOUNT/$GITHUB_REPO"
 ```
 
 ```bash
-PIPELINE_NAME='rjfmachado.azuregovernance.continuousdelivery'
+PIPELINE_NAME='azure.governance.cd'
 PIPELINE_DESCRIPTION='Azure Governance - Continuous Delivery'
 REPO_YAML_PATH='build/cd/azure-pipelines.yml'
 FOLDER_PATH='\governance\cd'
@@ -120,7 +120,7 @@ az pipelines create --name "$PIPELINE_NAME" --description "$PIPELINE_DESCRIPTION
 ```
 
 ```bash
-PIPELINE_NAME='rjfmachado.azuregovernance.continuousintegration'
+PIPELINE_NAME='azure.governance.ci'
 PIPELINE_DESCRIPTION='Azure Governance - Pull Request'
 REPO_YAML_PATH='build/ci/azure-pipelines.yml'
 
@@ -134,7 +134,7 @@ az pipelines create --name "$PIPELINE_NAME" --description "$PIPELINE_DESCRIPTION
 
 ```bash
 # Currently this pipeline is required to be configured manually using the azure devops app, as the oauth method does not carry the event notifications for schedules.
-PIPELINE_NAME='rjfmachado.azuregovernance.validation'
+PIPELINE_NAME='azure.governance.validation.daily'
 PIPELINE_DESCRIPTION='Azure Governance - Verify deployed environments against expected configuration - Every day at midnight.'
 REPO_YAML_PATH='build/ops/azure-pipelines.yml'
 
