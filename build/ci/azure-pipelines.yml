@@ -1,4 +1,4 @@
-name: Pull Request_$(Rev:.r)
+name: Pull Request $(Rev:.r)
 
 trigger: none
 

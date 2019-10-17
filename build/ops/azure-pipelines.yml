@@ -1,4 +1,4 @@
-name: Daily Validation_$(Rev:.r)
+name: Daily Validation$(Rev:.r)
 
 trigger: none
 

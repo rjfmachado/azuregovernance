@@ -1,4 +1,4 @@
-name: Continuous Delivery$(Rev:.r)
+name: Continuous Delivery v$(Rev:.r)
 
 trigger:
   batch: "true"

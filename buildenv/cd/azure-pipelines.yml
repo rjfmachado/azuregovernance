@@ -1,4 +1,4 @@
-name: Continuous Delivery (Environments)$(Rev:.r)
+name: Continuous Delivery (Environments) v$(Rev:.r)
 
 trigger: none
 
