@@ -106,16 +106,20 @@ az devops configure --defaults project="$DEVOPS_PROJECT"
 
 SC_GITHUB_ID=$(az devops service-endpoint list --query "[?contains(name, '$GITHUB_ACCOUNT')].id" --output tsv)
 REPO_AZURE_GOVERNANCE="$GITHUB_ACCOUNT/$GITHUB_REPO"
+```
 
-PIPELINE_NAME='rjfmachado.azuregovernance.ci'
-PIPELINE_DESCRIPTION='Azure Governance - Continuous Integration pipeline.'
-REPO_YAML_PATH='build/ci/azure-pipelines.yml'
-FOLDER_PATH="\governance\ci"
+```bash
+PIPELINE_NAME='rjfmachado.azuregovernance.continuousdelivery'
+PIPELINE_DESCRIPTION='Azure Governance - Continuous Delivery'
+REPO_YAML_PATH='build/cd/azure-pipelines.yml'
+FOLDER_PATH='\governance\cd'
 
 az pipelines folder create --path "$FOLDER_PATH"
 
 az pipelines create --name "$PIPELINE_NAME" --description "$PIPELINE_DESCRIPTION" --repository "$REPO_AZURE_GOVERNANCE" --repository-type github --branch master --service-connection "$SC_GITHUB_ID" --yml-path "$REPO_YAML_PATH" --folder-path "$FOLDER_PATH" --skip-first-run
+```
 
+```bash
 PIPELINE_NAME='rjfmachado.azuregovernance.pr'
 PIPELINE_DESCRIPTION='Azure Governance - Pull Request validation pipeline.'
 REPO_YAML_PATH='build/pr/azure-pipelines.yml'
@@ -126,7 +130,9 @@ az pipelines folder create --path "$FOLDER_PATH"
 
 
 az pipelines create --name "$PIPELINE_NAME" --description "$PIPELINE_DESCRIPTION" --repository "$REPO_AZURE_GOVERNANCE" --repository-type github --branch master --service-connection "$SC_GITHUB_ID" --yml-path "$REPO_YAML_PATH" --folder-path "$FOLDER_PATH" --skip-first-run
+```
 
+```bash
 # Currently this pipeline is required to be configured manually using the azure devops app, as the oauth method does not carry the event notifications for schedules.
 # PIPELINE_NAME='rjfmachado.azuregovernance.opstest'
 # PIPELINE_DESCRIPTION='Azure Governance - Verify deployed environments against expected configuration - Every day at midnight.'
