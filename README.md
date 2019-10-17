@@ -53,7 +53,6 @@ This repo contains samples for using Terraform to deploy Azure Governance relate
 - //TODO: move my vars to samples
 - //TODO: add guidance for local development
 
-
 ## Configuration
 
 This repo contains id's and resources used in my own demo/learning environment, fork at will but you'll have to change those.
