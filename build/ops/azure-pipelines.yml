@@ -1,4 +1,4 @@
-name: Azure_Governance_Ops$(Rev:.r)
+name: Daily Validation_$(Rev:.r)
 
 trigger: none
 

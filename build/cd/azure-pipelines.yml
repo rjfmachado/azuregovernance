@@ -1,4 +1,4 @@
-name: Azure_Governance_$(Rev:.r)
+name: Continuous Delivery$(Rev:.r)
 
 trigger:
   batch: "true"

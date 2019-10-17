@@ -1,4 +1,4 @@
-name: Azure_Governance_CII$(Rev:.r)
+name: Continuous Delivery (Environments)$(Rev:.r)
 
 trigger: none
 

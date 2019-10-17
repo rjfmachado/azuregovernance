@@ -1,4 +1,4 @@
-name: Azure_Governance_PR$(Rev:.r)
+name: Pull Request_$(Rev:.r)
 
 trigger: none
 
