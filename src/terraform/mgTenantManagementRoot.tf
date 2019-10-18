@@ -12,7 +12,8 @@ resource "azurerm_role_definition" "roleCustomSupport" {
   permissions {
     actions = [
       "Microsoft.Support/*",
-      "*/read"
+      "*/read",
+      "Microsoft.Resources/*"
     ]
     not_actions = []
   }
@@ -22,9 +23,20 @@ resource "azurerm_role_definition" "roleCustomSupport" {
   ]
 }
 
+data "azuread_domains" "aad_domains" {
+  only_default = true
+}
+
+data "azuread_user" "example" {
+  user_principal_name = "ricardo@${data.azuread_domains.aad_domains.domains[0].domain_name}"
+}
+
 //Group to target with role assigment
 resource "azuread_group" "gAllSupport" {
   name = "All Support"
+  members = [
+    data.azuread_user.example.object_id
+  ]
 }
 
 //Custom Role assignment to Tenant Root Management Group

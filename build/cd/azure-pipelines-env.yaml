@@ -39,14 +39,13 @@ stages:
       - group: azuregovernancedev
 
     jobs:
-
       - deployment: Terraform
         displayName: Terraform
         pool:
           vmImage: "ubuntu-latest"
         #dependsOn: string
         #condition: string
-        continueOnError: false                # 'true' if future jobs should run even if this job fails; defaults to 'false'
+        continueOnError: false # 'true' if future jobs should run even if this job fails; defaults to 'false'
         #timeoutInMinutes: nonEmptyString        # how long to run the job before automatically cancelling
         #cancelTimeoutInMinutes: nonEmptyString  # how much time to give 'run always even if cancelled tasks' before killing them
         #variables: { string: string } | [ variable | variableReference ]
@@ -55,13 +54,13 @@ stages:
           runOnce:
             deploy:
               steps:
-              - template: /buildenv/templates/terraform-plan.yml
-                parameters:
-                  client_secret: $(ARM_CLIENT_SECRET)
-                  client_id: $(ARM_CLIENT_ID)
-                  tenant_id: $(ARM_TENANT_ID)
-                  subscription_id: $(ARM_SUBSCRIPTION_ID)
-                  storage_account_name: $(stateStorageAccountName)
-                  container_name: $(stateContainerName)
-                  key: $(stateKey)
-                  deploymentStage: $(deploymentStage)
+                - template: /build/templates/terraform-plan.yml
+                  parameters:
+                    client_secret: $(ARM_CLIENT_SECRET)
+                    client_id: $(ARM_CLIENT_ID)
+                    tenant_id: $(ARM_TENANT_ID)
+                    subscription_id: $(ARM_SUBSCRIPTION_ID)
+                    storage_account_name: $(stateStorageAccountName)
+                    container_name: $(stateContainerName)
+                    key: $(stateKey)
+                    deploymentStage: $(deploymentStage)
