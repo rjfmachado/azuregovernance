@@ -1,22 +1,48 @@
-name: Daily Validation$(Rev:.r)
+name: Continuous Delivery v$(Rev:.r)
 
-trigger: none
-
-schedules:
-- cron: 0 0 * * *
-  displayName: Ops Validation Build (Midnight)
+trigger:
+  batch: "true"
   branches:
     include:
     - master
-  always: true
+  paths:
+    include:
+    - src/terraform
+    - build/cd/azure-pipelines.yml
+    - build/templates/terraform-stage.yml
 
 pr: none
 
 variables:
 - name: terraformVersion
   value: 0.12.10
+- name: TF_INPUT
+  value: "false"
+- name: TF_IN_AUTOMATION
+  value: "true"
 
 stages:
+
+- stage: Artifacts
+
+  jobs:
+
+  - job: PublishArtifact
+    displayName: Terraform Management Groups
+    pool:
+      vmImage: 'ubuntu-latest'
+
+    steps:
+
+    - publish: src/terraform
+      displayName: "Publish Azure Governance artifact."
+      artifact: terraformAzureGovernance
+      enabled: "true"
+
+    - publish: build/
+      displayName: "Publish Azure Governance build artifact."
+      artifact: pipelinesAzureGovernance
+      enabled: "true"
 
 - stage: dev
 
@@ -34,7 +60,7 @@ stages:
   jobs:
 
   - job: Terraform
-    displayName: Azure Governance Ops - Dev
+    displayName: Terraform Management Groups Build
     pool:
       vmImage: 'ubuntu-latest'
 
@@ -44,7 +70,7 @@ stages:
 
     steps:
 
-    - template: /build/templates/terraform-stage-ops.yml
+    - template: /build/templates/terraform-stage.yml
       parameters:
         client_secret: $(ARM_CLIENT_SECRET)
         client_id: $(ARM_CLIENT_ID)
@@ -71,7 +97,7 @@ stages:
   jobs:
 
   - job: Terraform
-    displayName: Azure Governance Ops - Production
+    displayName: Terraform Management Groups Build
     pool:
       vmImage: 'ubuntu-latest'
 
@@ -81,7 +107,7 @@ stages:
 
     steps:
 
-    - template: /build/templates/terraform-stage-ops.yml
+    - template: /build/templates/terraform-stage.yml
       parameters:
         client_secret: $(ARM_CLIENT_SECRET)
         client_id: $(ARM_CLIENT_ID)

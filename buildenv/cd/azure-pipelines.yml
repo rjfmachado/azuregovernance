@@ -1,0 +1,67 @@
+name: Continuous Delivery (Environments) v$(Rev:.r)
+
+trigger: none
+
+pr: none
+
+stages:
+  - stage: PublishArtifacts
+
+    jobs:
+      - job: publishArtifacts
+        displayName: Publish Azure Governance Terraform files.
+
+        pool:
+          vmImage: "ubuntu-latest"
+
+        steps:
+          - publish: src/terraform
+            displayName: "Publish Azure Governance."
+            artifact: terraformAzureGovernance
+            enabled: "true"
+
+          - publish: buildenv/
+            displayName: "Publish YAML Pipelines."
+            artifact: pipelinesAzureGovernance
+            enabled: "true"
+
+  - stage: Development
+
+    variables:
+      - name: deploymentStage
+        value: "dev"
+      - name: stateStorageAccountName
+        value: "tfazuregovernancedev"
+      - name: stateContainerName
+        value: "dev"
+      - name: stateKey
+        value: "terraform.tfstate"
+      - group: azuregovernancedev
+
+    jobs:
+
+      - deployment: Terraform
+        displayName: Terraform
+        pool:
+          vmImage: "ubuntu-latest"
+        #dependsOn: string
+        #condition: string
+        continueOnError: false                # 'true' if future jobs should run even if this job fails; defaults to 'false'
+        #timeoutInMinutes: nonEmptyString        # how long to run the job before automatically cancelling
+        #cancelTimeoutInMinutes: nonEmptyString  # how much time to give 'run always even if cancelled tasks' before killing them
+        #variables: { string: string } | [ variable | variableReference ]
+        environment: ${{ variables['deploymentStage'] }}
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+              - template: /buildenv/templates/terraform-plan.yml
+                parameters:
+                  client_secret: $(ARM_CLIENT_SECRET)
+                  client_id: $(ARM_CLIENT_ID)
+                  tenant_id: $(ARM_TENANT_ID)
+                  subscription_id: $(ARM_SUBSCRIPTION_ID)
+                  storage_account_name: $(stateStorageAccountName)
+                  container_name: $(stateContainerName)
+                  key: $(stateKey)
+                  deploymentStage: $(deploymentStage)

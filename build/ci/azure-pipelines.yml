@@ -1,48 +1,29 @@
-name: Azure_Governance_$(Rev:.r)
+name: Pull Request $(Rev:.r)
 
-trigger:
-  batch: "true"
+trigger: none
+
+pr:
+  autoCancel: "true"
   branches:
     include:
     - master
   paths:
     include:
     - src/terraform
-    - build/ci/azure-pipelines.yml
+    - build/cd/azure-pipelines.yml
     - build/templates/terraform-stage.yml
-
-pr: none
+    exclude:
+    - build/ci/azure-pipelines.yml
+    - build/templates/terraform-stage-pr.yml
 
 variables:
 - name: terraformVersion
-  value: 0.12.9
+  value: 0.12.10
 
 stages:
+  - stage: dev
 
-- stage: Artifacts
-
-  jobs:
-
-  - job: PublishArtifact
-    displayName: Terraform Management Groups
-    pool:
-      vmImage: 'ubuntu-latest'
-
-    steps:
-
-    - publish: src/terraform
-      displayName: "Publish Azure Governance artifact."
-      artifact: terraformAzureGovernance
-      enabled: "true"
-
-    - publish: build/
-      displayName: "Publish Azure Governance build artifact."
-      artifact: pipelinesAzureGovernance
-      enabled: "true"
-
-- stage: dev
-
-  variables:
+    variables:
     - name: deploymentStage
       value: "dev"
     - name: stateStorageAccountName
@@ -53,63 +34,26 @@ stages:
       value: "terraform.tfstate"
     - group: azuregovernancedev
 
-  jobs:
+    jobs:
 
-  - job: Terraform
-    displayName: Terraform Management Groups Build
-    pool:
-      vmImage: 'ubuntu-latest'
+    - job: Terraform
+      displayName: Azure Governance Pull Request
+      pool:
+        vmImage: 'ubuntu-latest'
 
-    container:
-      image: rjfmachado.azurecr.io/terraform:${{ variables['terraformVersion'] }}
-      endpoint: containers
+      container:
+        image: rjfmachado.azurecr.io/terraform:${{ variables['terraformVersion'] }}
+        endpoint: containers
 
-    steps:
+      steps:
 
-    - template: /build/templates/terraform-stage.yml
-      parameters:
-        client_secret: $(ARM_CLIENT_SECRET)
-        client_id: $(ARM_CLIENT_ID)
-        tenant_id: $(ARM_TENANT_ID)
-        subscription_id: $(ARM_SUBSCRIPTION_ID)
-        storage_account_name: $(stateStorageAccountName)
-        container_name: $(stateContainerName)
-        key: $(stateKey)
-        deploymentStage: $(deploymentStage)
-
-- stage: prod
-
-  variables:
-    - name: deploymentStage
-      value: "prod"
-    - name: stateStorageAccountName
-      value: "tfazuregovernanceprod"
-    - name: stateContainerName
-      value: "prod"
-    - name: stateKey
-      value: "terraform.tfstate"
-    - group: azuregovernanceprod
-
-  jobs:
-
-  - job: Terraform
-    displayName: Terraform Management Groups Build
-    pool:
-      vmImage: 'ubuntu-latest'
-
-    container:
-      image: rjfmachado.azurecr.io/terraform:${{ variables['terraformVersion'] }}
-      endpoint: containers
-
-    steps:
-
-    - template: /build/templates/terraform-stage.yml
-      parameters:
-        client_secret: $(ARM_CLIENT_SECRET)
-        client_id: $(ARM_CLIENT_ID)
-        tenant_id: $(ARM_TENANT_ID)
-        subscription_id: $(ARM_SUBSCRIPTION_ID)
-        storage_account_name: $(stateStorageAccountName)
-        container_name: $(stateContainerName)
-        key: $(stateKey)
-        deploymentStage: $(deploymentStage)
+      - template: /build/templates/terraform-stage-pr.yml
+        parameters:
+          client_secret: $(ARM_CLIENT_SECRET)
+          client_id: $(ARM_CLIENT_ID)
+          tenant_id: $(ARM_TENANT_ID)
+          subscription_id: $(ARM_SUBSCRIPTION_ID)
+          storage_account_name: $(stateStorageAccountName)
+          container_name: $(stateContainerName)
+          key: $(stateKey)
+          deploymentStage: $(deploymentStage)
