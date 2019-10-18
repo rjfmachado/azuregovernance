@@ -96,6 +96,7 @@ az rest --method post --uri https://management.azure.com/providers/Microsoft.Man
 - In Azure Cloud Shell:
 
 ```bash
+# Prepare your environment
 DEVOPS_ACCOUNT='https://dev.azure.com/rjfmachado'
 DEVOPS_PROJECT='azuredemos'
 az devops configure --defaults organization="$DEVOPS_ACCOUNT"
@@ -108,6 +109,7 @@ REPO_AZURE_GOVERNANCE="$GITHUB_ACCOUNT/$GITHUB_REPO"
 ```
 
 ```bash
+# Create the CD pipeline
 PIPELINE_NAME='azure.governance.cd'
 PIPELINE_DESCRIPTION='Azure Governance - Continuous Delivery'
 REPO_YAML_PATH='build/cd/azure-pipelines.yml'
@@ -119,6 +121,7 @@ az pipelines create --name "$PIPELINE_NAME" --description "$PIPELINE_DESCRIPTION
 ```
 
 ```bash
+# Create the CI pipeline
 PIPELINE_NAME='azure.governance.ci'
 PIPELINE_DESCRIPTION='Azure Governance - Pull Request'
 REPO_YAML_PATH='build/ci/azure-pipelines.yml'
@@ -132,7 +135,7 @@ az pipelines create --name "$PIPELINE_NAME" --description "$PIPELINE_DESCRIPTION
 ```
 
 ```bash
-# Currently this pipeline is required to be configured manually using the azure devops app, as the oauth method does not carry the event notifications for schedules.
+# FIXME: Create the Daily validation pipeline - Currently this pipeline is required to be configured manually using the azure devops app, as the oauth method does not carry the event notifications for schedules.
 PIPELINE_NAME='azure.governance.validation.daily'
 PIPELINE_DESCRIPTION='Azure Governance - Verify deployed environments against expected configuration - Every day at midnight.'
 REPO_YAML_PATH='build/ops/azure-pipelines.yml'
@@ -177,7 +180,7 @@ SERVICE_PRINCIPAL_ID=$(az ad sp show --id "http://$SERVICE_PRINCIPAL_NAME" --que
 # Assign Owner role to Service Principal at the Tenant Root Management Group
 az role assignment create --role "Owner" --assignee $SERVICE_PRINCIPAL_ID --scope "/providers/Microsoft.Management/managementGroups/$TENANT_ID"
 
-#TODO: add Service Principal to Azure AD User administrator role
+#TODO: add Service Principal to Azure AD User roles
 ```
 
 - In Azure Cloud Shell, configure the stage Variable Group.
@@ -207,5 +210,4 @@ az storage container create --name "$CONTAINER_NAME" --account-name "$STORAGE_AC
 az role assignment create --role "Contributor" --assignee $SERVICE_PRINCIPAL_ID --resource-group "$RESOURCE_GROUP_NAME"
 
 az lock create --name 'preventDelete' --resource-group "$RESOURCE_GROUP_NAME" --lock-type CanNotDelete
-
 ```
