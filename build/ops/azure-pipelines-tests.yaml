@@ -24,11 +24,13 @@ stages:
           - task: AzurePowerShell@4
             inputs:
               azureSubscription: scAzureGovernance
+              scriptType: Inline
               inline: Install-Module -Name Pester -Force -Scope CurrentUser
               azurePowerShellVersion: "latestVersion"
 
           - task: AzurePowerShell@4
             inputs:
               azureSubscription: scAzureGovernance
+              scriptType: Inline
               inline: Get-AzSubscription
               azurePowerShellVersion: "latestVersion"
