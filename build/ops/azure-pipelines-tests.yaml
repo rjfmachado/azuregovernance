@@ -1,0 +1,36 @@
+name: Test runs$(Rev:.r)
+
+trigger: none
+
+pr: none
+
+variables:
+  - group: azuregovernancedev
+
+stages:
+  - stage: dev
+
+    variables:
+      - name: deploymentStage
+        value: "dev"
+
+    jobs:
+      - job: Test
+        displayName: Tests
+        pool:
+          vmImage: "ubuntu-latest"
+
+        steps:
+          - task: AzurePowerShell@4
+            inputs:
+              azureSubscription: scAzureGovernance
+              inline: /
+                Install-Module -Name Pester -Force -Scope CurrentUser
+              azurePowerShellVersion: "latestVersion"
+
+          - task: AzurePowerShell@4
+            inputs:
+              azureSubscription: scAzureGovernance
+              inline: /
+                Get-AzSubscription
+              azurePowerShellVersion: "latestVersion"
