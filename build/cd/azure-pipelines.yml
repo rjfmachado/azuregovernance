@@ -66,7 +66,7 @@ stages:
 
     container:
       image: rjfmachado.azurecr.io/terraform:${{ variables['terraformVersion'] }}
-      endpoint: containers
+      endpoint: rjfmachado.containers
 
     steps:
 

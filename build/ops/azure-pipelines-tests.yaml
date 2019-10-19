@@ -23,7 +23,7 @@ stages:
         steps:
           - task: AzurePowerShell@4
             inputs:
-              azureSubscription: scAzureGovernance
+              azureSubscription: azure.governance.tenantroot
               scriptType: Inline
               inline: |
                 Install-Module -Name Pester -Force -Scope CurrentUser
@@ -31,7 +31,7 @@ stages:
 
           - task: AzurePowerShell@4
             inputs:
-              azureSubscription: scAzureGovernance
+              azureSubscription: azure.governance.tenantroot
               scriptType: Inline
               inline: |
                 Get-AzSubscription
