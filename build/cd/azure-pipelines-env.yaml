@@ -65,7 +65,7 @@ stages:
                     key: $(stateKey)
                     deploymentStage: $(deploymentStage)
 
-  - stage: Development
+  - stage: Production
 
     variables:
       - name: deploymentStage
