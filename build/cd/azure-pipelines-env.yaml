@@ -20,7 +20,7 @@ stages:
             artifact: terraformAzureGovernance
             enabled: "true"
 
-          - publish: buildenv/
+          - publish: build/
             displayName: "Publish YAML Pipelines."
             artifact: pipelinesAzureGovernance
             enabled: "true"
