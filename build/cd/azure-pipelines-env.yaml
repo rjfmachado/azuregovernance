@@ -60,10 +60,10 @@ stages:
                     client_id: $(ARM_CLIENT_ID)
                     tenant_id: $(ARM_TENANT_ID)
                     subscription_id: $(ARM_SUBSCRIPTION_ID)
-                    storage_account_name: $(stateStorageAccountName)
-                    container_name: $(stateContainerName)
-                    key: $(stateKey)
-                    deploymentStage: $(deploymentStage)
+                    storage_account_name: ${{ variables['stateStorageAccountName'] }}
+                    container_name: ${{ variables['stateContainerName'] }}
+                    key: ${{ variables['stateKey'] }}
+                    deploymentStage: ${{ variables['deploymentStage'] }}
 
   - stage: Production
 
