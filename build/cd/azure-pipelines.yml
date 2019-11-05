@@ -39,6 +39,11 @@ stages:
       artifact: terraformAzureGovernance
       enabled: "true"
 
+    - publish: test
+      displayName: "Publish Azure Governance tests."
+      artifact: testsAzureGovernance
+      enabled: "true"
+
     - publish: build/
       displayName: "Publish Azure Governance build artifact."
       artifact: pipelinesAzureGovernance
