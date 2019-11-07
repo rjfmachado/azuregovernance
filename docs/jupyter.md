@@ -19,4 +19,6 @@ https://www.youtube.com/results?search_query=jupyter+vscode
 
 https://jupyter.org/
 
+https://jupyter-server-proxy.readthedocs.io/en/latest/convenience/packages/theia.html
+
 add portforwading to clouddev via .ssh/config
