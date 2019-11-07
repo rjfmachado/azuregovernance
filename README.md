@@ -7,8 +7,8 @@ This repo contains samples for using Terraform to deploy Azure Governance relate
 - Support multiple Azure AD Tenants in a multistage pipeline - Currently dev and prod, but designed to support easy addition of more stages.
   - Azure Pipelines YAML templates.
   - Use of containers to support Terraform version pinning.
-  - TODO: Add support for Visual Studio Code remote container for terraform dev/debug
-- TODO: Review partner scenarios with multiple customers and Azure Lighthouse/CSP model.
+  - //TODO: Add support for Visual Studio Code remote container for terraform dev/debug
+- //TODO: Review partner scenarios with multiple customers and Azure Lighthouse/CSP model.
 - Maintain Terraform state with the azurerm storage account backend.
 - Implement Azure Governance Resources
   - Subscription assignment to Management Groups
@@ -16,37 +16,42 @@ This repo contains samples for using Terraform to deploy Azure Governance relate
   - Custom Role Based Access Control definitons scoped to Management Groups, Subscriptions and Resource Groups.
     - TODO: File GitHub issue as assignments for roles scoped to Management Groups keep getting recreated.
   - Role Based Access Control assignments with builtin and custom roles to Management Groups, Subscriptions and Resource Groups.
-  - TODO: Azure Policy definitions scoped to Management Groups
-  - TODO: Azure Policy assignments to Management Groups
-    - TODO: <https://github.com/terraform-providers/terraform-provider-azurerm/issues/3762>
-    - TODO: Support for Audit, Deny, Add, Modify (Tags)
-    - TODO: Support for DeployIfNotExists and Managed Service Identities.
-  - TODO: Add Blueprints definitions/assignments
-- TODO: Add terraform graph and GraphViz support, review terraform-docs
-- TODO: Add Azure DevOps custom dashboard with relevant visuals
-- TODO: Improve deployment safety
+  - //TODO: Azure Policy definitions scoped to Management Groups
+  - //TODO: Azure Policy assignments to Management Groups
+    - //TODO: <https://github.com/terraform-providers/terraform-provider-azurerm/issues/3762>
+    - //TODO: Support for Audit, Deny, Add, Modify (Tags)
+    - //TODO: Support for DeployIfNotExists and Managed Service Identities.
+  - //TODO: Add Blueprints definitions/assignments
+- //TODO: Add terraform graph and GraphViz support, review terraform-docs
+- //TODO: Add Azure DevOps custom dashboard with relevant visuals
+- //TODO: Add azure dashboard <https://www.terraform.io/docs/providers/azurerm/r/dashboard.html>
+- //TODO: Improve deployment safety
   - Added Scheduled plan pipeline (gitops) and notifications
   - PR pipeline to validate/plan in dev/prod
-    - TODO: Pipeline not running on schedule, verify - issue with OAUTH and GitHub triggers
-  - TODO: Add tflint, investigate terratest
-  - TODO: Add tests to PR builds
-  - TODO: Add Environments,Stage checks <https://docs.microsoft.com/en-us/azure/devops/pipelines/process/checks?view=azure-devops>
+    - //TODO: Pipeline not running on schedule, verify - issue with OAUTH and GitHub triggers
+  - //TODO: Add tflint, investigate terratest
+  - //TODO: Add tests to PR builds
+  - //TODO: Add Environments,Stage checks <https://docs.microsoft.com/en-us/azure/devops/pipelines/process/checks?view=azure-devops>
     <https://github.com/microsoft/azure-pipelines-yaml/issues/288>
-- Add Security Center configuration
-- Add Azure Monitor
-- TODO: Review repo badges, eg <https://raw.githubusercontent.com/wata727/tflint/master/README.md>
-- TODO: seriously improve this guidance :)
-- TODO: Monitor secret age and alert.
-- Azure AD Roles
+- //TODOAdd Security Center configuration
+- //TODO: Add Azure Monitor
+- //TODO: Review repo badges, eg <https://raw.githubusercontent.com/wata727/tflint/master/README.md>
+- //TODO: seriously improve this guidance :)
+- //TODO: Monitor secret age and alert.
+- //TODO: Azure AD Roles
   - <https://techcommunity.microsoft.com/t5/Azure-Active-Directory-Identity/Custom-roles-for-app-registration-management-is-now-in-public/ba-p/789101>
   - <https://docs.microsoft.com/en-us/azure/active-directory/users-groups-roles/roles-custom-available-permissions>
   - <https://docs.microsoft.com/en-us/azure/active-directory/users-groups-roles/roles-custom-overview>
-- TODO: Action Groups/Alerts
-- TODO: Add a provisioners/connections scenario
-- TODO: Connect Activity Log to Workspace
-- TODO: Connect Azure AD Logs
-- TODO: Verify usage of *dynamic* block
-- TODO: investigate CNAB bundle as a release tool?
+  - //TODO: GA of Azure AD Roles (Global Reader)<https://techcommunity.microsoft.com/t5/Azure-Active-Directory-Identity/16-new-built-in-roles-including-Global-reader-now-available-in/ba-p/900749>
+  - //TODO:Custom Roles for App registration
+- //TODO: Action Groups/Alerts
+- //TODO: Add a provisioners/connections scenario
+- //TODO: Connect Activity Log to Workspace
+- //TODO: Connect Azure AD Logs
+- //TODO: Verify usage of *dynamic* block
+- //TODO: investigate CNAB bundle as a release tool?
+- //TODO: move my vars to samples
+- //TODO: add guidance for local development
 
 ## Configuration
 
@@ -62,11 +67,17 @@ az extensions add --name azure-devops
 az devops login
 ```
 
+or
+
+```bash
+az extension update --name azure-devops
+```
+
 > If you wish to pin Terraform to a specific version, you can use my [Terraform Container](https://github.com/rjfmachado/containers/tree/master/src/terraform). You'll also need to setup your own registry, Docker Registry service connection, and configure the continuous delivery pipeline accordingly.
 
 ### Environments
 
-TODO: Document environments and checks
+//TODO: Document environments and checks
 
 Configure Management Groups Tenant backfill.
 
@@ -85,34 +96,55 @@ az rest --method post --uri https://management.azure.com/providers/Microsoft.Man
 - In Azure Cloud Shell:
 
 ```bash
-GITHUB_ACCOUNT='rjfmachado'
-GITHUB_REPO='azuregovernance'
+# Prepare your environment
 DEVOPS_ACCOUNT='https://dev.azure.com/rjfmachado'
 DEVOPS_PROJECT='azuredemos'
 az devops configure --defaults organization="$DEVOPS_ACCOUNT"
 az devops configure --defaults project="$DEVOPS_PROJECT"
 
+GITHUB_ACCOUNT='rjfmachado'
+GITHUB_REPO='azuregovernance'
 SC_GITHUB_ID=$(az devops service-endpoint list --query "[?contains(name, '$GITHUB_ACCOUNT')].id" --output tsv)
 REPO_AZURE_GOVERNANCE="$GITHUB_ACCOUNT/$GITHUB_REPO"
+```
 
-PIPELINE_NAME='rjfmachado.azuregovernance.ci'
-PIPELINE_DESCRIPTION='Azure Governance - Continuous Integration pipeline.'
+```bash
+# Create the CD pipeline
+PIPELINE_NAME='azure.governance.cd'
+PIPELINE_DESCRIPTION='Azure Governance - Continuous Delivery'
+REPO_YAML_PATH='build/cd/azure-pipelines.yml'
+FOLDER_PATH='\governance\cd'
+
+az pipelines folder create --path "$FOLDER_PATH"
+
+az pipelines create --name "$PIPELINE_NAME" --description "$PIPELINE_DESCRIPTION" --repository "$REPO_AZURE_GOVERNANCE" --repository-type github --branch master --service-connection "$SC_GITHUB_ID" --yml-path "$REPO_YAML_PATH" --folder-path "$FOLDER_PATH" --skip-first-run
+```
+
+```bash
+# Create the CI pipeline
+PIPELINE_NAME='azure.governance.ci'
+PIPELINE_DESCRIPTION='Azure Governance - Pull Request'
 REPO_YAML_PATH='build/ci/azure-pipelines.yml'
 
-az pipelines create --name "$PIPELINE_NAME" --description "$PIPELINE_DESCRIPTION" --repository "$REPO_AZURE_GOVERNANCE" --repository-type github --branch master --service-connection "$SC_GITHUB_ID" --yml-path "$REPO_YAML_PATH" --skip-first-run
+FOLDER_PATH="\governance\ci"
 
-PIPELINE_NAME='rjfmachado.azuregovernance.pr'
-PIPELINE_DESCRIPTION='Azure Governance - Pull Request validation pipeline.'
-REPO_YAML_PATH='build/pr/azure-pipelines.yml'
+az pipelines folder create --path "$FOLDER_PATH"
 
-az pipelines create --name "$PIPELINE_NAME" --description "$PIPELINE_DESCRIPTION" --repository "$REPO_AZURE_GOVERNANCE" --repository-type github --branch master --service-connection "$SC_GITHUB_ID" --yml-path "$REPO_YAML_PATH" --skip-first-run
 
-# Currently this pipeline is required to be configured manually using the azure devops app, as the oauth method does not carry the event notifications for schedules.
-# PIPELINE_NAME='rjfmachado.azuregovernance.opstest'
-# PIPELINE_DESCRIPTION='Azure Governance - Verify deployed environments against expected configuration - Every day at midnight.'
-# REPO_YAML_PATH='build/ops/azure-pipelines.yml'
+az pipelines create --name "$PIPELINE_NAME" --description "$PIPELINE_DESCRIPTION" --repository "$REPO_AZURE_GOVERNANCE" --repository-type github --branch master --service-connection "$SC_GITHUB_ID" --yml-path "$REPO_YAML_PATH" --folder-path "$FOLDER_PATH" --skip-first-run
+```
 
-# az pipelines create --name "$PIPELINE_NAME" --description "$PIPELINE_DESCRIPTION" --repository "$REPO_AZURE_GOVERNANCE" --repository-type github --branch master --service-connection "$SC_GITHUB_ID" --yml-path "$REPO_YAML_PATH" --skip-first-run
+```bash
+# FIXME: Create the Daily validation pipeline - Currently this pipeline is required to be configured manually using the azure devops app, as the oauth method does not carry the event notifications for schedules.
+PIPELINE_NAME='azure.governance.validation.daily'
+PIPELINE_DESCRIPTION='Azure Governance - Verify deployed environments against expected configuration - Every day at midnight.'
+REPO_YAML_PATH='build/ops/azure-pipelines.yml'
+
+FOLDER_PATH="\governance\ops"
+
+az pipelines folder create --path "$FOLDER_PATH"
+
+az pipelines create --name "$PIPELINE_NAME" --description "$PIPELINE_DESCRIPTION" --repository "$REPO_AZURE_GOVERNANCE" --repository-type github --branch master --service-connection "$SC_GITHUB_ID" --yml-path "$REPO_YAML_PATH" --folder-path "$FOLDER_PATH" --skip-first-run
 ```
 
 > Note: Pipelines are retained for 30 days after deletion. If you are required to rerun the pipeline creation process, you will need to rename your pipelines.
@@ -148,7 +180,7 @@ SERVICE_PRINCIPAL_ID=$(az ad sp show --id "http://$SERVICE_PRINCIPAL_NAME" --que
 # Assign Owner role to Service Principal at the Tenant Root Management Group
 az role assignment create --role "Owner" --assignee $SERVICE_PRINCIPAL_ID --scope "/providers/Microsoft.Management/managementGroups/$TENANT_ID"
 
-#TODO: add Service Principal to Azure AD User administrator role
+#TODO: add Service Principal to Azure AD User roles
 ```
 
 - In Azure Cloud Shell, configure the stage Variable Group.
@@ -178,5 +210,4 @@ az storage container create --name "$CONTAINER_NAME" --account-name "$STORAGE_AC
 az role assignment create --role "Contributor" --assignee $SERVICE_PRINCIPAL_ID --resource-group "$RESOURCE_GROUP_NAME"
 
 az lock create --name 'preventDelete' --resource-group "$RESOURCE_GROUP_NAME" --lock-type CanNotDelete
-
 ```
