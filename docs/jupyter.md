@@ -11,3 +11,12 @@ https://github.com/jupyterhub/the-littlest-jupyterhub
 https://github.com/jupyterhub/jupyterhub
 https://github.com/jupyterhub
 https://github.com/jupyterhub/binderhub
+
+https://www.youtube.com/results?search_query=jupyter+bash
+https://www.youtube.com/results?search_query=jupyter+container
+https://www.youtube.com/results?search_query=jupyter+powershell
+https://www.youtube.com/results?search_query=jupyter+vscode
+
+https://jupyter.org/
+
+add portforwading to clouddev via .ssh/config
