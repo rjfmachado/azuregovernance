@@ -19,6 +19,9 @@ https://www.youtube.com/results?search_query=jupyter+vscode
 
 https://jupyter.org/
 
+https://www.hanselman.com/blog/AnnouncingNETJupyterNotebooks.aspx
+http://slhogle.github.io/2017/bash_jupyter_notebook/
+
 https://jupyter-server-proxy.readthedocs.io/en/latest/convenience/packages/theia.html
 
 add portforwading to clouddev via .ssh/config
