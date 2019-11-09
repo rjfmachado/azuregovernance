@@ -151,6 +151,36 @@ az pipelines create --name "$PIPELINE_NAME" --description "$PIPELINE_DESCRIPTION
 
 ### Stage configuration
 
+```bash
+SUBSCRIPTION_NAME='grgerg'
+KEYVAULT_NAME="bf9834j683"
+LOCATION='West Europe'
+RG_KEYVAULT_NAME='498tjfy384j2yt'
+
+# Create the vault
+az account set --subscription $(az account show --subscription "$SUBSCRIPTION_NAME" --query id --output tsv)
+az group create --name "$RG_KEYVAULT_NAME" --location "$LOCATION"
+az keyvault create --name "$KEYVAULT_NAME" --location "$LOCATION" --sku standard --enabled-for-template-deployment --enabled-for-deployment --enabled-for-disk-encryption --resource-group "$RG_KEYVAULT_NAME"
+
+#Create the Service Principal and store in Key Vault
+
+SERVICE_PRINCIPAL_NAME='spName'
+
+SUBSCRIPTION_ID=$(az account show --subscription "$SUBSCRIPTION_NAME" --query id --output tsv)
+TENANT_ID=$(az account show --subscription "$SUBSCRIPTION_NAME" --query tenantId --output tsv)
+
+SECRET_NAME="secretName"
+
+az keyvault secret set --vault-name "$KEYVAULT_NAME" --name "$SECRET_NAME" --value $(az ad sp create-for-rbac --name "$SERVICE_PRINCIPAL_NAME" --skip-assignment --years 5 --query password --output tsv)
+SERVICE_PRINCIPAL_ID=$(az ad sp show --id "http://$SERVICE_PRINCIPAL_NAME" --query appId --output tsv)
+
+SERVICE_ENDPOINT_NAME="serviceEndpointName"
+
+export AZURE_DEVOPS_EXT_AZURE_RM_SERVICE_PRINCIPAL_KEY=$(az keyvault secret show --name "$SECRET_NAME" --vault-name "$KEYVAULT_NAME" --query value --output tsv)
+
+az devops service-endpoint azurerm create --azure-rm-service-principal-id $SERVICE_PRINCIPAL_ID --azure-rm-tenant-id $TENANT_ID --azure-rm-subscription-id $SUBSCRIPTION_ID --azure-rm-subscription-name "$SUBSCRIPTION_NAME" --name "$SERVICE_ENDPOINT_NAME"
+```
+
 TODO: Add more guidance to this step.
 
 - Enable Access management for Azure Resources in [Azure Active Directory Properties](https://portal.azure.com/#blade/Microsoft_AAD_IAM/ActiveDirectoryMenuBlade/Properties) for the account executing the below scripts for role assignments at the Tenant Root Management Group.
