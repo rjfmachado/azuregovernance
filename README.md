@@ -14,11 +14,11 @@ This repo contains samples for using Terraform to deploy Azure Governance relate
   - Subscription assignment to Management Groups
     - Support for external management of Subscription Assignment via lifecycle/ignore_changes
   - Custom Role Based Access Control definitons scoped to Management Groups, Subscriptions and Resource Groups.
-    - TODO: File GitHub issue as assignments for roles scoped to Management Groups keep getting recreated.
+    - //TODO: [#4847](https://github.com/terraform-providers/terraform-provider-azurerm/issues/4847)
   - Role Based Access Control assignments with builtin and custom roles to Management Groups, Subscriptions and Resource Groups.
   - //TODO: Azure Policy definitions scoped to Management Groups
   - //TODO: Azure Policy assignments to Management Groups
-    - //TODO: <https://github.com/terraform-providers/terraform-provider-azurerm/issues/3762>
+    - //TODO:[#3762](https://github.com/terraform-providers/terraform-provider-azurerm/issues/3762)
     - //TODO: Support for Audit, Deny, Add, Modify (Tags)
     - //TODO: Support for DeployIfNotExists and Managed Service Identities.
   - //TODO: Add Blueprints definitions/assignments
@@ -52,6 +52,7 @@ This repo contains samples for using Terraform to deploy Azure Governance relate
 - //TODO: investigate CNAB bundle as a release tool?
 - //TODO: move my vars to samples
 - //TODO: add guidance for local development
+- //TODO: track [#3450](https://github.com/terraform-providers/terraform-provider-azurerm/issues/3450)
 
 ## Configuration
 
