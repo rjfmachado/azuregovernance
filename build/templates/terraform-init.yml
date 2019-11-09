@@ -11,7 +11,7 @@ parameters:
 steps:
   - task: TerraformInstaller@0
     inputs:
-      terraformVersion: "01.12.13"
+      terraformVersion: "0.12.13"
 
   - bash: |
       terraform version
