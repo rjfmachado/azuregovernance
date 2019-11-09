@@ -11,7 +11,7 @@ parameters:
 steps:
   - task: TerraformInstaller@0
     inputs:
-      terraformVersion: "0.12.10"
+      terraformVersion: "0.12.13"
 
   - bash: |
       terraform version
@@ -31,6 +31,5 @@ steps:
       -backend-config="key=${{parameters.key}}"
     displayName: "Terraform Init"
     name: init
-
     workingDirectory: $(Pipeline.Workspace)/terraformAzureGovernance
     enabled: "true"

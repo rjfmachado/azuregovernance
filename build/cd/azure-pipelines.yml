@@ -15,7 +15,7 @@ pr: none
 
 variables:
 - name: terraformVersion
-  value: 0.12.10
+  value: 0.12.13
 - name: TF_INPUT
   value: "false"
 - name: TF_IN_AUTOMATION
@@ -37,6 +37,11 @@ stages:
     - publish: src/terraform
       displayName: "Publish Azure Governance artifact."
       artifact: terraformAzureGovernance
+      enabled: "true"
+
+    - publish: src/test
+      displayName: "Publish Azure Governance tests."
+      artifact: testsAzureGovernance
       enabled: "true"
 
     - publish: build/
@@ -66,7 +71,7 @@ stages:
 
     container:
       image: rjfmachado.azurecr.io/terraform:${{ variables['terraformVersion'] }}
-      endpoint: containers
+      endpoint: rjfmachado.containers
 
     steps:
 
@@ -103,7 +108,7 @@ stages:
 
     container:
       image: rjfmachado.azurecr.io/terraform:${{ variables['terraformVersion'] }}
-      endpoint: containers
+      endpoint: rjfmachado.containers
 
     steps:
 

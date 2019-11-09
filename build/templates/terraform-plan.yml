@@ -9,6 +9,10 @@ parameters:
   deploymentStage: ""
 
 steps:
+  - task: TerraformInstaller@0
+    inputs:
+      terraformVersion: "0.12.13"
+
   - bash: |
       terraform init \
       -input=false \
@@ -19,19 +23,17 @@ steps:
       -backend-config="key=${{parameters.key}}"
     displayName: "Terraform Init"
     name: init
-
     workingDirectory: $(Pipeline.Workspace)/terraformAzureGovernance
     enabled: "true"
 
   - bash: |
       terraform plan \
       -input=false \
-      -out=dev.plan
-      -var "client_secret=${{parameters.client_secret}}" \
-      -var "client_id=${{parameters.client_id}}" \
-      -var "tenant_id=${{parameters.tenant_id}}" \
-      -var "subscription_id=${{parameters.subscription_id}}" \
-      -var "deploymentStage=${{parameters.deploymentStage}}"
+      -var "client_secret=${{ parameters.client_secret }}" \
+      -var "client_id=${{ parameters.client_id }}" \
+      -var "tenant_id=${{parameters.tenant_id }}" \
+      -var "subscription_id=${{ parameters.subscription_id }}" \
+      -var "deploymentStage=${{ parameters.deploymentStage }}"
     displayName: "Terraform Plan"
     workingDirectory: $(Pipeline.Workspace)/terraformAzureGovernance
     enabled: "true"

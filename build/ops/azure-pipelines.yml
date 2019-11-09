@@ -14,7 +14,7 @@ pr: none
 
 variables:
 - name: terraformVersion
-  value: 0.12.10
+  value: 0.12.13
 
 stages:
 
@@ -40,7 +40,7 @@ stages:
 
     container:
       image: rjfmachado.azurecr.io/terraform:${{ variables['terraformVersion'] }}
-      endpoint: containers
+      endpoint: rjfmachado.containers
 
     steps:
 
@@ -77,7 +77,7 @@ stages:
 
     container:
       image: rjfmachado.azurecr.io/terraform:${{ variables['terraformVersion'] }}
-      endpoint: containers
+      endpoint: rjfmachado.containers
 
     steps:
 
