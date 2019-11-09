@@ -23,6 +23,7 @@ stages:
         steps:
           - task: AzurePowerShell@4
             inputs:
+              displayName: Download Pester
               azureSubscription: azure.governance.tenantroot
               scriptType: Inline
               inline: |
@@ -31,8 +32,22 @@ stages:
 
           - task: AzurePowerShell@4
             inputs:
+              displayName: Invoke Pester
               azureSubscription: azure.governance.tenantroot
               scriptType: Inline
               inline: |
-                Get-AzSubscription
+                Invoke-Pester -OutputFile $(System.DefaultWorkingDirectory)/TEST-Pester.xml -OutputFormat NUnitXML
               azurePowerShellVersion: "latestVersion"
+              workingDirectory: $(Build.SourcesDirectory)/src/test/ops
+
+          - task: PublishTestResults@2
+            inputs:
+              testResultsFormat: "NUnit"
+              #testResultsFiles: '**/TEST-*.xml'
+              #searchFolder: '$(System.DefaultWorkingDirectory)' # Optional
+              #mergeTestResults: false # Optional
+              #failTaskOnFailedTests: false # Optional
+              #testRunTitle: # Optional
+              #buildPlatform: # Optional
+              #buildConfiguration: # Optional
+              #publishRunAttachments: true # Optional

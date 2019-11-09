@@ -1,6 +1,6 @@
 # Azure Governance with Terraform
 
-[![Build Status](https://dev.azure.com/rjfmachado/azuredemos/_apis/build/status/rjfmachado.azuregovernance.ci?branchName=master)](https://dev.azure.com/rjfmachado/azuredemos/_build/latest?definitionId=32&branchName=master)
+[![Build Status](https://dev.azure.com/rjfmachado/azuredemos/_apis/build/status/governance/cd/azure.governance.cd?branchName=master)](https://dev.azure.com/rjfmachado/azuredemos/_build/latest?definitionId=48&branchName=master)
 
 This repo contains samples for using Terraform to deploy Azure Governance related resources using Azure Devops and is configured to:
 
@@ -33,7 +33,7 @@ This repo contains samples for using Terraform to deploy Azure Governance relate
   - //TODO: Add tests to PR builds
   - //TODO: Add Environments,Stage checks <https://docs.microsoft.com/en-us/azure/devops/pipelines/process/checks?view=azure-devops>
     <https://github.com/microsoft/azure-pipelines-yaml/issues/288>
-- //TODOAdd Security Center configuration
+- //TODO: Add Security Center configuration
 - //TODO: Add Azure Monitor
 - //TODO: Review repo badges, eg <https://raw.githubusercontent.com/wata727/tflint/master/README.md>
 - //TODO: seriously improve this guidance :)
