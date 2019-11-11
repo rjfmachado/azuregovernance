@@ -24,4 +24,6 @@ http://slhogle.github.io/2017/bash_jupyter_notebook/
 
 https://jupyter-server-proxy.readthedocs.io/en/latest/convenience/packages/theia.html
 
+https://docs.microsoft.com/en-us/azure/azure-monitor/platform/workbooks-overview
+
 add portforwading to clouddev via .ssh/config
