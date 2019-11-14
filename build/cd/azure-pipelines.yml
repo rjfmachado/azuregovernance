@@ -15,7 +15,7 @@ pr: none
 
 variables:
 - name: terraformVersion
-  value: 0.12.13
+  value: 0.12.14
 - name: TF_INPUT
   value: "false"
 - name: TF_IN_AUTOMATION
