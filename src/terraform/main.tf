@@ -2,7 +2,7 @@ terraform {
   backend "azurerm" {
     resource_group_name = "terraformState"
   }
-  required_version = ">= 0.12"
+  required_version = ">= 0.12.14"
 }
 
 variable "client_secret" {
