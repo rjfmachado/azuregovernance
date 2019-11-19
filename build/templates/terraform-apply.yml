@@ -1,0 +1,29 @@
+parameters:
+  client_secret: ""
+  client_id: ""
+  tenant_id: ""
+  subscription_id: ""
+  storage_account_name: ""
+  container_name: ""
+  key: ""
+  deploymentStage: ""
+
+steps:
+  - task: TerraformInstaller@0
+    enabled: "false"
+    inputs:
+      terraformVersion: "0.12.16"
+
+  - bash: |
+      terraform apply \
+      -input=false \
+      -auto-approve \
+      -var "client_secret=${{parameters.client_secret}}" \
+      -var "client_id=${{parameters.client_id}}" \
+      -var "tenant_id=${{parameters.tenant_id}}" \
+      -var "subscription_id=${{parameters.subscription_id}}" \
+      -var "deploymentStage=${{parameters.deploymentStage}}"
+    displayName: "Terraform Apply"
+    workingDirectory: src/terraform
+    enabled: "true"
+    name: apply
