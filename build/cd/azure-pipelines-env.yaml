@@ -25,7 +25,7 @@ stages:
             artifact: pipelinesAzureGovernance
             enabled: "true"
 
-  - stage: Development
+  - stage: Development (Init/Plan)
 
     variables:
       - name: deploymentStage
@@ -65,6 +65,20 @@ stages:
                     key: ${{ variables['stateKey'] }}
                     deploymentStage: ${{ variables['deploymentStage'] }}
 
+  - stage: Development (Apply)
+
+    variables:
+      - name: deploymentStage
+        value: "dev"
+      - name: stateStorageAccountName
+        value: "tfazuregovernancedev"
+      - name: stateContainerName
+        value: "dev"
+      - name: stateKey
+        value: "terraform.tfstate"
+      - group: azuregovernancedev
+
+    jobs:
       - deployment: TerraformApply
         displayName: Terraform (Apply)
         pool:
