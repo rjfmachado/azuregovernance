@@ -39,7 +39,7 @@ stages:
       - group: azuregovernancedev
 
     jobs:
-      - deployment: Terraform (Init/Plan)
+      - deployment: TerraformPlan
         displayName: Terraform (Init/Plan)
         pool:
           vmImage: "ubuntu-latest"
@@ -65,7 +65,7 @@ stages:
                     key: ${{ variables['stateKey'] }}
                     deploymentStage: ${{ variables['deploymentStage'] }}
 
-      - deployment: Terraform (Apply)
+      - deployment: TerraformApply
         displayName: Terraform (Apply)
         pool:
           vmImage: "ubuntu-latest"
