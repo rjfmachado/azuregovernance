@@ -49,7 +49,7 @@ stages:
         #timeoutInMinutes: nonEmptyString        # how long to run the job before automatically cancelling
         #cancelTimeoutInMinutes: nonEmptyString  # how much time to give 'run always even if cancelled tasks' before killing them
         #variables: { string: string } | [ variable | variableReference ]
-        environment: "${{ variables['deploymentStage'] }}-plan"
+        environment: ${{ variables['deploymentStage'] }}-plan
         strategy:
           runOnce:
             preDeploy:
