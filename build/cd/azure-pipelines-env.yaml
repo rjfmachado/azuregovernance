@@ -39,7 +39,7 @@ stages:
       - group: azuregovernancedev
 
     jobs:
-      - deployment: TerraformPlan
+      - deployment: TerraformInit
         displayName: Terraform (Init/Plan)
         pool:
           vmImage: "ubuntu-latest"
