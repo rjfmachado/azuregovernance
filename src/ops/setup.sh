@@ -46,7 +46,7 @@ az devops service-endpoint azurerm create \
 # Assign Owner role to Service Principal at the Tenant Root Management Group
 az role assignment create --role "Owner" --assignee $TF_SERVICE_PRINCIPAL_ID --scope "/providers/Microsoft.Management/managementGroups/$TENANT_ID"
 
-# TODO: need Azure AD role assignment
+# TODO: need Azure AD role assignment (User Administrator)
 
 # Create the Terraform Variable Group
 VARIABLE_GROUP="azuregovernance$STAGE_NAME"
