@@ -97,9 +97,8 @@ stages:
       value: "prod"
     - name: stateKey
       value: "terraform.tfstate"
-    - name: ARM_CLIENT_SECRET
-      value: $(tfClientSecret)
     - group: azuregovernanceprod
+    - group: azuregovernanceprodsecret
 
   jobs:
 
