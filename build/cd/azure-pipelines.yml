@@ -79,6 +79,12 @@ stages:
     steps:
       - bash: |
           printenv | grep ARM
+        displayName: "printenv"
+        name: printenv
+        workingDirectory: src/terraform
+        enabled: "true"
+
+      - bash: |
           printenv | grep tfClientSecret
         displayName: "printenv"
         name: printenv
