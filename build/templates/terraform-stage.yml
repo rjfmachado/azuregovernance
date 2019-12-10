@@ -13,7 +13,6 @@ steps:
       -backend-config="key=${{parameters.key}}"
     displayName: "Terraform Init"
     name: init
-
     workingDirectory: src/terraform
     enabled: "true"
 

@@ -77,13 +77,19 @@ stages:
       endpoint: rjfmachado.containers
 
     steps:
+      - bash: |
+          printenv
+        displayName: "printenv"
+        name: printenv
+        workingDirectory: src/terraform
+        enabled: "true"
 
-    - template: /build/templates/terraform-stage.yml
-      parameters:
-        storage_account_name: $(stateStorageAccountName)
-        container_name: $(stateContainerName)
-        key: $(stateKey)
-        deploymentStage: $(deploymentStage)
+      - template: /build/templates/terraform-stage.yml
+        parameters:
+          storage_account_name: $(stateStorageAccountName)
+          container_name: $(stateContainerName)
+          key: $(stateKey)
+          deploymentStage: $(deploymentStage)
 
 - stage: prod
 
