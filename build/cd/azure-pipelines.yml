@@ -80,14 +80,14 @@ stages:
       - bash: |
           printenv | grep ARM
         displayName: "printenv"
-        name: printenv
+        name: printenvarm
         workingDirectory: src/terraform
         enabled: "true"
 
       - bash: |
           printenv | grep tfClientSecret
         displayName: "printenv"
-        name: printenv
+        name: printenvtf
         workingDirectory: src/terraform
         enabled: "true"
 
