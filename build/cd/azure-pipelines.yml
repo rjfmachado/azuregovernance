@@ -63,7 +63,7 @@ stages:
     - group: azuregovernancedev
     - group: azuregovernancedevsecret
     - name: ARM_CLIENT_SECRET
-      value: ${{ variables.tfClientSecret }}
+      value: $[ variables.tfClientSecret ]
 
   jobs:
 
