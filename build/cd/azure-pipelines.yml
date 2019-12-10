@@ -78,7 +78,7 @@ stages:
 
     steps:
       - bash: |
-          printenv
+          printenv | grep ARM
         displayName: "printenv"
         name: printenv
         workingDirectory: src/terraform
