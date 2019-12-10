@@ -1,8 +1,5 @@
 parameters:
   client_secret: ""
-  client_id: ""
-  tenant_id: ""
-  subscription_id: ""
   storage_account_name: ""
   container_name: ""
   key: ""
@@ -27,9 +24,6 @@ steps:
       terraform plan \
       -input=false \
       -var "client_secret=${{parameters.client_secret}}" \
-      -var "client_id=${{parameters.client_id}}" \
-      -var "tenant_id=${{parameters.tenant_id}}" \
-      -var "subscription_id=${{parameters.subscription_id}}" \
       -var "deploymentStage=${{parameters.deploymentStage}}"
     displayName: "Terraform Plan"
     workingDirectory: src/terraform
