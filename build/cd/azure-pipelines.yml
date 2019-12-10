@@ -63,7 +63,7 @@ stages:
     - group: azuregovernancedev
     - group: azuregovernancedevsecret
     - name: ARM_CLIENT_SECRET
-      value: $[ variables.tfClientSecret ]
+      value: $[ secret.tfClientSecret ]
 
   jobs:
 
@@ -79,7 +79,7 @@ stages:
     steps:
       - bash: |
           printenv | grep ARM
-          printenv | tfClientSecret
+          printenv | grep tfClientSecret
         displayName: "printenv"
         name: printenv
         workingDirectory: src/terraform
