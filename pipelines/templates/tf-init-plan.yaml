@@ -1,5 +1,7 @@
 steps:
   - bash: |
+      printenv | grep ARM
+      printenv | grep TF_CLI
       terraform init
     displayName: "Terraform Init"
     name: init
