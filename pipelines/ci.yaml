@@ -27,7 +27,7 @@ stages:
     - name: TF_VERSION
       value: 0.12.17
     - name: TF_CLI_ARGS_init
-      value: "-backend=true -backend-config=dev.stage"
+      value:
 
   jobs:
 
@@ -42,12 +42,15 @@ stages:
 
     steps:
       - bash: |
-          printenv | grep ARM \| dev
+          printenv | grep ARM
+          printend | grep TF_
         displayName: "printenv"
         name: printenvARM
         workingDirectory: src/terraform
-        enabled: "false"
+        enabled: "true"
         env:
           ARM_CLIENT_SECRET: $(tfClientSecret)
 
       - template: /pipelines/templates/tf-init-plan.yaml
+        parameters:
+          tfCliInit: "-backend=true -backend-config=dev.stage"
