@@ -23,11 +23,13 @@ stages:
 
   variables:
     - group: azuregovernancedev
+    - name: TF_CLI_ARGS_init
+      value: "-backend=true -backend-config=../setup/dev.env"
 
   jobs:
 
   - job: Terraform
-    displayName: Terraform Management Groups Build
+    displayName: Terraform Init-Plan
     pool:
       vmImage: 'ubuntu-latest'
 
@@ -37,7 +39,7 @@ stages:
 
     steps:
       - bash: |
-          printenv | grep ARM
+          printenv
         displayName: "printenv"
         name: printenvarm
         workingDirectory: src/terraform
