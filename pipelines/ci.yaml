@@ -43,7 +43,7 @@ stages:
     steps:
       - bash: |
           printenv | grep ARM
-          printend | grep TF_
+          printenv | grep TF_
         displayName: "printenv"
         name: printenvARM
         workingDirectory: src/terraform
