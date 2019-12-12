@@ -1,0 +1,44 @@
+name: Azure Governance CI v$(Rev:.r)
+
+trigger:
+  batch: "true"
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - src/terraform
+
+pr: none
+
+variables:
+- name: TF_INPUT
+  value: "false"
+- name: TF_IN_AUTOMATION
+  value: "true"
+
+stages:
+
+- stage: dev
+
+  variables:
+    - group: azuregovernancedev
+
+  jobs:
+
+  - job: Terraform
+    displayName: Terraform Management Groups Build
+    pool:
+      vmImage: 'ubuntu-latest'
+
+    container:
+      image: rjfmachado.azurecr.io/terraform:${{ variables['terraformVersion'] }}
+      endpoint: rjfmachado.containers
+
+    steps:
+      - bash: |
+          printenv | grep ARM
+        displayName: "printenv"
+        name: printenvarm
+        workingDirectory: src/terraform
+        enabled: "true"
