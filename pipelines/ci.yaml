@@ -46,6 +46,8 @@ stages:
         displayName: "printenv"
         name: printenvARM
         workingDirectory: src/terraform
-        enabled: "true"
+        enabled: "false"
         env:
           ARM_CLIENT_SECRET: $(tfClientSecret)
+
+      - template: /pipelines/templates/tf-init-plan.yaml

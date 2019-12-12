@@ -1,0 +1,18 @@
+steps:
+  - bash: |
+      terraform init
+    displayName: "Terraform Init"
+    name: init
+    workingDirectory: src/terraform
+    enabled: "true"
+    env:
+      ARM_CLIENT_SECRET: $(tfClientSecret)
+
+  - bash: |
+      terraform plan
+    displayName: "Terraform Plan"
+    name: plan
+    workingDirectory: src/terraform
+    enabled: "true"
+    env:
+      ARM_CLIENT_SECRET: $(tfClientSecret)
