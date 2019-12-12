@@ -1,4 +1,4 @@
-name: Azure Governance CI v$(Rev:.r)
+name: azure.governance.ci$(Rev:.r)
 
 trigger:
   batch: "true"
