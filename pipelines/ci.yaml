@@ -23,6 +23,8 @@ stages:
 
   variables:
     - group: azuregovernancedev
+    - name: TF_VERSION
+      value: 0.12.17
     - name: TF_CLI_ARGS_init
       value: "-backend=true -backend-config=../setup/dev.env"
 
@@ -34,7 +36,7 @@ stages:
       vmImage: 'ubuntu-latest'
 
     container:
-      image: rjfmachado.azurecr.io/terraform:${{ variables['terraformVersion'] }}
+      image: rjfmachado.azurecr.io/terraform:${{ variables['TF_VERSION'] }}
       endpoint: rjfmachado.containers
 
     steps:
