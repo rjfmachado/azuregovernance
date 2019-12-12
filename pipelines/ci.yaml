@@ -41,16 +41,6 @@ stages:
       endpoint: rjfmachado.containers
 
     steps:
-      - bash: |
-          printenv | grep ARM
-          printenv | grep TF_
-        displayName: "printenv"
-        name: printenvARM
-        workingDirectory: src/terraform
-        enabled: "true"
-        env:
-          ARM_CLIENT_SECRET: $(tfClientSecret)
-
       - template: /pipelines/templates/tf-init-plan.yaml
         parameters:
-          tfCliInit: "-backend=true -backend-config=dev.stage"
+          tfCliInit: -backend=true -backend-config=dev.stage

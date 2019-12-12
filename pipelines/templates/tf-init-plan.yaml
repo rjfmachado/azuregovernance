@@ -2,6 +2,18 @@ parameters:
   tfCliInit: ""
 
 steps:
+
+  - bash: |
+      printenv | grep ARM
+      printenv | grep TF_
+    displayName: "Debug environment"
+    name: debugenvironment
+    workingDirectory: src/terraform
+    enabled: "true"
+    env:
+      ARM_CLIENT_SECRET: $(tfClientSecret)
+      TF_CLI_ARGS_init: ${{ parameters.tfCliInit }}"
+
   - bash: |
       terraform init
     displayName: "Terraform Init"
@@ -10,7 +22,7 @@ steps:
     enabled: "true"
     env:
       ARM_CLIENT_SECRET: $(tfClientSecret)
-      TF_CLI_ARGS_init: ${{parameters.tfCliInit}}"
+
 
   - bash: |
       terraform plan
@@ -20,4 +32,4 @@ steps:
     enabled: "true"
     env:
       ARM_CLIENT_SECRET: $(tfClientSecret)
-      TF_CLI_ARGS_init: ${{parameters.tfCliInit}}"
+      TF_CLI_ARGS_init: ${{ parameters.tfCliInit }}"
