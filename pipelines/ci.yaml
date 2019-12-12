@@ -26,8 +26,6 @@ stages:
     - group: azuregovernancedevsecret
     - name: TF_VERSION
       value: 0.12.17
-    - name: TF_CLI_ARGS_init
-      value:
 
   jobs:
 
