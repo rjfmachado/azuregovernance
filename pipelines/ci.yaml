@@ -42,10 +42,10 @@ stages:
 
     steps:
       - bash: |
-          printenv | grep ARM
+          printenv | grep ARM \| dev
         displayName: "printenv"
         name: printenvARM
         workingDirectory: src/terraform
         enabled: "true"
         env:
-          ARM_CLIENT_SECRET: ${{ variables['secret.tfClientSecret'] }}
+          ARM_CLIENT_SECRET: $(tfClientSecret)
