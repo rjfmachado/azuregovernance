@@ -48,4 +48,4 @@ stages:
         workingDirectory: src/terraform
         enabled: "true"
         env:
-          ARM_CLIENT_SECRET: ${{ variables['tfClientSecret'] }}
+          ARM_CLIENT_SECRET: ${{ variables['secret.tfClientSecret'] }}
