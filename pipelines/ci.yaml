@@ -4,41 +4,39 @@ trigger:
   batch: "true"
   branches:
     include:
-    - master
+      - master
   paths:
     include:
-    - src/terraform
+      - src/terraform
 
 pr: none
 
 variables:
-- name: TF_INPUT
-  value: "false"
-- name: TF_IN_AUTOMATION
-  value: "true"
+  - name: TF_INPUT
+    value: "false"
+  - name: TF_IN_AUTOMATION
+    value: "true"
 
 stages:
+  - stage: dev
 
-- stage: dev
+    variables:
+      - group: azuregovernancedev
+      - group: azuregovernancedevsecret
+      - name: TF_VERSION
+        value: 0.12.19
 
-  variables:
-    - group: azuregovernancedev
-    - group: azuregovernancedevsecret
-    - name: TF_VERSION
-      value: 0.12.17
+    jobs:
+      - job: Terraform
+        displayName: Terraform Init-Plan
+        pool:
+          vmImage: "ubuntu-latest"
 
-  jobs:
+        container:
+          image: rjfmachado.azurecr.io/terraform:${{ variables['TF_VERSION'] }}
+          endpoint: rjfmachado.containers
 
-  - job: Terraform
-    displayName: Terraform Init-Plan
-    pool:
-      vmImage: 'ubuntu-latest'
-
-    container:
-      image: rjfmachado.azurecr.io/terraform:${{ variables['TF_VERSION'] }}
-      endpoint: rjfmachado.containers
-
-    steps:
-      - template: /pipelines/templates/tf-init-plan.yaml
-        parameters:
-          tfCliInit: -backend=true -backend-config=dev.stage
+        steps:
+          - template: /pipelines/templates/tf-init-plan.yaml
+            parameters:
+              tfCliInit: -backend=true -backend-config=dev.stage

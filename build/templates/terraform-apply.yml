@@ -12,7 +12,7 @@ steps:
   - task: TerraformInstaller@0
     enabled: "false"
     inputs:
-      terraformVersion: "0.12.17"
+      terraformVersion: "0.12.19"
 
   - bash: |
       terraform apply \

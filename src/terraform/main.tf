@@ -2,7 +2,7 @@ terraform {
   backend "azurerm" {
     resource_group_name = "terraformState"
   }
-  required_version = ">= 0.12.17"
+  required_version = ">= 0.12.19"
 }
 
 variable "deploymentStage" {
