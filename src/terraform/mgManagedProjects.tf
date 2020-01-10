@@ -9,7 +9,7 @@ resource "azurerm_management_group" "mgManaged" {
   display_name               = "Managed Projects"
   parent_management_group_id = data.azurerm_management_group.mgTenantRoot.id
   group_id                   = "Managed"
-  subscription_ids           = var.mgManagedSubscriptions[var.deploymentStage]
+  #subscription_ids           = var.mgManagedSubscriptions[var.deploymentStage]
 }
 
 # Assignment of a Tenant Root Management Group scoped role to a child Management Group

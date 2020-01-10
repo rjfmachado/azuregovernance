@@ -2,32 +2,12 @@ terraform {
   backend "azurerm" {
     resource_group_name = "terraformState"
   }
-  required_version = ">= 0.12"
+  required_version = ">= 0.12.19"
 }
 
-variable "client_secret" {
-  type        = string
-  description = "The service principal client secred for the azurerm/ad client context."
-  default     = null
-}
-variable "client_id" {
-  type        = string
-  description = "The service principal client id for the azurerm/ad client context."
-  default     = null
-}
-variable "tenant_id" {
-  type        = string
-  description = "The default tenant for the azurerm client/ad context."
-  default     = null
-}
-variable "subscription_id" {
-  type        = string
-  description = "The default subscription for the azurerm client context."
-  default     = null
-}
 variable "deploymentStage" {
   type        = string
-  description = "dev, qa, prod"
+  description = "dev, prod"
   default     = null
 }
 
@@ -35,6 +15,7 @@ data "azurerm_client_config" "current" {
 }
 
 provider "azurerm" {
+<<<<<<< HEAD
   version         = "~> 1.36.0"
   client_id       = var.client_id
   subscription_id = var.subscription_id
@@ -47,4 +28,11 @@ provider "azuread" {
   client_id     = var.client_id
   tenant_id     = var.tenant_id
   client_secret = var.client_secret
+=======
+  version = "~> 1.40.0"
+}
+
+provider "azuread" {
+  version = "~> 0.7.0"
+>>>>>>> 4d33a168900f4295ad706215d9e835170f0e667a
 }

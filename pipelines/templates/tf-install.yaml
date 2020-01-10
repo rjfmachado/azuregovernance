@@ -1,0 +1,15 @@
+parameters:
+  tfVersion: ""
+
+steps:
+
+  - bash: |
+      terraform -version
+      wget https://releases.hashicorp.com/terraform/${{ parameters.tfVersion }}/terraform_${{ parameters.tfVersion }}_linux_amd64.zip -q
+      unzip -q terraform_${{ parameters.tfVersion }}_linux_amd64.zip
+      sudo mv terraform /usr/local/bin
+      terraform -version
+    displayName: "Install Terraform"
+    name: installterraform
+    workingDirectory: src/terraform
+    enabled: "true"

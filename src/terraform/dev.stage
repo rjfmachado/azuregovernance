@@ -1,0 +1,3 @@
+storage_account_name="tfazuregovernancedev"
+container_name="dev"
+key="terraform.tfstate"

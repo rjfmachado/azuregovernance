@@ -1,0 +1,39 @@
+parameters:
+  tfCliInit: ""
+  tfCliPlan: ""
+  tfCliApply: ""
+
+steps:
+
+  - bash: |
+      printenv | grep ARM
+      printenv | grep TF_
+    displayName: "Runtime environment"
+    name: runtimeenv
+    workingDirectory: src/terraform
+    enabled: "true"
+    env:
+      ARM_CLIENT_SECRET: $(tfClientSecret)
+      TF_CLI_ARGS_init: ${{ parameters.tfCliInit }}
+      TF_CLI_ARGS_plan: ${{ parameters.tfCliPlan }}
+      TF_CLI_ARGS_apply: ${{ parameters.tfCliApply }}
+
+  - bash: |
+      terraform init
+    displayName: "Terraform Init"
+    name: init
+    workingDirectory: src/terraform
+    enabled: "true"
+    env:
+      ARM_CLIENT_SECRET: $(tfClientSecret)
+      TF_CLI_ARGS_init: ${{ parameters.tfCliInit }}
+
+  - bash: |
+      terraform plan
+    displayName: "Terraform Plan"
+    name: plan
+    workingDirectory: src/terraform
+    enabled: "true"
+    env:
+      ARM_CLIENT_SECRET: $(tfClientSecret)
+      TF_CLI_ARGS_plan: ${{ parameters.tfCliPlan }}

@@ -1,0 +1,28 @@
+name: azure.governance.publishrelease$(Rev:.r)
+
+trigger:
+  batch: "true"
+  branches:
+    include:
+      - release/*
+  paths:
+    include:
+      - src/terraform
+
+pr: none
+
+stages:
+  - stage: publishRelease
+
+    jobs:
+      - job: publishArtifacts
+        displayName: Publish Azure Governance Terraform files.
+
+        pool:
+          vmImage: "ubuntu-latest"
+
+        steps:
+          - publish: src/terraform
+            displayName: "Release Azure Governance."
+            artifact: releaseAzureGovernance.$(Build.SourceBranchName)
+            enabled: "true"

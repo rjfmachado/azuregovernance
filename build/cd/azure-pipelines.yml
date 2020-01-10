@@ -15,7 +15,7 @@ pr: none
 
 variables:
 - name: terraformVersion
-  value: 0.12.14
+  value: 0.12.19
 - name: TF_INPUT
   value: "false"
 - name: TF_IN_AUTOMATION
@@ -61,6 +61,9 @@ stages:
     - name: stateKey
       value: "terraform.tfstate"
     - group: azuregovernancedev
+    - group: azuregovernancedevsecret
+    - name: ARM_CLIENT_SECRET
+      value: "yooo"
 
   jobs:
 
@@ -74,17 +77,26 @@ stages:
       endpoint: rjfmachado.containers
 
     steps:
+      - bash: |
+          printenv | grep ARM
+        displayName: "printenv"
+        name: printenvarm
+        workingDirectory: src/terraform
+        enabled: "true"
 
-    - template: /build/templates/terraform-stage.yml
-      parameters:
-        client_secret: $(ARM_CLIENT_SECRET)
-        client_id: $(ARM_CLIENT_ID)
-        tenant_id: $(ARM_TENANT_ID)
-        subscription_id: $(ARM_SUBSCRIPTION_ID)
-        storage_account_name: $(stateStorageAccountName)
-        container_name: $(stateContainerName)
-        key: $(stateKey)
-        deploymentStage: $(deploymentStage)
+      - bash: |
+          printenv | grep tfClientSecret
+        displayName: "printenv"
+        name: printenvtf
+        workingDirectory: src/terraform
+        enabled: "true"
+
+      - template: /build/templates/terraform-stage.yml
+        parameters:
+          storage_account_name: $(stateStorageAccountName)
+          container_name: $(stateContainerName)
+          key: $(stateKey)
+          deploymentStage: $(deploymentStage)
 
 - stage: prod
 
@@ -98,6 +110,7 @@ stages:
     - name: stateKey
       value: "terraform.tfstate"
     - group: azuregovernanceprod
+    - group: azuregovernanceprodsecret
 
   jobs:
 
@@ -114,10 +127,7 @@ stages:
 
     - template: /build/templates/terraform-stage.yml
       parameters:
-        client_secret: $(ARM_CLIENT_SECRET)
-        client_id: $(ARM_CLIENT_ID)
-        tenant_id: $(ARM_TENANT_ID)
-        subscription_id: $(ARM_SUBSCRIPTION_ID)
+        client_secret: $(tfClientSecret)
         storage_account_name: $(stateStorageAccountName)
         container_name: $(stateContainerName)
         key: $(stateKey)
