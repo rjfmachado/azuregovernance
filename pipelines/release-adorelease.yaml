@@ -40,6 +40,8 @@ stages:
     variables:
       - group: azuregovernancedev
       - group: azuregovernancedevsecret
+      - name: TF_VAR_deploymentStage
+        value: dev
 
     jobs:
       - job: Terraform
@@ -67,6 +69,8 @@ stages:
     variables:
       - group: azuregovernanceprod
       - group: azuregovernanceprodsecret
+      - name: TF_VAR_deploymentStage
+        value: prod
 
     jobs:
       - job: Terraform
