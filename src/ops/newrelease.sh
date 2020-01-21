@@ -6,10 +6,13 @@ echo "Creating Release: r$newrelease"
 
 git checkout master
 
-git checkout -b "release/r$newrelease"
+git checkout -b "release/r${newrelease}"
+git push --set-upstream origin release/r${newrelease}
 
 sed -i 's|\"release\": $currentrelease|\"release\": $newrelease|g' ./release.json
 
 git add release.json
 
-git commit -A -m "Changing to release r$newrelease"
+git commit -A -m "Changing to release r${newrelease}"
+
+echo "You are now ready to commit changes to terraform code."
