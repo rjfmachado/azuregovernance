@@ -82,7 +82,7 @@ stages:
           - template: /pipelines/templates/tf-init-plan.yaml
             parameters:
               tfCliInit: -backend=true -backend-config=prod.stage
-              tfCliPlan: -out prod.plan  -var-file=dev.tfvars
+              tfCliPlan: -out prod.plan  -var-file=prod.tfvars
 
           - publish: src/terraform/prod.plan
             displayName: "Publish Prod Plan"
