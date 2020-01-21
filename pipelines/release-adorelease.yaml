@@ -40,8 +40,6 @@ stages:
     variables:
       - group: azuregovernancedev
       - group: azuregovernancedevsecret
-      - name: TF_VAR_deploymentStage
-        value: dev
 
     jobs:
       - job: Terraform
@@ -57,7 +55,7 @@ stages:
           - template: /pipelines/templates/tf-init-plan.yaml
             parameters:
               tfCliInit: -backend=true -backend-config=dev.stage
-              tfCliPlan: -out dev.plan
+              tfCliPlan: -out dev.plan -var-file=dev.tfvars
 
           - publish: src/terraform/dev.plan
             displayName: "Publish Dev Plan"
@@ -69,8 +67,6 @@ stages:
     variables:
       - group: azuregovernanceprod
       - group: azuregovernanceprodsecret
-      - name: TF_VAR_deploymentStage
-        value: prod
 
     jobs:
       - job: Terraform
@@ -86,7 +82,7 @@ stages:
           - template: /pipelines/templates/tf-init-plan.yaml
             parameters:
               tfCliInit: -backend=true -backend-config=prod.stage
-              tfCliPlan: -out prod.plan
+              tfCliPlan: -out prod.plan  -var-file=dev.tfvars
 
           - publish: src/terraform/prod.plan
             displayName: "Publish Prod Plan"
