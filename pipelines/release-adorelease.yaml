@@ -35,7 +35,7 @@ stages:
             artifact: releaseAzureGovernance
             enabled: "true"
 
-  - stage: dev
+  - stage: devplan
 
     variables:
       - group: azuregovernancedev
@@ -62,7 +62,7 @@ stages:
             artifact: releaseAzureGovernance.devplan
             enabled: "true"
 
-  - stage: prod
+  - stage: prodplan
 
     variables:
       - group: azuregovernanceprod
