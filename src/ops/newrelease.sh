@@ -1,18 +1,33 @@
-currentrelease=$(cat release.json | jq .release)
-newrelease=$((currentrelease+1))
+git checkout -q master
 
-echo "Current Release: r$currentrelease"
-echo "Creating Release: r$newrelease"
+git branch | grep "master"
 
-git checkout master
+currentrelease=$(cat release.json | jq .release | sed "s/\"//g")
 
-git checkout -b "release/r${newrelease}"
-git push --set-upstream origin release/r${newrelease}
+# the release name is expected in arguments
+if [[ $# -ne 1 ]] ; then
+    echo "Current Release: ${currentrelease}"
+    echo
+    echo "Usage: ./newrelease.sh [New Release Name]"
+    echo
+    echo "Note: please use release names with the format"
+    exit 1
+else
+ newrelease=$1
+fi
 
-sed -i 's|\"release\": $currentrelease|\"release\": $newrelease|g' ./release.json
+echo "Current Release: ${currentrelease}"
+echo "Creating Release: ${newrelease}"
+
+sed -i "s/${currentrelease}/${newrelease}/g" ./release.json
 
 git add release.json
 
-git commit -A -m "Changing to release r${newrelease}"
+git commit -m "Creating release ${newrelease}."
 
-echo "You are now ready to commit changes to terraform code."
+git push
+
+git checkout -b "release/${newrelease}"
+git push --set-upstream origin release/${newrelease}
+
+echo "You are now ready to release ${newrelease} from branch release/${newrelease}."
