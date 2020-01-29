@@ -104,6 +104,8 @@ stages:
           runOnce:
             preDeploy:
               steps:
+                - bash: |
+                    ls -la ..
                 - template: /pipelines/templates/tf-install.yaml
                   parameters:
                     tfVersion: $(TF_VERSION)
