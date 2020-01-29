@@ -96,6 +96,8 @@ stages:
           runOnce:
             deploy:
               steps:
+                - download: releaseAzureGovernance
+                - download: releaseAzureGovernancedevplan
                 - template: /pipelines/templates/tf-init-applyplan.yaml
                   parameters:
                     tfDir: $(Agent.BuildDirectory)/releaseAzureGovernance
@@ -119,7 +121,8 @@ stages:
           runOnce:
             deploy:
               steps:
-                - download: none
+                - download: releaseAzureGovernance
+                - download: releaseAzureGovernanceprodplan
                 - template: /pipelines/templates/tf-init-applyplan.yaml
                   parameters:
                     tfDir: $(Agent.BuildDirectory)/releaseAzureGovernance
