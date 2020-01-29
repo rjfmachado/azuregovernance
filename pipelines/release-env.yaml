@@ -40,11 +40,11 @@ stages:
         pool:
           vmImage: "ubuntu-latest"
 
-        container:
-          image: rjfmachado.azurecr.io/terraform:${{ variables['TF_VERSION'] }}
-          endpoint: rjfmachado.containers
-
         steps:
+          - template: /pipelines/templates/tf-install.yaml
+            parameters:
+              tfVersion: $(TF_VERSION)
+
           - template: /pipelines/templates/tf-init-plan.yaml
             parameters:
               tfCliInit: -backend=true -backend-config=dev.stage
@@ -67,11 +67,11 @@ stages:
         pool:
           vmImage: "ubuntu-latest"
 
-        container:
-          image: rjfmachado.azurecr.io/terraform:${{ variables['TF_VERSION'] }}
-          endpoint: rjfmachado.containers
-
         steps:
+          - template: /pipelines/templates/tf-install.yaml
+            parameters:
+              tfVersion: $(TF_VERSION)
+
           - template: /pipelines/templates/tf-init-plan.yaml
             parameters:
               tfCliInit: -backend=true -backend-config=prod.stage
@@ -106,9 +106,9 @@ stages:
               steps:
                 - bash: |
                     ls -laR ../
-                - template: /pipelines/templates/tf-install.yaml
-                  parameters:
-                    tfVersion: $(TF_VERSION)
+                #- template: /pipelines/templates/tf-install.yaml
+                #  parameters:
+                #    tfVersion: $(TF_VERSION)
             deploy:
               steps:
                 - template: /pipelines/templates/tf-init-applyplan.yaml
