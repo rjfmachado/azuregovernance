@@ -6,7 +6,7 @@ steps:
   - bash: |
       terraform show
     displayName: "Terraform Plan"
-    name: plan
+    name: showplan
     workingDirectory: ${{ parameters.tfDir}}
     enabled: "true"
     env:
