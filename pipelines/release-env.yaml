@@ -116,8 +116,8 @@ stages:
         continueOnError: false
         environment: prod
         strategy:
-          download: none
           runOnce:
+            download: none
             deploy:
               steps:
                 - template: /pipelines/templates/tf-init-applyplan.yaml
