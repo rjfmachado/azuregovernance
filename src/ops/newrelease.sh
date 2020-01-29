@@ -28,6 +28,6 @@ git commit -m "Creating release ${newrelease}."
 git push
 
 git checkout -b "release/${newrelease}"
-git push --set-upstream origin release/${newrelease}
+git push --set-upstream origin "release/${newrelease}"
 
 echo "You are now ready to release ${newrelease} from branch release/${newrelease}."
