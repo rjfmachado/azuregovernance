@@ -40,15 +40,13 @@ stages:
               tfVersion: $(TF_VERSION)
 
       - job: publishDevPlan
-        displayName: Terraform Init-Plan
-
+        displayName: Publish dev plan
         variables:
           - group: azuregovernancedev
           - group: azuregovernancedevsecret
-
         pool:
           vmImage: "ubuntu-latest"
-
+        dependsOn: terraformInstall
         steps:
           - template: /pipelines/templates/tf-init-plan.yaml
             parameters:
@@ -61,15 +59,13 @@ stages:
             enabled: "true"
 
       - job: publishProdPlan
-        displayName: Terraform Init-Plan
-
+        displayName: Publish prod plan
         variables:
           - group: azuregovernanceprod
           - group: azuregovernanceprodsecret
-
         pool:
           vmImage: "ubuntu-latest"
-
+        dependsOn: terraformInstall
         steps:
           - template: /pipelines/templates/tf-init-plan.yaml
             parameters:
@@ -89,7 +85,7 @@ stages:
 
     jobs:
       - deployment: TerraformApplyPlan
-        displayName: Terraform (Init/ApplyPlan)
+        displayName: Terraform (Apply Plan)
         pool:
           vmImage: "ubuntu-latest"
         #dependsOn: string
@@ -105,6 +101,21 @@ stages:
               steps:
                 - bash: |
                     ls -laR ../
+
+                - bash: |
+                    ls -laR $(Pipeline.Workspace)
+
+                - bash: |
+                    ls -laR $(Build.SourcesDirectory)
+
+                - bash: |
+                    ls -laR $(Build.BinariesDirectory)
+
+                - bash: |
+                    ls -laR $(Build.ArtifactStagingDirectory)
+
+                - bash: |
+                    ls -laR $(Common.TestResultsDirectory)
                 #- template: /pipelines/templates/tf-install.yaml
                 #  parameters:
                 #    tfVersion: $(TF_VERSION)
