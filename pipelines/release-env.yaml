@@ -55,7 +55,7 @@ stages:
 
           - publish: src/terraform/dev.plan
             displayName: "Publish Dev Plan"
-            artifact: releaseAzureGovernance.devplan
+            artifact: releaseAzureGovernancedevplan
             enabled: "true"
 
       - job: publishProdPlan
@@ -74,7 +74,7 @@ stages:
 
           - publish: src/terraform/prod.plan
             displayName: "Publish Prod Plan"
-            artifact: releaseAzureGovernance.prodplan
+            artifact: releaseAzureGovernanceprodplan
             enabled: "true"
 
   - stage: dev
