@@ -13,10 +13,10 @@ variables:
     value: 0.12.19
 
 stages:
-  - stage: publishRelease
+  - stage: publishArtifacts
 
     jobs:
-      - job: publishArtifacts
+      - job: publishTerraform
         displayName: Publish Azure Governance Terraform files/plans.
 
         pool:
@@ -28,15 +28,9 @@ stages:
             artifact: releaseAzureGovernance
             enabled: "true"
 
-  - stage: devplan
+      - job: terraformInstall
+        displayName: Terraform (Install)
 
-    variables:
-      - group: azuregovernancedev
-      - group: azuregovernancedevsecret
-
-    jobs:
-      - job: Terraform
-        displayName: Terraform Init-Plan
         pool:
           vmImage: "ubuntu-latest"
 
@@ -45,6 +39,17 @@ stages:
             parameters:
               tfVersion: $(TF_VERSION)
 
+      - job: publishDevPlan
+        displayName: Terraform Init-Plan
+
+        variables:
+          - group: azuregovernancedev
+          - group: azuregovernancedevsecret
+
+        pool:
+          vmImage: "ubuntu-latest"
+
+        steps:
           - template: /pipelines/templates/tf-init-plan.yaml
             parameters:
               tfCliInit: -backend=true -backend-config=dev.stage
@@ -55,23 +60,17 @@ stages:
             artifact: releaseAzureGovernance.devplan
             enabled: "true"
 
-  - stage: prodplan
-
-    variables:
-      - group: azuregovernanceprod
-      - group: azuregovernanceprodsecret
-
-    jobs:
-      - job: Terraform
+      - job: publishProdPlan
         displayName: Terraform Init-Plan
+
+        variables:
+          - group: azuregovernanceprod
+          - group: azuregovernanceprodsecret
+
         pool:
           vmImage: "ubuntu-latest"
 
         steps:
-          - template: /pipelines/templates/tf-install.yaml
-            parameters:
-              tfVersion: $(TF_VERSION)
-
           - template: /pipelines/templates/tf-init-plan.yaml
             parameters:
               tfCliInit: -backend=true -backend-config=prod.stage
