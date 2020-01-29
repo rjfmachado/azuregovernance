@@ -1,10 +1,11 @@
-name: azure.governance.ci$(Rev:.r)
+name: azure.governance.pullrequest$(Rev:.r)
 
 trigger:
   batch: "true"
   branches:
     include:
-      - master
+      - feature/*
+      - hotfix/*
   paths:
     include:
       - src/terraform
@@ -16,6 +17,8 @@ variables:
     value: "false"
   - name: TF_IN_AUTOMATION
     value: "true"
+  - name: TF_VERSION
+    value: 0.12.19
 
 stages:
   - stage: dev
@@ -23,8 +26,6 @@ stages:
     variables:
       - group: azuregovernancedev
       - group: azuregovernancedevsecret
-      - name: TF_VERSION
-        value: 0.12.19
 
     jobs:
       - job: Terraform
