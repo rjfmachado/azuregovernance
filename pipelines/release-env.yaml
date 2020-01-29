@@ -116,6 +116,10 @@ stages:
 
                 - bash: |
                     ls -laR $(Common.TestResultsDirectory)
+                - bash: |
+                    ls -laR $(System.DefaultWorkingDirectory)
+                - bash: |
+                    ls -laR $(Agent.BuildDirectory)
                 #- template: /pipelines/templates/tf-install.yaml
                 #  parameters:
                 #    tfVersion: $(TF_VERSION)
