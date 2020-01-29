@@ -115,10 +115,10 @@ stages:
           vmImage: "ubuntu-latest"
         continueOnError: false
         environment: prod
-        download: none
         strategy:
           runOnce:
             deploy:
+              - download: none
               steps:
                 - template: /pipelines/templates/tf-init-applyplan.yaml
                   parameters:
