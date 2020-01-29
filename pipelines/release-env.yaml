@@ -28,16 +28,16 @@ stages:
             artifact: releaseAzureGovernance
             enabled: "true"
 
-      - job: terraformInstall
-        displayName: Terraform (Install)
+      # - job: terraformInstall
+      #   displayName: Terraform (Install)
 
-        pool:
-          vmImage: "ubuntu-latest"
+      #   pool:
+      #     vmImage: "ubuntu-latest"
 
-        steps:
-          - template: /pipelines/templates/tf-install.yaml
-            parameters:
-              tfVersion: $(TF_VERSION)
+      #   steps:
+      #     - template: /pipelines/templates/tf-install.yaml
+      #       parameters:
+      #         tfVersion: $(TF_VERSION)
 
       - job: publishDevPlan
         displayName: Publish dev plan
@@ -46,6 +46,9 @@ stages:
           - group: azuregovernancedevsecret
         pool:
           vmImage: "ubuntu-latest"
+        container:
+          image: rjfmachado.azurecr.io/terraform:${{ variables['TF_VERSION'] }}
+          endpoint: rjfmachado.containers
         dependsOn: terraformInstall
         steps:
           - template: /pipelines/templates/tf-init-plan.yaml
@@ -66,6 +69,9 @@ stages:
           - group: azuregovernanceprodsecret
         pool:
           vmImage: "ubuntu-latest"
+        container:
+          image: rjfmachado.azurecr.io/terraform:${{ variables['TF_VERSION'] }}
+          endpoint: rjfmachado.containers
         dependsOn: terraformInstall
         steps:
           - template: /pipelines/templates/tf-init-plan.yaml
@@ -90,6 +96,9 @@ stages:
         displayName: Terraform (Apply Plan)
         pool:
           vmImage: "ubuntu-latest"
+        container:
+          image: rjfmachado.azurecr.io/terraform:${{ variables['TF_VERSION'] }}
+          endpoint: rjfmachado.containers
         continueOnError: false
         environment: dev
         strategy:
@@ -113,6 +122,9 @@ stages:
         displayName: Terraform (Apply Plan)
         pool:
           vmImage: "ubuntu-latest"
+        container:
+          image: rjfmachado.azurecr.io/terraform:${{ variables['TF_VERSION'] }}
+          endpoint: rjfmachado.containers
         continueOnError: false
         environment: prod
         strategy:
