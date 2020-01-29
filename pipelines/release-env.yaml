@@ -116,6 +116,7 @@ stages:
         continueOnError: false
         environment: prod
         strategy:
+          download: none
           runOnce:
             deploy:
               steps:
