@@ -107,7 +107,7 @@ stages:
                 - template: /pipelines/templates/tf-install.yaml
                   parameters:
                     tfVersion: $(TF_VERSION)
-            Deploy:
+            deploy:
               steps:
                 - template: /pipelines/templates/tf-init-applyplan.yaml
                   parameters:
