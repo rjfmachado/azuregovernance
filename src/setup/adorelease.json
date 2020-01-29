@@ -1,0 +1,1039 @@
+{
+    "source": 2,
+    "revision": 69,
+    "description": null,
+    "createdBy": {
+        "displayName": "Ricardo Machado",
+        "url": "https://spsprodeus24.vssps.visualstudio.com/A66dda0c4-13ea-4941-ad29-a2bb13f3b9d1/_apis/Identities/8fc8443f-aa10-4305-8af1-243d2d30386d",
+        "_links": {
+            "avatar": {
+                "href": "https://dev.azure.com/rjfmachado/_apis/GraphProfile/MemberAvatars/msa.M2YyNDE1OTEtZjgxZS03MTJjLWE5NzAtODUwMjExMTAyZTgz"
+            }
+        },
+        "id": "8fc8443f-aa10-4305-8af1-243d2d30386d",
+        "uniqueName": "r_machado@hotmail.com",
+        "imageUrl": "https://dev.azure.com/rjfmachado/_apis/GraphProfile/MemberAvatars/msa.M2YyNDE1OTEtZjgxZS03MTJjLWE5NzAtODUwMjExMTAyZTgz",
+        "descriptor": "msa.M2YyNDE1OTEtZjgxZS03MTJjLWE5NzAtODUwMjExMTAyZTgz"
+    },
+    "createdOn": "2020-01-03T14:53:21.893Z",
+    "modifiedBy": {
+        "displayName": "Ricardo Machado",
+        "url": "https://spsprodeus24.vssps.visualstudio.com/A66dda0c4-13ea-4941-ad29-a2bb13f3b9d1/_apis/Identities/8fc8443f-aa10-4305-8af1-243d2d30386d",
+        "_links": {
+            "avatar": {
+                "href": "https://dev.azure.com/rjfmachado/_apis/GraphProfile/MemberAvatars/msa.M2YyNDE1OTEtZjgxZS03MTJjLWE5NzAtODUwMjExMTAyZTgz"
+            }
+        },
+        "id": "8fc8443f-aa10-4305-8af1-243d2d30386d",
+        "uniqueName": "r_machado@hotmail.com",
+        "imageUrl": "https://dev.azure.com/rjfmachado/_apis/GraphProfile/MemberAvatars/msa.M2YyNDE1OTEtZjgxZS03MTJjLWE5NzAtODUwMjExMTAyZTgz",
+        "descriptor": "msa.M2YyNDE1OTEtZjgxZS03MTJjLWE5NzAtODUwMjExMTAyZTgz"
+    },
+    "modifiedOn": "2020-01-21T15:19:16.907Z",
+    "isDeleted": false,
+    "lastRelease": {
+        "id": 31,
+        "name": "r3.001",
+        "artifacts": [],
+        "_links": {},
+        "description": "",
+        "releaseDefinition": {
+            "id": 2,
+            "projectReference": null,
+            "_links": {}
+        },
+        "createdOn": "2020-01-22T14:16:11.503Z",
+        "createdBy": {
+            "displayName": "Ricardo Machado",
+            "url": "https://spsprodeus24.vssps.visualstudio.com/A66dda0c4-13ea-4941-ad29-a2bb13f3b9d1/_apis/Identities/8fc8443f-aa10-4305-8af1-243d2d30386d",
+            "_links": {
+                "avatar": {
+                    "href": "https://dev.azure.com/rjfmachado/_apis/GraphProfile/MemberAvatars/msa.M2YyNDE1OTEtZjgxZS03MTJjLWE5NzAtODUwMjExMTAyZTgz"
+                }
+            },
+            "id": "8fc8443f-aa10-4305-8af1-243d2d30386d",
+            "uniqueName": "r_machado@hotmail.com",
+            "imageUrl": "https://dev.azure.com/rjfmachado/_apis/GraphProfile/MemberAvatars/msa.M2YyNDE1OTEtZjgxZS03MTJjLWE5NzAtODUwMjExMTAyZTgz",
+            "descriptor": "msa.M2YyNDE1OTEtZjgxZS03MTJjLWE5NzAtODUwMjExMTAyZTgz"
+        }
+    },
+    "variables": {
+        "tfVersion": {
+            "value": "0.12.19"
+        }
+    },
+    "variableGroups": [],
+    "environments": [
+        {
+            "id": 7,
+            "name": "dev (review)",
+            "rank": 1,
+            "owner": {
+                "displayName": "Ricardo Machado",
+                "url": "https://spsprodeus24.vssps.visualstudio.com/A66dda0c4-13ea-4941-ad29-a2bb13f3b9d1/_apis/Identities/8fc8443f-aa10-4305-8af1-243d2d30386d",
+                "_links": {
+                    "avatar": {
+                        "href": "https://dev.azure.com/rjfmachado/_apis/GraphProfile/MemberAvatars/msa.M2YyNDE1OTEtZjgxZS03MTJjLWE5NzAtODUwMjExMTAyZTgz"
+                    }
+                },
+                "id": "8fc8443f-aa10-4305-8af1-243d2d30386d",
+                "uniqueName": "r_machado@hotmail.com",
+                "imageUrl": "https://dev.azure.com/rjfmachado/_apis/GraphProfile/MemberAvatars/msa.M2YyNDE1OTEtZjgxZS03MTJjLWE5NzAtODUwMjExMTAyZTgz",
+                "descriptor": "msa.M2YyNDE1OTEtZjgxZS03MTJjLWE5NzAtODUwMjExMTAyZTgz"
+            },
+            "variables": {},
+            "variableGroups": [
+                6,
+                11
+            ],
+            "preDeployApprovals": {
+                "approvals": [
+                    {
+                        "rank": 1,
+                        "isAutomated": true,
+                        "isNotificationOn": false,
+                        "id": 19
+                    }
+                ],
+                "approvalOptions": {
+                    "requiredApproverCount": null,
+                    "releaseCreatorCanBeApprover": false,
+                    "autoTriggeredAndPreviousEnvironmentApprovedCanBeSkipped": false,
+                    "enforceIdentityRevalidation": false,
+                    "timeoutInMinutes": 0,
+                    "executionOrder": 1
+                }
+            },
+            "deployStep": {
+                "id": 26
+            },
+            "postDeployApprovals": {
+                "approvals": [
+                    {
+                        "rank": 1,
+                        "isAutomated": true,
+                        "isNotificationOn": false,
+                        "id": 27
+                    }
+                ],
+                "approvalOptions": {
+                    "requiredApproverCount": null,
+                    "releaseCreatorCanBeApprover": false,
+                    "autoTriggeredAndPreviousEnvironmentApprovedCanBeSkipped": false,
+                    "enforceIdentityRevalidation": false,
+                    "timeoutInMinutes": 0,
+                    "executionOrder": 2
+                }
+            },
+            "deployPhases": [
+                {
+                    "deploymentInput": {
+                        "parallelExecution": {
+                            "parallelExecutionType": 0
+                        },
+                        "agentSpecification": {
+                            "identifier": "ubuntu-18.04"
+                        },
+                        "skipArtifactsDownload": false,
+                        "artifactsDownloadInput": {
+                            "downloadInputs": [
+                                {
+                                    "alias": "_azure.governance.release",
+                                    "artifactType": "Build",
+                                    "artifactDownloadMode": "All",
+                                    "artifactItems": []
+                                }
+                            ]
+                        },
+                        "queueId": 150,
+                        "demands": [],
+                        "enableAccessToken": false,
+                        "timeoutInMinutes": 0,
+                        "jobCancelTimeoutInMinutes": 1,
+                        "condition": "succeeded()",
+                        "overrideInputs": {}
+                    },
+                    "rank": 1,
+                    "phaseType": 1,
+                    "name": "Agent job",
+                    "refName": null,
+                    "workflowTasks": [
+                        {
+                            "environment": {},
+                            "taskId": "d9bafed4-0b18-4f58-968d-86655b4d2ce9",
+                            "version": "2.*",
+                            "name": "Terraform (Version)",
+                            "refName": "",
+                            "enabled": true,
+                            "alwaysRun": false,
+                            "continueOnError": false,
+                            "timeoutInMinutes": 0,
+                            "definitionType": "task",
+                            "overrideInputs": {},
+                            "condition": "succeeded()",
+                            "inputs": {
+                                "script": "terraform -version -no-color\nwget https://releases.hashicorp.com/terraform/$(tfVersion)/terraform_$(tfVersion)_linux_amd64.zip -q\nunzip -q terraform_$(tfVersion)_linux_amd64.zip\nsudo mv terraform /usr/local/bin\nterraform -version -no-color",
+                                "workingDirectory": "",
+                                "failOnStderr": "false"
+                            }
+                        },
+                        {
+                            "environment": {
+                                "ARM_CLIENT_SECRET": "$(tfClientSecret)"
+                            },
+                            "taskId": "d9bafed4-0b18-4f58-968d-86655b4d2ce9",
+                            "version": "2.*",
+                            "name": "Terraform (Init)",
+                            "refName": "",
+                            "enabled": true,
+                            "alwaysRun": false,
+                            "continueOnError": false,
+                            "timeoutInMinutes": 0,
+                            "definitionType": "task",
+                            "overrideInputs": {},
+                            "condition": "succeeded()",
+                            "inputs": {
+                                "script": "terraform init -backend=true -backend-config=dev.stage -no-color",
+                                "workingDirectory": "$(System.DefaultWorkingDirectory)/_azure.governance.release/releaseAzureGovernance",
+                                "failOnStderr": "false"
+                            }
+                        },
+                        {
+                            "environment": {
+                                "ARM_CLIENT_SECRET": "$(tfClientSecret)"
+                            },
+                            "taskId": "d9bafed4-0b18-4f58-968d-86655b4d2ce9",
+                            "version": "2.*",
+                            "name": "Terraform (Show Plan)",
+                            "refName": "",
+                            "enabled": true,
+                            "alwaysRun": false,
+                            "continueOnError": false,
+                            "timeoutInMinutes": 0,
+                            "definitionType": "task",
+                            "overrideInputs": {},
+                            "condition": "succeeded()",
+                            "inputs": {
+                                "script": "terraform show $(System.DefaultWorkingDirectory)/_azure.governance.release/releaseAzureGovernance.devplan/dev.plan -no-color",
+                                "workingDirectory": "$(System.DefaultWorkingDirectory)/_azure.governance.release/releaseAzureGovernance",
+                                "failOnStderr": "false"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "environmentOptions": {
+                "emailNotificationType": "OnlyOnFailure",
+                "emailRecipients": "release.environment.owner;release.creator",
+                "skipArtifactsDownload": false,
+                "timeoutInMinutes": 0,
+                "enableAccessToken": false,
+                "publishDeploymentStatus": true,
+                "badgeEnabled": false,
+                "autoLinkWorkItems": false,
+                "pullRequestDeploymentEnabled": false
+            },
+            "demands": [],
+            "conditions": [
+                {
+                    "name": "ReleaseStarted",
+                    "conditionType": 1,
+                    "value": ""
+                }
+            ],
+            "executionPolicy": {
+                "concurrencyCount": 1,
+                "queueDepthCount": 0
+            },
+            "schedules": [],
+            "currentRelease": {
+                "id": 31,
+                "url": "https://vsrm.dev.azure.com/rjfmachado/f9e70011-da01-446d-8222-957ea584dd19/_apis/Release/releases/31",
+                "_links": {}
+            },
+            "retentionPolicy": {
+                "daysToKeep": 30,
+                "releasesToKeep": 3,
+                "retainBuild": true
+            },
+            "processParameters": {},
+            "properties": {
+                "BoardsEnvironmentType": {
+                    "$type": "System.String",
+                    "$value": "unmapped"
+                },
+                "LinkBoardsWorkItems": {
+                    "$type": "System.String",
+                    "$value": "False"
+                }
+            },
+            "preDeploymentGates": {
+                "id": 0,
+                "gatesOptions": null,
+                "gates": []
+            },
+            "postDeploymentGates": {
+                "id": 0,
+                "gatesOptions": null,
+                "gates": []
+            },
+            "environmentTriggers": [],
+            "badgeUrl": "https://vsrm.dev.azure.com/rjfmachado/_apis/public/Release/badge/f9e70011-da01-446d-8222-957ea584dd19/2/7"
+        },
+        {
+            "id": 12,
+            "name": "dev (apply)",
+            "rank": 2,
+            "owner": {
+                "displayName": "Ricardo Machado",
+                "url": "https://spsprodeus24.vssps.visualstudio.com/A66dda0c4-13ea-4941-ad29-a2bb13f3b9d1/_apis/Identities/8fc8443f-aa10-4305-8af1-243d2d30386d",
+                "_links": {
+                    "avatar": {
+                        "href": "https://dev.azure.com/rjfmachado/_apis/GraphProfile/MemberAvatars/msa.M2YyNDE1OTEtZjgxZS03MTJjLWE5NzAtODUwMjExMTAyZTgz"
+                    }
+                },
+                "id": "8fc8443f-aa10-4305-8af1-243d2d30386d",
+                "uniqueName": "r_machado@hotmail.com",
+                "imageUrl": "https://dev.azure.com/rjfmachado/_apis/GraphProfile/MemberAvatars/msa.M2YyNDE1OTEtZjgxZS03MTJjLWE5NzAtODUwMjExMTAyZTgz",
+                "descriptor": "msa.M2YyNDE1OTEtZjgxZS03MTJjLWE5NzAtODUwMjExMTAyZTgz"
+            },
+            "variables": {},
+            "variableGroups": [
+                6,
+                11
+            ],
+            "preDeployApprovals": {
+                "approvals": [
+                    {
+                        "rank": 1,
+                        "isAutomated": false,
+                        "isNotificationOn": false,
+                        "approver": {
+                            "displayName": "Ricardo Machado",
+                            "url": "https://spsprodeus24.vssps.visualstudio.com/A66dda0c4-13ea-4941-ad29-a2bb13f3b9d1/_apis/Identities/8fc8443f-aa10-4305-8af1-243d2d30386d",
+                            "_links": {
+                                "avatar": {
+                                    "href": "https://dev.azure.com/rjfmachado/_apis/GraphProfile/MemberAvatars/msa.M2YyNDE1OTEtZjgxZS03MTJjLWE5NzAtODUwMjExMTAyZTgz"
+                                }
+                            },
+                            "id": "8fc8443f-aa10-4305-8af1-243d2d30386d",
+                            "uniqueName": "r_machado@hotmail.com",
+                            "imageUrl": "https://dev.azure.com/rjfmachado/_apis/GraphProfile/MemberAvatars/msa.M2YyNDE1OTEtZjgxZS03MTJjLWE5NzAtODUwMjExMTAyZTgz",
+                            "descriptor": "msa.M2YyNDE1OTEtZjgxZS03MTJjLWE5NzAtODUwMjExMTAyZTgz"
+                        },
+                        "id": 45
+                    }
+                ],
+                "approvalOptions": {
+                    "requiredApproverCount": null,
+                    "releaseCreatorCanBeApprover": true,
+                    "autoTriggeredAndPreviousEnvironmentApprovedCanBeSkipped": false,
+                    "enforceIdentityRevalidation": false,
+                    "timeoutInMinutes": 0,
+                    "executionOrder": 1
+                }
+            },
+            "deployStep": {
+                "id": 37
+            },
+            "postDeployApprovals": {
+                "approvals": [
+                    {
+                        "rank": 1,
+                        "isAutomated": true,
+                        "isNotificationOn": false,
+                        "id": 38
+                    }
+                ],
+                "approvalOptions": {
+                    "requiredApproverCount": null,
+                    "releaseCreatorCanBeApprover": false,
+                    "autoTriggeredAndPreviousEnvironmentApprovedCanBeSkipped": false,
+                    "enforceIdentityRevalidation": false,
+                    "timeoutInMinutes": 0,
+                    "executionOrder": 2
+                }
+            },
+            "deployPhases": [
+                {
+                    "deploymentInput": {
+                        "parallelExecution": {
+                            "parallelExecutionType": 0
+                        },
+                        "agentSpecification": {
+                            "identifier": "ubuntu-18.04"
+                        },
+                        "skipArtifactsDownload": false,
+                        "artifactsDownloadInput": {
+                            "downloadInputs": [
+                                {
+                                    "alias": "_azure.governance.release",
+                                    "artifactType": "Build",
+                                    "artifactDownloadMode": "All",
+                                    "artifactItems": []
+                                }
+                            ]
+                        },
+                        "queueId": 150,
+                        "demands": [],
+                        "enableAccessToken": false,
+                        "timeoutInMinutes": 0,
+                        "jobCancelTimeoutInMinutes": 1,
+                        "condition": "succeeded()",
+                        "overrideInputs": {}
+                    },
+                    "rank": 1,
+                    "phaseType": 1,
+                    "name": "Agent job",
+                    "refName": null,
+                    "workflowTasks": [
+                        {
+                            "environment": {},
+                            "taskId": "d9bafed4-0b18-4f58-968d-86655b4d2ce9",
+                            "version": "2.*",
+                            "name": "Terraform (Version)",
+                            "refName": "",
+                            "enabled": true,
+                            "alwaysRun": false,
+                            "continueOnError": false,
+                            "timeoutInMinutes": 0,
+                            "definitionType": "task",
+                            "overrideInputs": {},
+                            "condition": "succeeded()",
+                            "inputs": {
+                                "script": "terraform -version -no-color\nwget https://releases.hashicorp.com/terraform/$(tfVersion)/terraform_$(tfVersion)_linux_amd64.zip -q\nunzip -q terraform_$(tfVersion)_linux_amd64.zip\nsudo mv terraform /usr/local/bin\nterraform -version -no-color",
+                                "workingDirectory": "",
+                                "failOnStderr": "false"
+                            }
+                        },
+                        {
+                            "environment": {
+                                "ARM_CLIENT_SECRET": "$(tfClientSecret)"
+                            },
+                            "taskId": "d9bafed4-0b18-4f58-968d-86655b4d2ce9",
+                            "version": "2.*",
+                            "name": "Terraform (Init)",
+                            "refName": "",
+                            "enabled": true,
+                            "alwaysRun": false,
+                            "continueOnError": false,
+                            "timeoutInMinutes": 0,
+                            "definitionType": "task",
+                            "overrideInputs": {},
+                            "condition": "succeeded()",
+                            "inputs": {
+                                "script": "terraform init -backend=true -backend-config=dev.stage -no-color",
+                                "workingDirectory": "$(System.DefaultWorkingDirectory)/_azure.governance.release/releaseAzureGovernance",
+                                "failOnStderr": "false"
+                            }
+                        },
+                        {
+                            "environment": {
+                                "ARM_CLIENT_SECRET": "$(tfClientSecret)"
+                            },
+                            "taskId": "d9bafed4-0b18-4f58-968d-86655b4d2ce9",
+                            "version": "2.*",
+                            "name": "Terraform (Apply)",
+                            "refName": "",
+                            "enabled": true,
+                            "alwaysRun": false,
+                            "continueOnError": false,
+                            "timeoutInMinutes": 0,
+                            "definitionType": "task",
+                            "overrideInputs": {},
+                            "condition": "succeeded()",
+                            "inputs": {
+                                "script": "terraform apply -no-color $(System.DefaultWorkingDirectory)/_azure.governance.release/releaseAzureGovernance.devplan/dev.plan",
+                                "workingDirectory": "$(System.DefaultWorkingDirectory)/_azure.governance.release/releaseAzureGovernance",
+                                "failOnStderr": "false"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "environmentOptions": {
+                "emailNotificationType": "OnlyOnFailure",
+                "emailRecipients": "release.environment.owner;release.creator",
+                "skipArtifactsDownload": false,
+                "timeoutInMinutes": 0,
+                "enableAccessToken": false,
+                "publishDeploymentStatus": true,
+                "badgeEnabled": false,
+                "autoLinkWorkItems": false,
+                "pullRequestDeploymentEnabled": false
+            },
+            "demands": [],
+            "conditions": [
+                {
+                    "name": "dev (review)",
+                    "conditionType": 2,
+                    "value": "4"
+                }
+            ],
+            "executionPolicy": {
+                "concurrencyCount": 1,
+                "queueDepthCount": 0
+            },
+            "schedules": [],
+            "currentRelease": {
+                "id": 31,
+                "url": "https://vsrm.dev.azure.com/rjfmachado/f9e70011-da01-446d-8222-957ea584dd19/_apis/Release/releases/31",
+                "_links": {}
+            },
+            "retentionPolicy": {
+                "daysToKeep": 30,
+                "releasesToKeep": 3,
+                "retainBuild": true
+            },
+            "processParameters": {},
+            "properties": {
+                "BoardsEnvironmentType": {
+                    "$type": "System.String",
+                    "$value": "unmapped"
+                },
+                "LinkBoardsWorkItems": {
+                    "$type": "System.String",
+                    "$value": "False"
+                }
+            },
+            "preDeploymentGates": {
+                "id": 0,
+                "gatesOptions": null,
+                "gates": []
+            },
+            "postDeploymentGates": {
+                "id": 0,
+                "gatesOptions": null,
+                "gates": []
+            },
+            "environmentTriggers": [],
+            "badgeUrl": "https://vsrm.dev.azure.com/rjfmachado/_apis/public/Release/badge/f9e70011-da01-446d-8222-957ea584dd19/2/12"
+        },
+        {
+            "id": 13,
+            "name": "prod (review)",
+            "rank": 3,
+            "owner": {
+                "displayName": "Ricardo Machado",
+                "url": "https://spsprodeus24.vssps.visualstudio.com/A66dda0c4-13ea-4941-ad29-a2bb13f3b9d1/_apis/Identities/8fc8443f-aa10-4305-8af1-243d2d30386d",
+                "_links": {
+                    "avatar": {
+                        "href": "https://dev.azure.com/rjfmachado/_apis/GraphProfile/MemberAvatars/msa.M2YyNDE1OTEtZjgxZS03MTJjLWE5NzAtODUwMjExMTAyZTgz"
+                    }
+                },
+                "id": "8fc8443f-aa10-4305-8af1-243d2d30386d",
+                "uniqueName": "r_machado@hotmail.com",
+                "imageUrl": "https://dev.azure.com/rjfmachado/_apis/GraphProfile/MemberAvatars/msa.M2YyNDE1OTEtZjgxZS03MTJjLWE5NzAtODUwMjExMTAyZTgz",
+                "descriptor": "msa.M2YyNDE1OTEtZjgxZS03MTJjLWE5NzAtODUwMjExMTAyZTgz"
+            },
+            "variables": {},
+            "variableGroups": [
+                8,
+                10
+            ],
+            "preDeployApprovals": {
+                "approvals": [
+                    {
+                        "rank": 1,
+                        "isAutomated": true,
+                        "isNotificationOn": false,
+                        "id": 39
+                    }
+                ],
+                "approvalOptions": {
+                    "requiredApproverCount": null,
+                    "releaseCreatorCanBeApprover": false,
+                    "autoTriggeredAndPreviousEnvironmentApprovedCanBeSkipped": false,
+                    "enforceIdentityRevalidation": false,
+                    "timeoutInMinutes": 0,
+                    "executionOrder": 1
+                }
+            },
+            "deployStep": {
+                "id": 42
+            },
+            "postDeployApprovals": {
+                "approvals": [
+                    {
+                        "rank": 1,
+                        "isAutomated": true,
+                        "isNotificationOn": false,
+                        "id": 43
+                    }
+                ],
+                "approvalOptions": {
+                    "requiredApproverCount": null,
+                    "releaseCreatorCanBeApprover": false,
+                    "autoTriggeredAndPreviousEnvironmentApprovedCanBeSkipped": false,
+                    "enforceIdentityRevalidation": false,
+                    "timeoutInMinutes": 0,
+                    "executionOrder": 2
+                }
+            },
+            "deployPhases": [
+                {
+                    "deploymentInput": {
+                        "parallelExecution": {
+                            "parallelExecutionType": 0
+                        },
+                        "agentSpecification": {
+                            "identifier": "ubuntu-18.04"
+                        },
+                        "skipArtifactsDownload": false,
+                        "artifactsDownloadInput": {
+                            "downloadInputs": [
+                                {
+                                    "alias": "_azure.governance.release",
+                                    "artifactType": "Build",
+                                    "artifactDownloadMode": "All",
+                                    "artifactItems": []
+                                }
+                            ]
+                        },
+                        "queueId": 150,
+                        "demands": [],
+                        "enableAccessToken": false,
+                        "timeoutInMinutes": 0,
+                        "jobCancelTimeoutInMinutes": 1,
+                        "condition": "succeeded()",
+                        "overrideInputs": {}
+                    },
+                    "rank": 1,
+                    "phaseType": 1,
+                    "name": "Agent job",
+                    "refName": null,
+                    "workflowTasks": [
+                        {
+                            "environment": {},
+                            "taskId": "d9bafed4-0b18-4f58-968d-86655b4d2ce9",
+                            "version": "2.*",
+                            "name": "Terraform (Version)",
+                            "refName": "",
+                            "enabled": true,
+                            "alwaysRun": false,
+                            "continueOnError": false,
+                            "timeoutInMinutes": 0,
+                            "definitionType": "task",
+                            "overrideInputs": {},
+                            "condition": "succeeded()",
+                            "inputs": {
+                                "script": "terraform -version -no-color\nwget https://releases.hashicorp.com/terraform/$(tfVersion)/terraform_$(tfVersion)_linux_amd64.zip -q\nunzip -q terraform_$(tfVersion)_linux_amd64.zip\nsudo mv terraform /usr/local/bin\nterraform -version -no-color",
+                                "workingDirectory": "",
+                                "failOnStderr": "false"
+                            }
+                        },
+                        {
+                            "environment": {
+                                "ARM_CLIENT_SECRET": "$(tfClientSecret)"
+                            },
+                            "taskId": "d9bafed4-0b18-4f58-968d-86655b4d2ce9",
+                            "version": "2.*",
+                            "name": "Terraform (Init)",
+                            "refName": "",
+                            "enabled": true,
+                            "alwaysRun": false,
+                            "continueOnError": false,
+                            "timeoutInMinutes": 0,
+                            "definitionType": "task",
+                            "overrideInputs": {},
+                            "condition": "succeeded()",
+                            "inputs": {
+                                "script": "terraform init -backend=true -backend-config=prod.stage -no-color",
+                                "workingDirectory": "$(System.DefaultWorkingDirectory)/_azure.governance.release/releaseAzureGovernance",
+                                "failOnStderr": "false"
+                            }
+                        },
+                        {
+                            "environment": {
+                                "ARM_CLIENT_SECRET": "$(tfClientSecret)"
+                            },
+                            "taskId": "d9bafed4-0b18-4f58-968d-86655b4d2ce9",
+                            "version": "2.*",
+                            "name": "Terraform (Show Plan)",
+                            "refName": "",
+                            "enabled": true,
+                            "alwaysRun": false,
+                            "continueOnError": false,
+                            "timeoutInMinutes": 0,
+                            "definitionType": "task",
+                            "overrideInputs": {},
+                            "condition": "succeeded()",
+                            "inputs": {
+                                "script": "terraform show $(System.DefaultWorkingDirectory)/_azure.governance.release/releaseAzureGovernance.prodplan/prod.plan -no-color",
+                                "workingDirectory": "$(System.DefaultWorkingDirectory)/_azure.governance.release/releaseAzureGovernance",
+                                "failOnStderr": "false"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "environmentOptions": {
+                "emailNotificationType": "OnlyOnFailure",
+                "emailRecipients": "release.environment.owner;release.creator",
+                "skipArtifactsDownload": false,
+                "timeoutInMinutes": 0,
+                "enableAccessToken": false,
+                "publishDeploymentStatus": true,
+                "badgeEnabled": false,
+                "autoLinkWorkItems": false,
+                "pullRequestDeploymentEnabled": false
+            },
+            "demands": [],
+            "conditions": [
+                {
+                    "name": "dev (review)",
+                    "conditionType": 2,
+                    "value": "4"
+                }
+            ],
+            "executionPolicy": {
+                "concurrencyCount": 1,
+                "queueDepthCount": 0
+            },
+            "schedules": [],
+            "currentRelease": {
+                "id": 31,
+                "url": "https://vsrm.dev.azure.com/rjfmachado/f9e70011-da01-446d-8222-957ea584dd19/_apis/Release/releases/31",
+                "_links": {}
+            },
+            "retentionPolicy": {
+                "daysToKeep": 30,
+                "releasesToKeep": 3,
+                "retainBuild": true
+            },
+            "processParameters": {},
+            "properties": {
+                "BoardsEnvironmentType": {
+                    "$type": "System.String",
+                    "$value": "unmapped"
+                },
+                "LinkBoardsWorkItems": {
+                    "$type": "System.String",
+                    "$value": "False"
+                }
+            },
+            "preDeploymentGates": {
+                "id": 0,
+                "gatesOptions": null,
+                "gates": []
+            },
+            "postDeploymentGates": {
+                "id": 0,
+                "gatesOptions": null,
+                "gates": []
+            },
+            "environmentTriggers": [],
+            "badgeUrl": "https://vsrm.dev.azure.com/rjfmachado/_apis/public/Release/badge/f9e70011-da01-446d-8222-957ea584dd19/2/13"
+        },
+        {
+            "id": 14,
+            "name": "prod (apply)",
+            "rank": 4,
+            "owner": {
+                "displayName": "Ricardo Machado",
+                "url": "https://spsprodeus24.vssps.visualstudio.com/A66dda0c4-13ea-4941-ad29-a2bb13f3b9d1/_apis/Identities/8fc8443f-aa10-4305-8af1-243d2d30386d",
+                "_links": {
+                    "avatar": {
+                        "href": "https://dev.azure.com/rjfmachado/_apis/GraphProfile/MemberAvatars/msa.M2YyNDE1OTEtZjgxZS03MTJjLWE5NzAtODUwMjExMTAyZTgz"
+                    }
+                },
+                "id": "8fc8443f-aa10-4305-8af1-243d2d30386d",
+                "uniqueName": "r_machado@hotmail.com",
+                "imageUrl": "https://dev.azure.com/rjfmachado/_apis/GraphProfile/MemberAvatars/msa.M2YyNDE1OTEtZjgxZS03MTJjLWE5NzAtODUwMjExMTAyZTgz",
+                "descriptor": "msa.M2YyNDE1OTEtZjgxZS03MTJjLWE5NzAtODUwMjExMTAyZTgz"
+            },
+            "variables": {},
+            "variableGroups": [
+                8,
+                10
+            ],
+            "preDeployApprovals": {
+                "approvals": [
+                    {
+                        "rank": 1,
+                        "isAutomated": false,
+                        "isNotificationOn": false,
+                        "approver": {
+                            "displayName": "Ricardo Machado",
+                            "url": "https://spsprodeus24.vssps.visualstudio.com/A66dda0c4-13ea-4941-ad29-a2bb13f3b9d1/_apis/Identities/8fc8443f-aa10-4305-8af1-243d2d30386d",
+                            "_links": {
+                                "avatar": {
+                                    "href": "https://dev.azure.com/rjfmachado/_apis/GraphProfile/MemberAvatars/msa.M2YyNDE1OTEtZjgxZS03MTJjLWE5NzAtODUwMjExMTAyZTgz"
+                                }
+                            },
+                            "id": "8fc8443f-aa10-4305-8af1-243d2d30386d",
+                            "uniqueName": "r_machado@hotmail.com",
+                            "imageUrl": "https://dev.azure.com/rjfmachado/_apis/GraphProfile/MemberAvatars/msa.M2YyNDE1OTEtZjgxZS03MTJjLWE5NzAtODUwMjExMTAyZTgz",
+                            "descriptor": "msa.M2YyNDE1OTEtZjgxZS03MTJjLWE5NzAtODUwMjExMTAyZTgz"
+                        },
+                        "id": 46
+                    }
+                ],
+                "approvalOptions": {
+                    "requiredApproverCount": null,
+                    "releaseCreatorCanBeApprover": true,
+                    "autoTriggeredAndPreviousEnvironmentApprovedCanBeSkipped": false,
+                    "enforceIdentityRevalidation": false,
+                    "timeoutInMinutes": 0,
+                    "executionOrder": 1
+                }
+            },
+            "deployStep": {
+                "id": 41
+            },
+            "postDeployApprovals": {
+                "approvals": [
+                    {
+                        "rank": 1,
+                        "isAutomated": true,
+                        "isNotificationOn": false,
+                        "id": 44
+                    }
+                ],
+                "approvalOptions": {
+                    "requiredApproverCount": null,
+                    "releaseCreatorCanBeApprover": false,
+                    "autoTriggeredAndPreviousEnvironmentApprovedCanBeSkipped": false,
+                    "enforceIdentityRevalidation": false,
+                    "timeoutInMinutes": 0,
+                    "executionOrder": 2
+                }
+            },
+            "deployPhases": [
+                {
+                    "deploymentInput": {
+                        "parallelExecution": {
+                            "parallelExecutionType": 0
+                        },
+                        "agentSpecification": {
+                            "identifier": "ubuntu-18.04"
+                        },
+                        "skipArtifactsDownload": false,
+                        "artifactsDownloadInput": {
+                            "downloadInputs": [
+                                {
+                                    "alias": "_azure.governance.release",
+                                    "artifactType": "Build",
+                                    "artifactDownloadMode": "All",
+                                    "artifactItems": []
+                                }
+                            ]
+                        },
+                        "queueId": 150,
+                        "demands": [],
+                        "enableAccessToken": false,
+                        "timeoutInMinutes": 0,
+                        "jobCancelTimeoutInMinutes": 1,
+                        "condition": "succeeded()",
+                        "overrideInputs": {}
+                    },
+                    "rank": 1,
+                    "phaseType": 1,
+                    "name": "Agent job",
+                    "refName": null,
+                    "workflowTasks": [
+                        {
+                            "environment": {},
+                            "taskId": "d9bafed4-0b18-4f58-968d-86655b4d2ce9",
+                            "version": "2.*",
+                            "name": "Terraform (Version)",
+                            "refName": "",
+                            "enabled": true,
+                            "alwaysRun": false,
+                            "continueOnError": false,
+                            "timeoutInMinutes": 0,
+                            "definitionType": "task",
+                            "overrideInputs": {},
+                            "condition": "succeeded()",
+                            "inputs": {
+                                "script": "terraform -version -no-color\nwget https://releases.hashicorp.com/terraform/$(tfVersion)/terraform_$(tfVersion)_linux_amd64.zip -q\nunzip -q terraform_$(tfVersion)_linux_amd64.zip\nsudo mv terraform /usr/local/bin\nterraform -version -no-color",
+                                "workingDirectory": "",
+                                "failOnStderr": "false"
+                            }
+                        },
+                        {
+                            "environment": {
+                                "ARM_CLIENT_SECRET": "$(tfClientSecret)"
+                            },
+                            "taskId": "d9bafed4-0b18-4f58-968d-86655b4d2ce9",
+                            "version": "2.*",
+                            "name": "Terraform (Init)",
+                            "refName": "",
+                            "enabled": true,
+                            "alwaysRun": false,
+                            "continueOnError": false,
+                            "timeoutInMinutes": 0,
+                            "definitionType": "task",
+                            "overrideInputs": {},
+                            "condition": "succeeded()",
+                            "inputs": {
+                                "script": "terraform init -backend=true -backend-config=prod.stage -no-color",
+                                "workingDirectory": "$(System.DefaultWorkingDirectory)/_azure.governance.release/releaseAzureGovernance",
+                                "failOnStderr": "false"
+                            }
+                        },
+                        {
+                            "environment": {
+                                "ARM_CLIENT_SECRET": "$(tfClientSecret)"
+                            },
+                            "taskId": "d9bafed4-0b18-4f58-968d-86655b4d2ce9",
+                            "version": "2.*",
+                            "name": "Terraform (Apply)",
+                            "refName": "",
+                            "enabled": true,
+                            "alwaysRun": false,
+                            "continueOnError": false,
+                            "timeoutInMinutes": 0,
+                            "definitionType": "task",
+                            "overrideInputs": {},
+                            "condition": "succeeded()",
+                            "inputs": {
+                                "script": "terraform apply -no-color $(System.DefaultWorkingDirectory)/_azure.governance.release/releaseAzureGovernance.prodplan/prod.plan",
+                                "workingDirectory": "$(System.DefaultWorkingDirectory)/_azure.governance.release/releaseAzureGovernance",
+                                "failOnStderr": "false"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "environmentOptions": {
+                "emailNotificationType": "OnlyOnFailure",
+                "emailRecipients": "release.environment.owner;release.creator",
+                "skipArtifactsDownload": false,
+                "timeoutInMinutes": 0,
+                "enableAccessToken": false,
+                "publishDeploymentStatus": true,
+                "badgeEnabled": false,
+                "autoLinkWorkItems": false,
+                "pullRequestDeploymentEnabled": false
+            },
+            "demands": [],
+            "conditions": [
+                {
+                    "name": "prod (review)",
+                    "conditionType": 2,
+                    "value": "4"
+                }
+            ],
+            "executionPolicy": {
+                "concurrencyCount": 1,
+                "queueDepthCount": 0
+            },
+            "schedules": [],
+            "currentRelease": {
+                "id": 31,
+                "url": "https://vsrm.dev.azure.com/rjfmachado/f9e70011-da01-446d-8222-957ea584dd19/_apis/Release/releases/31",
+                "_links": {}
+            },
+            "retentionPolicy": {
+                "daysToKeep": 30,
+                "releasesToKeep": 3,
+                "retainBuild": true
+            },
+            "processParameters": {},
+            "properties": {
+                "BoardsEnvironmentType": {
+                    "$type": "System.String",
+                    "$value": "unmapped"
+                },
+                "LinkBoardsWorkItems": {
+                    "$type": "System.String",
+                    "$value": "False"
+                }
+            },
+            "preDeploymentGates": {
+                "id": 0,
+                "gatesOptions": null,
+                "gates": []
+            },
+            "postDeploymentGates": {
+                "id": 0,
+                "gatesOptions": null,
+                "gates": []
+            },
+            "environmentTriggers": [],
+            "badgeUrl": "https://vsrm.dev.azure.com/rjfmachado/_apis/public/Release/badge/f9e70011-da01-446d-8222-957ea584dd19/2/14"
+        }
+    ],
+    "artifacts": [
+        {
+            "sourceId": "f9e70011-da01-446d-8222-957ea584dd19:59",
+            "type": "Build",
+            "alias": "_azure.governance.release",
+            "definitionReference": {
+                "artifactSourceDefinitionUrl": {
+                    "id": "https://dev.azure.com/rjfmachado/_permalink/_build/index?collectionId=222dd4a2-67d5-488a-82c0-277500f43630&projectId=f9e70011-da01-446d-8222-957ea584dd19&definitionId=59",
+                    "name": ""
+                },
+                "defaultVersionBranch": {
+                    "id": "",
+                    "name": ""
+                },
+                "defaultVersionSpecific": {
+                    "id": "",
+                    "name": ""
+                },
+                "defaultVersionTags": {
+                    "id": "",
+                    "name": ""
+                },
+                "defaultVersionType": {
+                    "id": "latestType",
+                    "name": "Latest"
+                },
+                "definition": {
+                    "id": "59",
+                    "name": "azure.governance.release"
+                },
+                "definitions": {
+                    "id": "",
+                    "name": ""
+                },
+                "IsMultiDefinitionType": {
+                    "id": "False",
+                    "name": "False"
+                },
+                "project": {
+                    "id": "f9e70011-da01-446d-8222-957ea584dd19",
+                    "name": "azuredemos"
+                },
+                "repository": {
+                    "id": "",
+                    "name": ""
+                }
+            },
+            "isPrimary": true,
+            "isRetained": false
+        }
+    ],
+    "triggers": [],
+    "releaseNameFormat": "$(Build.SourceBranch).$(rev:rrr)",
+    "tags": [],
+    "properties": {
+        "DefinitionCreationSource": {
+            "$type": "System.String",
+            "$value": "ReleaseNew"
+        },
+        "IntegrateBoardsWorkItems": {
+            "$type": "System.String",
+            "$value": "False"
+        },
+        "IntegrateJiraWorkItems": {
+            "$type": "System.String",
+            "$value": "false"
+        }
+    },
+    "id": 2,
+    "name": "Azure Governance",
+    "path": "\\",
+    "projectReference": null,
+    "url": "https://vsrm.dev.azure.com/rjfmachado/f9e70011-da01-446d-8222-957ea584dd19/_apis/Release/definitions/2",
+    "_links": {
+        "self": {
+            "href": "https://vsrm.dev.azure.com/rjfmachado/f9e70011-da01-446d-8222-957ea584dd19/_apis/Release/definitions/2"
+        },
+        "web": {
+            "href": "https://dev.azure.com/rjfmachado/f9e70011-da01-446d-8222-957ea584dd19/_release?definitionId=2"
+        }
+    }
+}
