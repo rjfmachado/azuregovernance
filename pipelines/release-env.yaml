@@ -88,43 +88,12 @@ stages:
         displayName: Terraform (Apply Plan)
         pool:
           vmImage: "ubuntu-latest"
-        #dependsOn: string
-        #condition: string
-        continueOnError: false # 'true' if future jobs should run even if this job fails; defaults to 'false'
-        #timeoutInMinutes: nonEmptyString        # how long to run the job before automatically cancelling
-        #cancelTimeoutInMinutes: nonEmptyString  # how much time to give 'run always even if cancelled tasks' before killing them
-        #variables: { string: string } | [ variable | variableReference ]
+        continueOnError: false
         environment: dev
         strategy:
           runOnce:
-            # preDeploy:
-            #   steps:
-            #- template: /pipelines/templates/tf-install.yaml
-            #  parameters:
-            #    tfVersion: $(TF_VERSION)
             deploy:
               steps:
-                - bash: |
-                    ls -laR ../
-
-                - bash: |
-                    ls -laR $(Pipeline.Workspace)
-
-                - bash: |
-                    ls -laR $(Build.SourcesDirectory)
-
-                - bash: |
-                    ls -laR $(Build.BinariesDirectory)
-
-                - bash: |
-                    ls -laR $(Build.ArtifactStagingDirectory)
-
-                - bash: |
-                    ls -laR $(Common.TestResultsDirectory)
-                - bash: |
-                    ls -laR $(System.DefaultWorkingDirectory)
-                - bash: |
-                    ls -laR $(Agent.BuildDirectory)
                 - template: /pipelines/templates/tf-init-applyplan.yaml
                   parameters:
                     tfCliInit: -backend=true -backend-config=$(Agent.BuildDirectory)/releaseAzureGovernance/dev.stage

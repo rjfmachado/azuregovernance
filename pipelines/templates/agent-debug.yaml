@@ -1,0 +1,15 @@
+steps:
+    - bash: |
+          ls -laR $(Pipeline.Workspace)
+    - bash: |
+          ls -laR $(Build.SourcesDirectory)
+    - bash: |
+          ls -laR $(Build.BinariesDirectory)
+    - bash: |
+          ls -laR $(Build.ArtifactStagingDirectory)
+    - bash: |
+          ls -laR $(Common.TestResultsDirectory)
+    - bash: |
+          ls -laR $(System.DefaultWorkingDirectory)
+    - bash: |
+          ls -laR $(Agent.BuildDirectory)
