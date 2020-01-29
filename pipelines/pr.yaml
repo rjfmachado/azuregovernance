@@ -51,7 +51,7 @@ stages:
           - template: /pipelines/templates/tf-showplan.yaml
             parameters:
               tfDir: src/terraform
-              tfCliShow: -json test.dev.plan
+              tfCliShow: -json test.dev.plan | jq '.' > test.dev.plan.json
 
       - job: terraformTestProd
         displayName: Terraform (Prod)
@@ -72,4 +72,4 @@ stages:
           - template: /pipelines/templates/tf-showplan.yaml
             parameters:
               tfDir: src/terraform
-              tfCliShow: -json test.prod.plan
+              tfCliShow: -json test.prod.plan | jq '.' > test.dev.plan.json
