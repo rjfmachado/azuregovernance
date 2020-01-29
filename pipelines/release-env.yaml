@@ -118,8 +118,8 @@ stages:
         strategy:
           runOnce:
             deploy:
-              - download: none
               steps:
+                - download: none
                 - template: /pipelines/templates/tf-init-applyplan.yaml
                   parameters:
                     tfDir: $(Agent.BuildDirectory)/releaseAzureGovernance
