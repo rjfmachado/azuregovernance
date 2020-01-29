@@ -28,17 +28,6 @@ stages:
             artifact: releaseAzureGovernance
             enabled: "true"
 
-      # - job: terraformInstall
-      #   displayName: Terraform (Install)
-
-      #   pool:
-      #     vmImage: "ubuntu-latest"
-
-      #   steps:
-      #     - template: /pipelines/templates/tf-install.yaml
-      #       parameters:
-      #         tfVersion: $(TF_VERSION)
-
       - job: publishDevPlan
         displayName: Publish dev plan
         variables:
@@ -49,7 +38,6 @@ stages:
         container:
           image: rjfmachado.azurecr.io/terraform:${{ variables['TF_VERSION'] }}
           endpoint: rjfmachado.containers
-        #dependsOn: terraformInstall
         steps:
           - template: /pipelines/templates/tf-init-plan.yaml
             parameters:
@@ -59,7 +47,7 @@ stages:
 
           - publish: src/terraform/dev.plan
             displayName: "Publish Dev Plan"
-            artifact: releaseAzureGovernancedevplan
+            artifact: releaseAzureGovernance.devplan
             enabled: "true"
 
       - job: publishProdPlan
@@ -72,7 +60,6 @@ stages:
         container:
           image: rjfmachado.azurecr.io/terraform:${{ variables['TF_VERSION'] }}
           endpoint: rjfmachado.containers
-        #dependsOn: terraformInstall
         steps:
           - template: /pipelines/templates/tf-init-plan.yaml
             parameters:
@@ -82,7 +69,7 @@ stages:
 
           - publish: src/terraform/prod.plan
             displayName: "Publish Prod Plan"
-            artifact: releaseAzureGovernanceprodplan
+            artifact: releaseAzureGovernance.prodplan
             enabled: "true"
 
   - stage: dev
@@ -109,7 +96,7 @@ stages:
                   parameters:
                     tfDir: $(Agent.BuildDirectory)/releaseAzureGovernance
                     tfCliInit: -backend=true -backend-config=$(Agent.BuildDirectory)/releaseAzureGovernance/dev.stage
-                    tfCliApply: $(Agent.BuildDirectory)/releaseAzureGovernancedevplan/dev.plan
+                    tfCliApply: $(Agent.BuildDirectory)/releaseAzureGovernance.devplan/dev.plan
 
   - stage: prod
 
@@ -135,4 +122,4 @@ stages:
                   parameters:
                     tfDir: $(Agent.BuildDirectory)/releaseAzureGovernance
                     tfCliInit: -backend=true -backend-config=$(Agent.BuildDirectory)/releaseAzureGovernance/prod.stage
-                    tfCliApply: $(Agent.BuildDirectory)/releaseAzureGovernanceprodplan/prod.plan
+                    tfCliApply: $(Agent.BuildDirectory)/releaseAzureGovernance.prodplan/prod.plan

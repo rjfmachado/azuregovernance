@@ -35,25 +35,20 @@ stages:
             artifact: releaseAzureGovernance
             enabled: "true"
 
-  - stage: devplan
-
-    variables:
-      - group: azuregovernancedev
-      - group: azuregovernancedevsecret
-
-    jobs:
-      - job: Terraform
-        displayName: Terraform Init-Plan
+      - job: publishDevPlan
+        displayName: Publish dev plan
+        variables:
+          - group: azuregovernancedev
+          - group: azuregovernancedevsecret
         pool:
           vmImage: "ubuntu-latest"
-
         container:
           image: rjfmachado.azurecr.io/terraform:${{ variables['TF_VERSION'] }}
           endpoint: rjfmachado.containers
-
         steps:
           - template: /pipelines/templates/tf-init-plan.yaml
             parameters:
+              tfDir: src/terraform
               tfCliInit: -backend=true -backend-config=dev.stage
               tfCliPlan: -out dev.plan -var-file=dev.tfvars.json
 
@@ -62,25 +57,20 @@ stages:
             artifact: releaseAzureGovernance.devplan
             enabled: "true"
 
-  - stage: prodplan
-
-    variables:
-      - group: azuregovernanceprod
-      - group: azuregovernanceprodsecret
-
-    jobs:
-      - job: Terraform
-        displayName: Terraform Init-Plan
+      - job: publishProdPlan
+        displayName: Publish prod plan
+        variables:
+          - group: azuregovernanceprod
+          - group: azuregovernanceprodsecret
         pool:
           vmImage: "ubuntu-latest"
-
         container:
           image: rjfmachado.azurecr.io/terraform:${{ variables['TF_VERSION'] }}
           endpoint: rjfmachado.containers
-
         steps:
           - template: /pipelines/templates/tf-init-plan.yaml
             parameters:
+              tfDir: src/terraform
               tfCliInit: -backend=true -backend-config=prod.stage
               tfCliPlan: -out prod.plan  -var-file=prod.tfvars.json
 
