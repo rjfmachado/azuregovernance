@@ -1,0 +1,50 @@
+parameters:
+  tfVersion: ""
+  tfCliInit: ""
+  tfCliPlan: ""
+  tfCliApply: ""
+
+steps:
+  - bash: |
+      printenv | grep ARM
+      printenv | grep TF_
+    displayName: "Runtime environment"
+    name: runtimeenv
+    workingDirectory: src/terraform
+    enabled: "true"
+    env:
+      ARM_CLIENT_SECRET: $(tfClientSecret)
+      TF_CLI_ARGS_init: ${{ parameters.tfCliInit }}
+      TF_CLI_ARGS_plan: ${{ parameters.tfCliPlan }}
+      TF_CLI_ARGS_apply: ${{ parameters.tfCliApply }}
+
+  - bash: |
+      terraform -version
+      wget https://releases.hashicorp.com/terraform/${{ parameters.tfVersion }}/terraform_${{ parameters.tfVersion }}_linux_amd64.zip -q
+      unzip -q terraform_${{ parameters.tfVersion }}_linux_amd64.zip
+      sudo mv terraform /usr/local/bin
+      terraform -version
+    displayName: "Install Terraform"
+    name: installterraform
+    workingDirectory: src/terraform
+    enabled: "true"
+
+  - bash: |
+      terraform init
+    displayName: "Terraform Init"
+    name: init
+    workingDirectory: src/terraform
+    enabled: "true"
+    env:
+      ARM_CLIENT_SECRET: $(tfClientSecret)
+      TF_CLI_ARGS_init: ${{ parameters.tfCliInit }}
+
+  - bash: |
+      terraform apply
+    displayName: "Terraform Apply"
+    name: apply
+    workingDirectory: src/terraform
+    enabled: "true"
+    env:
+      ARM_CLIENT_SECRET: $(tfClientSecret)
+      TF_CLI_ARGS_apply: ${{ parameters.tfCliApply }}

@@ -24,7 +24,7 @@ stages:
 
     jobs:
       - job: publishArtifacts
-        displayName: Publish Azure Governance Terraform files.
+        displayName: Publish Azure Governance Terraform files/plans.
 
         pool:
           vmImage: "ubuntu-latest"

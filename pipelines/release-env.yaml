@@ -1,0 +1,111 @@
+name: azure.governance.envrelease$(Rev:.r)
+
+trigger: none
+
+pr: none
+
+variables:
+  - name: TF_INPUT
+    value: "false"
+  - name: TF_IN_AUTOMATION
+    value: "true"
+  - name: TF_VERSION
+    value: 0.12.19
+
+stages:
+  - stage: publishRelease
+
+    jobs:
+      - job: publishArtifacts
+        displayName: Publish Azure Governance Terraform files/plans.
+
+        pool:
+          vmImage: "ubuntu-latest"
+
+        steps:
+          - publish: src/terraform
+            displayName: "Release Azure Governance."
+            artifact: releaseAzureGovernance
+            enabled: "true"
+
+  - stage: devplan
+
+    variables:
+      - group: azuregovernancedev
+      - group: azuregovernancedevsecret
+
+    jobs:
+      - job: Terraform
+        displayName: Terraform Init-Plan
+        pool:
+          vmImage: "ubuntu-latest"
+
+        container:
+          image: rjfmachado.azurecr.io/terraform:${{ variables['TF_VERSION'] }}
+          endpoint: rjfmachado.containers
+
+        steps:
+          - template: /pipelines/templates/tf-init-plan.yaml
+            parameters:
+              tfCliInit: -backend=true -backend-config=dev.stage
+              tfCliPlan: -out dev.plan -var-file=dev.tfvars.json
+
+          - publish: src/terraform/dev.plan
+            displayName: "Publish Dev Plan"
+            artifact: releaseAzureGovernance.devplan
+            enabled: "true"
+
+  - stage: prodplan
+
+    variables:
+      - group: azuregovernanceprod
+      - group: azuregovernanceprodsecret
+
+    jobs:
+      - job: Terraform
+        displayName: Terraform Init-Plan
+        pool:
+          vmImage: "ubuntu-latest"
+
+        container:
+          image: rjfmachado.azurecr.io/terraform:${{ variables['TF_VERSION'] }}
+          endpoint: rjfmachado.containers
+
+        steps:
+          - template: /pipelines/templates/tf-init-plan.yaml
+            parameters:
+              tfCliInit: -backend=true -backend-config=prod.stage
+              tfCliPlan: -out prod.plan  -var-file=prod.tfvars.json
+
+          - publish: src/terraform/prod.plan
+            displayName: "Publish Prod Plan"
+            artifact: releaseAzureGovernance.prodplan
+            enabled: "true"
+
+  - stage: dev
+
+    variables:
+      - group: azuregovernancedev
+      - group: azuregovernancedevsecret
+
+    jobs:
+      - deployment: TerraformApplyPlan
+        displayName: Terraform (Init/ApplyPlan)
+        pool:
+          vmImage: "ubuntu-latest"
+        #dependsOn: string
+        #condition: string
+        continueOnError: false # 'true' if future jobs should run even if this job fails; defaults to 'false'
+        #timeoutInMinutes: nonEmptyString        # how long to run the job before automatically cancelling
+        #cancelTimeoutInMinutes: nonEmptyString  # how much time to give 'run always even if cancelled tasks' before killing them
+        #variables: { string: string } | [ variable | variableReference ]
+        environment: ${{ variables['deploymentStage'] }}
+        strategy:
+          runOnce:
+            preDeploy:
+              steps:
+                - template: /pipelines/templates/tf-install-init-applyplan.yaml
+                  parameters:
+                    tfVersion: $(TF_VERSION)
+                    tfCliInit: -backend=true -backend-config=dev.stage
+                    tfCliApply: -var-file=dev.tfvars.json dev.plan
