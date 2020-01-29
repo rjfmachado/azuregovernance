@@ -96,5 +96,6 @@ stages:
               steps:
                 - template: /pipelines/templates/tf-init-applyplan.yaml
                   parameters:
+                    tfDir: $(Agent.BuildDirectory)/releaseAzureGovernance
                     tfCliInit: -backend=true -backend-config=$(Agent.BuildDirectory)/releaseAzureGovernance/dev.stage
                     tfCliApply: -var-file=$(Agent.BuildDirectory)/releaseAzureGovernance/dev.tfvars.json $(Agent.BuildDirectory)/releaseAzureGovernancedevplan/dev.plan

@@ -1,4 +1,5 @@
 parameters:
+  tfdir: ""
   tfCliInit: ""
   tfCliPlan: ""
   tfCliApply: ""
@@ -21,7 +22,7 @@ steps:
       terraform init
     displayName: "Terraform Init"
     name: init
-    workingDirectory: src/terraform
+    workingDirectory: ${{ parameters.tfDir }}
     enabled: "true"
     env:
       ARM_CLIENT_SECRET: $(tfClientSecret)
@@ -31,7 +32,7 @@ steps:
       terraform apply
     displayName: "Terraform Apply"
     name: apply
-    workingDirectory: src/terraform
+    workingDirectory: ${{ parameters.tfDir }}
     enabled: "true"
     env:
       ARM_CLIENT_SECRET: $(tfClientSecret)
