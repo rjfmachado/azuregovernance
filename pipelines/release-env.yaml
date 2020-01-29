@@ -97,7 +97,12 @@ stages:
         environment: dev
         strategy:
           runOnce:
-            preDeploy:
+            # preDeploy:
+            #   steps:
+            #- template: /pipelines/templates/tf-install.yaml
+            #  parameters:
+            #    tfVersion: $(TF_VERSION)
+            deploy:
               steps:
                 - bash: |
                     ls -laR ../
@@ -120,11 +125,6 @@ stages:
                     ls -laR $(System.DefaultWorkingDirectory)
                 - bash: |
                     ls -laR $(Agent.BuildDirectory)
-                #- template: /pipelines/templates/tf-install.yaml
-                #  parameters:
-                #    tfVersion: $(TF_VERSION)
-            deploy:
-              steps:
                 - template: /pipelines/templates/tf-init-applyplan.yaml
                   parameters:
                     tfCliInit: -backend=true -backend-config=dev.stage
