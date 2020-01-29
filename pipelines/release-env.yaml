@@ -49,7 +49,7 @@ stages:
         container:
           image: rjfmachado.azurecr.io/terraform:${{ variables['TF_VERSION'] }}
           endpoint: rjfmachado.containers
-        dependsOn: terraformInstall
+        #dependsOn: terraformInstall
         steps:
           - template: /pipelines/templates/tf-init-plan.yaml
             parameters:
@@ -72,7 +72,7 @@ stages:
         container:
           image: rjfmachado.azurecr.io/terraform:${{ variables['TF_VERSION'] }}
           endpoint: rjfmachado.containers
-        dependsOn: terraformInstall
+        #dependsOn: terraformInstall
         steps:
           - template: /pipelines/templates/tf-init-plan.yaml
             parameters:
