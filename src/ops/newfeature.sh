@@ -10,7 +10,7 @@ else
  featurename=$1
 fi
 
-git checkout -b "release/${featurename}"
-git push --set-upstream origin release/${newrelease}
+git checkout -b "feature/${featurename}"
+git push --set-upstream origin feature/${newrelease}
 
 echo "Feature branch feature/${newrelease} is now ready."
