@@ -1,0 +1,13 @@
+parameters:
+  tfDir: ""
+  tfCliShow: ""
+
+steps:
+  - bash: |
+      terraform show
+    displayName: "Terraform Plan"
+    name: plan
+    workingDirectory: ${{ parameters.tfDir}}
+    enabled: "true"
+    env:
+      TF_CLI_ARGS_show: ${{ parameters.tfCliShow }}

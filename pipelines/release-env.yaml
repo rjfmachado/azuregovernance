@@ -33,11 +33,14 @@ stages:
         variables:
           - group: azuregovernancedev
           - group: azuregovernancedevsecret
+
         pool:
           vmImage: "ubuntu-latest"
+
         container:
           image: rjfmachado.azurecr.io/terraform:${{ variables['TF_VERSION'] }}
           endpoint: rjfmachado.containers
+
         steps:
           - template: /pipelines/templates/tf-init-plan.yaml
             parameters:

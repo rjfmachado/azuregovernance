@@ -9,6 +9,7 @@ trigger:
   paths:
     include:
       - src/terraform
+      - src/test
 
 pr: none
 
@@ -21,15 +22,19 @@ variables:
     value: 0.12.19
 
 stages:
-  - stage: dev
+  - stage: terraform
 
     variables:
       - group: azuregovernancedev
       - group: azuregovernancedevsecret
 
     jobs:
-      - job: Terraform
-        displayName: Terraform Init-Plan
+      - job: terraformTestDev
+        displayName: Terraform (Dev)
+        variables:
+          - group: azuregovernancedev
+          - group: azuregovernancedevsecret
+
         pool:
           vmImage: "ubuntu-latest"
 
@@ -40,4 +45,31 @@ stages:
         steps:
           - template: /pipelines/templates/tf-init-plan.yaml
             parameters:
+              tfDir: src/terraform
               tfCliInit: -backend=true -backend-config=dev.stage
+              tfCliPlan: -out test.dev.plan -var-file=dev.tfvars.json
+          - template: /pipelines/templates/tf-showplan.yaml
+            parameters:
+              tfDir: src/terraform
+              tfCliShow: -json test.dev.plan
+
+      - job: terraformTestProd
+        displayName: Terraform (Prod)
+        variables:
+          - group: azuregovernanceprod
+          - group: azuregovernanceprodsecret
+        pool:
+          vmImage: "ubuntu-latest"
+        container:
+          image: rjfmachado.azurecr.io/terraform:${{ variables['TF_VERSION'] }}
+          endpoint: rjfmachado.containers
+        steps:
+          - template: /pipelines/templates/tf-init-plan.yaml
+            parameters:
+              tfDir: src/terraform
+              tfCliInit: -backend=true -backend-config=prod.stage
+              tfCliPlan: -out test.prod.plan  -var-file=prod.tfvars.json
+          - template: /pipelines/templates/tf-showplan.yaml
+            parameters:
+              tfDir: src/terraform
+              tfCliShow: -json test.prod.plan
