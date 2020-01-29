@@ -1,16 +1,16 @@
 parameters:
+  tfDir: ""
   tfCliInit: ""
   tfCliPlan: ""
   tfCliApply: ""
 
 steps:
-
   - bash: |
       printenv | grep ARM
       printenv | grep TF_
     displayName: "Runtime environment"
     name: runtimeenv
-    workingDirectory: src/terraform
+    workingDirectory: ${{ parameters.tfDir}}
     enabled: "true"
     env:
       ARM_CLIENT_SECRET: $(tfClientSecret)
@@ -22,7 +22,7 @@ steps:
       terraform init
     displayName: "Terraform Init"
     name: init
-    workingDirectory: src/terraform
+    workingDirectory: ${{ parameters.tfDir}}
     enabled: "true"
     env:
       ARM_CLIENT_SECRET: $(tfClientSecret)
@@ -32,7 +32,7 @@ steps:
       terraform plan
     displayName: "Terraform Plan"
     name: plan
-    workingDirectory: src/terraform
+    workingDirectory: ${{ parameters.tfDir}}
     enabled: "true"
     env:
       ARM_CLIENT_SECRET: $(tfClientSecret)
@@ -42,7 +42,7 @@ steps:
       terraform apply
     displayName: "Terraform Apply"
     name: apply
-    workingDirectory: src/terraform
+    workingDirectory: ${{ parameters.tfDir}}
     enabled: "true"
     env:
       ARM_CLIENT_SECRET: $(tfClientSecret)

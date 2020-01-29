@@ -50,6 +50,7 @@ stages:
         steps:
           - template: /pipelines/templates/tf-init-plan.yaml
             parameters:
+              tfDir: src/terraform
               tfCliInit: -backend=true -backend-config=dev.stage
               tfCliPlan: -out dev.plan -var-file=dev.tfvars.json
 
@@ -69,6 +70,7 @@ stages:
         steps:
           - template: /pipelines/templates/tf-init-plan.yaml
             parameters:
+              tfDir: src/terraform
               tfCliInit: -backend=true -backend-config=prod.stage
               tfCliPlan: -out prod.plan  -var-file=prod.tfvars.json
 

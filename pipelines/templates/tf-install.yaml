@@ -1,8 +1,8 @@
 parameters:
+  tfDir: ""
   tfVersion: ""
 
 steps:
-
   - bash: |
       terraform -version
       wget https://releases.hashicorp.com/terraform/${{ parameters.tfVersion }}/terraform_${{ parameters.tfVersion }}_linux_amd64.zip -q
@@ -11,5 +11,5 @@ steps:
       terraform -version
     displayName: "Install Terraform"
     name: installterraform
-    workingDirectory: src/terraform
+    workingDirectory: ${{ parameters.tfDir}}
     enabled: "true"

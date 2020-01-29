@@ -1,5 +1,5 @@
 parameters:
-  tfdir: ""
+  tfDir: ""
   tfCliInit: ""
   tfCliPlan: ""
   tfCliApply: ""
@@ -10,7 +10,7 @@ steps:
       printenv | grep TF_
     displayName: "Runtime environment"
     name: runtimeenv
-    workingDirectory: src/terraform
+    workingDirectory: ${{ parameters.tfDir}}
     enabled: "true"
     env:
       ARM_CLIENT_SECRET: $(tfClientSecret)
