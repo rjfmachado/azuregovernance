@@ -104,8 +104,12 @@ stages:
           runOnce:
             preDeploy:
               steps:
-                - template: /pipelines/templates/tf-install-init-applyplan.yaml
+                - template: /pipelines/templates/tf-install.yaml
                   parameters:
                     tfVersion: $(TF_VERSION)
+            Deploy:
+              steps:
+                - template: /pipelines/templates/tf-init-applyplan.yaml
+                  parameters:
                     tfCliInit: -backend=true -backend-config=dev.stage
                     tfCliApply: -var-file=dev.tfvars.json dev.plan
