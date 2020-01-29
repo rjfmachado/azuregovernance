@@ -84,11 +84,14 @@ stages:
     jobs:
       - deployment: TerraformApplyPlan
         displayName: Terraform (Apply Plan)
+
         pool:
           vmImage: "ubuntu-latest"
+
         container:
           image: rjfmachado.azurecr.io/terraform:${{ variables['TF_VERSION'] }}
           endpoint: rjfmachado.containers
+
         continueOnError: false
         environment: dev
         strategy:
@@ -110,11 +113,14 @@ stages:
     jobs:
       - deployment: TerraformApplyPlan
         displayName: Terraform (Apply Plan)
+
         pool:
           vmImage: "ubuntu-latest"
+
         container:
           image: rjfmachado.azurecr.io/terraform:${{ variables['TF_VERSION'] }}
           endpoint: rjfmachado.containers
+          
         continueOnError: false
         environment: prod
         strategy:
