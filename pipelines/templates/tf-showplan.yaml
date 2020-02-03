@@ -4,10 +4,10 @@ parameters:
 
 steps:
   - bash: |
-      terraform show
-    displayName: "Terraform Plan"
+      terraform show ${{ parameters.tfCliShow }}
+    displayName: "Terraform Show Plan"
     name: showplan
     workingDirectory: ${{ parameters.tfDir}}
     enabled: "true"
     env:
-      TF_CLI_ARGS_show: ${{ parameters.tfCliShow }}
+      ARM_CLIENT_SECRET: $(tfClientSecret)

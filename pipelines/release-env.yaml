@@ -5,12 +5,13 @@ trigger: none
 pr: none
 
 variables:
+  - name: TF_VERSION
+    value: 0.12.20
   - name: TF_INPUT
     value: "false"
   - name: TF_IN_AUTOMATION
     value: "true"
-  - name: TF_VERSION
-    value: 0.12.19
+
 
 stages:
   - stage: publishArtifacts
@@ -120,7 +121,7 @@ stages:
         container:
           image: rjfmachado.azurecr.io/terraform:${{ variables['TF_VERSION'] }}
           endpoint: rjfmachado.containers
-          
+
         continueOnError: false
         environment: prod
         strategy:

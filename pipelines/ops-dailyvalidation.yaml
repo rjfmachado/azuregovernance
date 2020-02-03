@@ -14,7 +14,7 @@ pr: none
 
 variables:
 - name: terraformVersion
-  value: 0.12.19
+  value: 0.12.20
 
 stages:
 

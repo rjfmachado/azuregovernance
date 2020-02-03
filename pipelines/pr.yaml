@@ -1,7 +1,8 @@
 name: azure.governance.pullrequest$(Rev:.r)
 
-trigger:
-  batch: "true"
+trigger: none
+
+pr:
   branches:
     include:
       - feature/*
@@ -9,9 +10,10 @@ trigger:
   paths:
     include:
       - src/terraform
-      - src/test
-
-pr: none
+    exclude:
+      - pipelines/*
+      - src/ops
+      - src/setup
 
 variables:
   - name: TF_INPUT
@@ -19,7 +21,7 @@ variables:
   - name: TF_IN_AUTOMATION
     value: "true"
   - name: TF_VERSION
-    value: 0.12.19
+    value: 0.12.20
 
 stages:
   - stage: terraform
@@ -52,6 +54,10 @@ stages:
             parameters:
               tfDir: src/terraform
               tfCliShow: -json test.dev.plan | jq '.' > test.dev.plan.json
+          - template: /pipelines/templates/pester-run-publish.yaml
+            parameters:
+              pesterDir: src/test/pr
+              serviceConnection: azuregovernancePesterDev
 
       - job: terraformTestProd
         displayName: Terraform (Prod)
@@ -73,3 +79,7 @@ stages:
             parameters:
               tfDir: src/terraform
               tfCliShow: -json test.prod.plan | jq '.' > test.dev.plan.json
+          - template: /pipelines/templates/pester-run-publish.yaml
+            parameters:
+              pesterDir: src/test/pr
+              serviceConnection: azuregovernancePesterProd

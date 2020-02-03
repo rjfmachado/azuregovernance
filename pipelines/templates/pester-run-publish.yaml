@@ -1,0 +1,36 @@
+parameters:
+  pesterDir: ""
+  pesterOutput: "TEST-Pester.xml"
+  serviceConnection: ""
+
+steps:
+  # - task: AzurePowerShell@5
+  #   inputs:
+  #     displayName: Download Pester
+  #     azureSubscription: ${{ parameters.serviceConnection }}
+  #     scriptType: Inline
+  #     inline: |
+  #       Install-Module -Name Pester -Force -Scope CurrentUser
+  #     azurePowerShellVersion: "latestVersion"
+
+  - task: AzurePowerShell@5
+    inputs:
+      displayName: Invoke Pester
+      azureSubscription: ${{ parameters.serviceConnection }}
+      scriptType: Inline
+      inline: |
+        Invoke-Pester -OutputFile $(System.DefaultWorkingDirectory)/${{ parameters.pesterOutput }} -OutputFormat NUnitXML
+      azurePowerShellVersion: "latestVersion"
+      workingDirectory: ${{ parameters.pesterDir }}
+
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFormat: "NUnit"
+      #testResultsFiles: '**/TEST-*.xml'
+      #searchFolder: '$(System.DefaultWorkingDirectory)' # Optional
+      #mergeTestResults: false # Optional
+      #failTaskOnFailedTests: false # Optional
+      #testRunTitle: # Optional
+      #buildPlatform: # Optional
+      #buildConfiguration: # Optional
+      #publishRunAttachments: true # Optional
