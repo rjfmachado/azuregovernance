@@ -7,87 +7,64 @@ schedules:
   displayName: Ops Validation Build (Midnight)
   branches:
     include:
-    - master
+    - release/r3
   always: true
 
 pr: none
 
 variables:
-- name: terraformVersion
-  value: 0.12.20
+  - name: TF_VERSION
+    value: 0.12.20
+  - name: TF_INPUT
+    value: "false"
+  - name: TF_IN_AUTOMATION
+    value: "true"
 
 stages:
-
-- stage: dev
-
-  variables:
-    - name: deploymentStage
-      value: "dev"
-    - name: stateStorageAccountName
-      value: "tfazuregovernancedev"
-    - name: stateContainerName
-      value: "dev"
-    - name: stateKey
-      value: "terraform.tfstate"
-    - group: azuregovernancedev
+- stage: opsPipeline
 
   jobs:
+    - job: verifyDev
+      displayName: Verify (Dev)
+      variables:
+        - group: azuregovernancedev
+        - group: azuregovernancedevsecret
 
-  - job: Terraform
-    displayName: Azure Governance Ops - Dev
-    pool:
-      vmImage: 'ubuntu-latest'
+      pool:
+        vmImage: "ubuntu-latest"
 
-    container:
-      image: rjfmachado.azurecr.io/terraform:${{ variables['terraformVersion'] }}
-      endpoint: rjfmachado.containers
+      container:
+        image: rjfmachado.azurecr.io/terraform:${{ variables['TF_VERSION'] }}
+        endpoint: rjfmachado.containers
 
-    steps:
+      steps:
+        - template: /pipelines/templates/tf-init-plan.yaml
+          parameters:
+            tfDir: src/terraform
+            tfCliInit: -backend=true -backend-config=dev.stage
+            tfCliPlan: -out test.dev.plan -var-file=dev.tfvars.json -detailed-exitcode
+        - template: /pipelines/templates/pester-run-publish.yaml
+          parameters:
+            pesterDir: src/test/ops
+            serviceConnection: azuregovernancePesterDev
 
-    - template: /build/templates/terraform-stage-ops.yml
-      parameters:
-        client_secret: $(ARM_CLIENT_SECRET)
-        client_id: $(ARM_CLIENT_ID)
-        tenant_id: $(ARM_TENANT_ID)
-        subscription_id: $(ARM_SUBSCRIPTION_ID)
-        storage_account_name: $(stateStorageAccountName)
-        container_name: $(stateContainerName)
-        key: $(stateKey)
-        deploymentStage: $(deploymentStage)
-
-- stage: prod
-
-  variables:
-    - name: deploymentStage
-      value: "prod"
-    - name: stateStorageAccountName
-      value: "tfazuregovernanceprod"
-    - name: stateContainerName
-      value: "prod"
-    - name: stateKey
-      value: "terraform.tfstate"
-    - group: azuregovernanceprod
-
-  jobs:
-
-  - job: Terraform
-    displayName: Azure Governance Ops - Production
-    pool:
-      vmImage: 'ubuntu-latest'
-
-    container:
-      image: rjfmachado.azurecr.io/terraform:${{ variables['terraformVersion'] }}
-      endpoint: rjfmachado.containers
-
-    steps:
-
-    - template: /build/templates/terraform-stage-ops.yml
-      parameters:
-        client_secret: $(ARM_CLIENT_SECRET)
-        client_id: $(ARM_CLIENT_ID)
-        tenant_id: $(ARM_TENANT_ID)
-        subscription_id: $(ARM_SUBSCRIPTION_ID)
-        storage_account_name: $(stateStorageAccountName)
-        container_name: $(stateContainerName)
-        key: $(stateKey)
-        deploymentStage: $(deploymentStage)
+    - job: verifyProd
+      displayName: Verify (Prod)
+      variables:
+        - group: azuregovernanceprod
+        - group: azuregovernanceprodsecret
+      pool:
+        vmImage: "ubuntu-latest"
+      container:
+        image: rjfmachado.azurecr.io/terraform:${{ variables['TF_VERSION'] }}
+        endpoint: rjfmachado.containers
+      steps:
+        - template: /pipelines/templates/tf-init-plan.yaml
+          parameters:
+            tfDir: src/terraform
+            tfCliInit: -backend=true -backend-config=prod.stage
+            tfCliPlan: -out test.prod.plan -var-file=prod.tfvars.json -detailed-exitcode
+        - template: /pipelines/templates/pester-run-publish.yaml
+          parameters:
+            pesterDir: src/test/ops
+            serviceConnection: azuregovernancePesterProd
