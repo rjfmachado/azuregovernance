@@ -20,10 +20,12 @@ echo "Current Release: ${currentrelease}"
 echo "Creating Release: ${newrelease}"
 
 sed -i "s/${currentrelease}/${newrelease}/g" ./release.json
+sed -i "s/- release\/${currentrelease}/- release\/${newrelease}/g" ../../pipelines/ops-dailyvalidation.yaml
 
 git add release.json
+git add ../../pipelines/ops-dailyvalidation.yaml
 
-git commit -m "Creating release ${newrelease}."
+git commit -a -m "Creating release ${newrelease}."
 
 git push
 
