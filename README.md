@@ -18,7 +18,6 @@ This repo contains samples for using Terraform 0.12 to deploy and manage Azure G
   * [ ] Add a scenario with Tags
   * [ ] Add a scenario for DeployIfNotExists and Managed Service Identities.
   * [ ] Add Blueprints definitions/assignments
-* [ ] Add terraform graph and GraphViz support, review terraform-docs
 * [ ] Add Azure DevOps custom dashboard with relevant visuals
 * [ ] Add azure dashboard [azurerm_dashboard](https://www.terraform.io/docs/providers/azurerm/r/dashboard.html)
 * [ ] Improve deployment safety
@@ -41,9 +40,14 @@ This repo contains samples for using Terraform 0.12 to deploy and manage Azure G
   * [ ] Connect Azure AD Logs
   * [ ] Add Azure Monitor
   * [ ] Action Groups & Alerts
-* [ ]Terraform
+* [ ] Terraform
   * [x] Maintain Terraform state with the azurerm storage account backend.
+  * [ ] Add Terraform graph and GraphViz support, review terraform-docs
   * [ ] Add a provisioners/connections scenario
   * [ ] Verify usage of *dynamic* block
+
+## Setup
+
+Setup [guidance](docs/setup.md) is work in progress and most steps are capable of automation with az cli and the azure-devops extension.
 
 > Note: the Repo contains IDs for tenants/subscriptions related to my test/demo infrastructure.
