@@ -7,7 +7,7 @@ schedules:
   displayName: Ops Validation Build (Midnight)
   branches:
     include:
-    - release/r4
+    - release/r5
   always: true
 
 pr: none
