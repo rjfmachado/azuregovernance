@@ -1,0 +1,1 @@
+terraform plan -out temp.plan && terraform show -json temp.plan | jq '.' > temp.plan.json && pwsh -NonInteractive -NoLogo -File ../ops/runtests.ps1

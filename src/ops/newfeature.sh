@@ -12,7 +12,7 @@ fi
 
 if git checkout -b "feature/${featurename}" && git push --set-upstream origin feature/${featurename} ;
 then
-    echo "Feature branch feature/${newrelease} is now ready."
+    echo "Feature branch feature/${featurename} is now ready."
 else
     echo "Failed to create branch for feature name ${featurename}."
 fi

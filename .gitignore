@@ -8,5 +8,9 @@
 # .tfvars files
 *.tfvars
 
+# terraform plans
+*.plan
+*.plan.json
+
 # visual studio code
 .vscode

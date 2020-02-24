@@ -15,7 +15,8 @@ data "azurerm_client_config" "current" {
 }
 
 provider "azurerm" {
-  version = "~> 1.41.0"
+  version = "~> 2.0"
+  features {}
 }
 
 provider "azuread" {
