@@ -3,68 +3,68 @@ name: Daily Validation$(Rev:.r)
 trigger: none
 
 schedules:
-- cron: 0 0 * * *
-  displayName: Ops Validation Build (Midnight)
-  branches:
-    include:
-    - release/r8
-  always: true
+  - cron: 0 0 * * *
+    displayName: Ops Validation Build (Midnight)
+    branches:
+      include:
+        - release/r8
+    always: true
 
 pr: none
 
 variables:
   - name: TF_VERSION
-    value: 0.12.20
+    value: 0.12.26
   - name: TF_INPUT
     value: "false"
   - name: TF_IN_AUTOMATION
     value: "true"
 
 stages:
-- stage: opsPipeline
+  - stage: opsPipeline
 
-  jobs:
-    - job: verifyDev
-      displayName: Verify (Dev)
-      variables:
-        - group: azuregovernancedev
-        - group: azuregovernancedevsecret
+    jobs:
+      - job: verifyDev
+        displayName: Verify (Dev)
+        variables:
+          - group: azuregovernancedev
+          - group: azuregovernancedevsecret
 
-      pool:
-        vmImage: "ubuntu-latest"
+        pool:
+          vmImage: "ubuntu-latest"
 
-      container:
-        image: rjfmachado.azurecr.io/terraform:${{ variables['TF_VERSION'] }}
-        endpoint: rjfmachado.containers
+        container:
+          image: rjfmachado.azurecr.io/terraform:${{ variables['TF_VERSION'] }}
+          endpoint: rjfmachado.containers
 
-      steps:
-        - template: /pipelines/templates/tf-init-plan.yaml
-          parameters:
-            tfDir: src/terraform
-            tfCliInit: -backend=true -backend-config=dev.stage
-            tfCliPlan: -out test.dev.plan -var-file=dev.tfvars.json -detailed-exitcode
-        - template: /pipelines/templates/pester-run-publish.yaml
-          parameters:
-            pesterDir: src/test/ops
-            serviceConnection: azuregovernancePesterDev
+        steps:
+          - template: /pipelines/templates/tf-init-plan.yaml
+            parameters:
+              tfDir: src/terraform
+              tfCliInit: -backend=true -backend-config=dev.stage
+              tfCliPlan: -out test.dev.plan -var-file=dev.tfvars.json -detailed-exitcode
+          - template: /pipelines/templates/pester-run-publish.yaml
+            parameters:
+              pesterDir: src/test/ops
+              serviceConnection: azuregovernancePesterDev
 
-    - job: verifyProd
-      displayName: Verify (Prod)
-      variables:
-        - group: azuregovernanceprod
-        - group: azuregovernanceprodsecret
-      pool:
-        vmImage: "ubuntu-latest"
-      container:
-        image: rjfmachado.azurecr.io/terraform:${{ variables['TF_VERSION'] }}
-        endpoint: rjfmachado.containers
-      steps:
-        - template: /pipelines/templates/tf-init-plan.yaml
-          parameters:
-            tfDir: src/terraform
-            tfCliInit: -backend=true -backend-config=prod.stage
-            tfCliPlan: -out test.prod.plan -var-file=prod.tfvars.json -detailed-exitcode
-        - template: /pipelines/templates/pester-run-publish.yaml
-          parameters:
-            pesterDir: src/test/ops
-            serviceConnection: azuregovernancePesterProd
+      - job: verifyProd
+        displayName: Verify (Prod)
+        variables:
+          - group: azuregovernanceprod
+          - group: azuregovernanceprodsecret
+        pool:
+          vmImage: "ubuntu-latest"
+        container:
+          image: rjfmachado.azurecr.io/terraform:${{ variables['TF_VERSION'] }}
+          endpoint: rjfmachado.containers
+        steps:
+          - template: /pipelines/templates/tf-init-plan.yaml
+            parameters:
+              tfDir: src/terraform
+              tfCliInit: -backend=true -backend-config=prod.stage
+              tfCliPlan: -out test.prod.plan -var-file=prod.tfvars.json -detailed-exitcode
+          - template: /pipelines/templates/pester-run-publish.yaml
+            parameters:
+              pesterDir: src/test/ops
+              serviceConnection: azuregovernancePesterProd

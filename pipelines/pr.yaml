@@ -21,7 +21,7 @@ variables:
   - name: TF_IN_AUTOMATION
     value: "true"
   - name: TF_VERSION
-    value: 0.12.20
+    value: 0.12.26
 
 stages:
   - stage: terraform
