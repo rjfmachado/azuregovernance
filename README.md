@@ -1,6 +1,6 @@
 # Azure Governance with Terraform
 
-[![Build Status](https://dev.azure.com/rjfmachado/azuredemos/_apis/build/status/governance/release/azure.governance.envrelease?branchName=master)](https://dev.azure.com/rjfmachado/azuredemos/_build/latest?definitionId=60&branchName=master)
+[![Build Status](https://dev.azure.com/rjfmachado/azuredemos/_apis/build/status/governance/release/azure.governance.envrelease?branchName=release%2Fr8)](https://dev.azure.com/rjfmachado/azuredemos/_build/latest?definitionId=60&branchName=release%2Fr8)
 
 This repo contains samples for using Terraform 0.12 to deploy and manage Azure Governance related resources using GitHub/Azure Devops and is configured to:
 

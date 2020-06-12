@@ -21,6 +21,7 @@ echo "Creating Release: ${newrelease}"
 
 sed -i "s/${currentrelease}/${newrelease}/g" ./release.json
 sed -i "s/- release\/${currentrelease}/- release\/${newrelease}/g" ../../pipelines/ops-dailyvalidation.yaml
+# TODO: add readme badge
 
 git add release.json
 git add ../../pipelines/ops-dailyvalidation.yaml
