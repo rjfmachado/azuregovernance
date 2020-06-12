@@ -7,6 +7,6 @@ variable "mgNetworkingSubscriptions" {
 resource "azurerm_management_group" "mgNetworking" {
   display_name               = "Networking"
   parent_management_group_id = data.azurerm_management_group.mgTenantRoot.id
-  group_id                   = "Networking"
+  name                       = "Networking"
   #subscription_ids           = var.mgNetworkingSubscriptions[var.deploymentStage]
 }

@@ -1,6 +1,6 @@
 //Get reference to the "Tenant Root Management Group"
 data "azurerm_management_group" "mgTenantRoot" {
-  group_id = data.azurerm_client_config.current.tenant_id
+  name = data.azurerm_client_config.current.tenant_id
 }
 
 //Custom role definition scoped to tenant root management group
