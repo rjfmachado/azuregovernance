@@ -62,7 +62,9 @@ resource "azurerm_policy_assignment" "polassAllowedLocations" {
   "listOfAllowedLocations": {
     "value": [
       "West Europe",
-      "North Europe"
+      "North Europe",
+      "West US",
+      "East US2"
      ]
   }
 }
