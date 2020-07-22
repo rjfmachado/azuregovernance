@@ -6,7 +6,7 @@ pr: none
 
 variables:
   - name: TF_VERSION
-    value: 0.12.26
+    value: 0.12.29
   - name: TF_INPUT
     value: "false"
   - name: TF_IN_AUTOMATION

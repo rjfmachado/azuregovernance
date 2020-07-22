@@ -1,10 +1,10 @@
 terraform {
-  required_version = "~> 0.12.26"
+  required_version = "~> 0.12.29"
   backend "azurerm" {
     resource_group_name = "terraformState"
   }
   required_providers {
-    azurerm = "~> 2.16"
+    azurerm = "~> 2.19"
     azuread = "~> 0.10"
   }
 }
