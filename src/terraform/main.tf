@@ -4,7 +4,7 @@ terraform {
     resource_group_name = "terraformState"
   }
   required_providers {
-    azurerm = "~> 2.19"
+    azurerm = "~> 2.20"
     azuread = "~> 0.10"
   }
 }
