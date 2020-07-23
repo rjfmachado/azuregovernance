@@ -1,11 +1,6 @@
 name: continuousdelivery
 
-on:
-  push:
-    branches:
-      - $default-branch
-    paths:
-      - src/terraform/**
+on: push
 
 jobs:
   tfPlan:
