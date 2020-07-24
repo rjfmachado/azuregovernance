@@ -25,6 +25,8 @@ jobs:
           terraform_version: 0.12.29
 
       - name: Terraform Init
+        env:
+          TF_CLI_ARGS_init: "-input=false -backend=true -backend-config=prod.stage"
         run: terraform init
 
       - name: Terraform Format
