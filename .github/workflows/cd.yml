@@ -15,6 +15,12 @@ jobs:
       ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
       ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
       ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      TF_CLI_ARGS_init: "-input=false -backend=true -backend-config=prod.stage"
+      TF_CLI_ARGS_plan: "-out prod.plan  -var-file=prod.tfvars.json"
+      TF_VAR_deploymentStage: "Prod"
+      TF_INPUT: "false"
+      TF_IN_AUTOMATION: "true"
+
 
     steps:
       - name: Checkout
@@ -25,8 +31,6 @@ jobs:
           terraform_version: 0.12.29
 
       - name: Terraform Init
-        env:
-          TF_CLI_ARGS_init: "-input=false -backend=true -backend-config=prod.stage"
         run: terraform init
 
       - name: Terraform Format
