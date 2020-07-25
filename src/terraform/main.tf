@@ -5,7 +5,7 @@ terraform {
   }
   required_providers {
     azurerm = "~> 2.20"
-    azuread = "~> 0.10"
+    azuread = "~> 0.11"
   }
 }
 
