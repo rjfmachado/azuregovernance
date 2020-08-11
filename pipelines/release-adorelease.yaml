@@ -17,7 +17,7 @@ variables:
   - name: TF_IN_AUTOMATION
     value: "true"
   - name: TF_VERSION
-    value: 0.12.29
+    value: 0.13.0
 
 stages:
   - stage: publishRelease

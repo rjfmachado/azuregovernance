@@ -2,7 +2,7 @@
 
 [![Build Status](https://dev.azure.com/rjfmachado/azuredemos/_apis/build/status/governance/release/azure.governance.envrelease?branchName=release%2Fr8)](https://dev.azure.com/rjfmachado/azuredemos/_build/latest?definitionId=60&branchName=release%2Fr8)
 
-This repo contains samples for using Terraform 0.12 to deploy and manage Azure Governance related resources using GitHub/Azure Devops and is configured to:
+This repo contains samples for using Terraform 0.13 to deploy and manage Azure Governance related resources using GitHub/Azure Devops and is configured to:
 
 * [x] Support multiple Azure AD Tenants in a multistage pipeline - Currently dev and prod, but designed to support easy addition of more stages.
 * [x] Azure Pipelines YAML templates for common tasks.
