@@ -39,4 +39,11 @@ resource "azurerm_role_definition" "roleDeploymentManagerAuditor" {
   assignable_scopes = [
     azurerm_management_group.mgManaged.id
   ]
+
+  //https://github.com/terraform-providers/terraform-provider-azurerm/issues/4847
+  lifecycle {
+    ignore_changes = [
+      scope,
+    ]
+  }
 }
