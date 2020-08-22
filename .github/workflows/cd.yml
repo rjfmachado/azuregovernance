@@ -9,7 +9,7 @@ defaults:
 jobs:
   tfPlanDev:
     name: Generate Plan (Dev)
-    if: github.ref == "dev"
+    if: github.ref == 'refs/head/dev'
     runs-on: ubuntu-latest
     env:
       ARM_TENANT_ID: ${{ secrets.DEV_ARM_TENANT_ID }}
@@ -41,7 +41,7 @@ jobs:
 
   tfPlanProd:
     name: Generate Plan (Prod)
-    if: github.ref == "master"
+    if: github.ref == 'refs/head/master'
     runs-on: ubuntu-latest
     env:
       ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
