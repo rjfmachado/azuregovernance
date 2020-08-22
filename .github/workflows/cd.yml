@@ -7,9 +7,42 @@ defaults:
     working-directory: src/terraform
 
 jobs:
-  tfPlan:
+  tfPlanDev:
+    name: Generate Plan (Dev)
+    if: github.ref == "dev"
     runs-on: ubuntu-latest
-    name: Generate Plan
+    env:
+      ARM_TENANT_ID: ${{ secrets.DEV_ARM_TENANT_ID }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.DEV_ARM_SUBSCRIPTION_ID }}
+      ARM_CLIENT_ID: ${{ secrets.DEV_ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.DEV_ARM_CLIENT_SECRET }}
+      TF_CLI_ARGS_init: "-input=false -backend=true -backend-config=dev.stage"
+      TF_CLI_ARGS_plan: "-out dev.plan  -var-file=dev.tfvars.json"
+      TF_VAR_deploymentStage: "Dev"
+      TF_INPUT: "false"
+      TF_IN_AUTOMATION: "true"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 0.13.0
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Format
+        run: terraform fmt -check
+
+      - name: Terraform Plan
+        run: terraform plan
+
+  tfPlanProd:
+    name: Generate Plan (Prod)
+    if: github.ref == "master"
+    runs-on: ubuntu-latest
     env:
       ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
@@ -20,7 +53,6 @@ jobs:
       TF_VAR_deploymentStage: "Prod"
       TF_INPUT: "false"
       TF_IN_AUTOMATION: "true"
-
 
     steps:
       - name: Checkout
