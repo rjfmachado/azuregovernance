@@ -1,0 +1,38 @@
+name: nightlyvalidation
+
+on:
+  schedule:
+    - cron '0 0 * * *'
+
+defaults:
+  run:
+    working-directory: src/terraform
+
+jobs:
+  tfPlanProd:
+    name: Generate Plan
+    runs-on: ubuntu-latest
+    env:
+      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      TF_CLI_ARGS_init: "-input=false -backend=true -backend-config=prod.stage"
+      TF_CLI_ARGS_plan: "-out prod.plan  -var-file=prod.tfvars.json"
+      TF_VAR_deploymentStage: "Prod"
+      TF_INPUT: "false"
+      TF_IN_AUTOMATION: "true"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 0.13.3
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Plan
+        run: terraform plan -detailed-exitcode
