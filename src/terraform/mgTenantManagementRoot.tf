@@ -23,11 +23,11 @@ resource "azurerm_role_definition" "roleCustomSupport" {
   ]
 
   //https://github.com/terraform-providers/terraform-provider-azurerm/issues/4847
-  lifecycle {
-    ignore_changes = [
-      scope,
-    ]
-  }
+  # lifecycle {
+  #   ignore_changes = [
+  #     scope,
+  #   ]
+  # }
 }
 
 data "azuread_domains" "aad_domains" {
@@ -49,7 +49,7 @@ resource "azuread_group" "gAllSupport" {
 //Custom Role assignment to Tenant Root Management Group
 resource "azurerm_role_assignment" "assAllCustomSupport" {
   scope              = data.azurerm_management_group.mgTenantRoot.id
-  role_definition_id = azurerm_role_definition.roleCustomSupport.id
+  role_definition_id = azurerm_role_definition.roleCustomSupport.role_definition_resource_id
   principal_id       = azuread_group.gAllSupport.id
 }
 

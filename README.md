@@ -45,6 +45,8 @@ This repo contains samples for using Terraform 0.13 to deploy and manage Azure G
   * [ ] Add Terraform graph and GraphViz support, review terraform-docs
   * [ ] Add a provisioners/connections scenario
   * [ ] Verify usage of *dynamic* block
+* [ ] Enterprise Scale
+  * [ ] Review <https://github.com/terraform-azurerm-modules/terraform-azurerm-azopsreference>
 
 ## Setup
 

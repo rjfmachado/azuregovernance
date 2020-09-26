@@ -15,7 +15,7 @@ resource "azurerm_management_group" "mgManaged" {
 # Assignment of a Tenant Root Management Group scoped role to a child Management Group
 resource "azurerm_role_assignment" "assManagedProjectsCustomSupport" {
   scope              = azurerm_management_group.mgManaged.id
-  role_definition_id = azurerm_role_definition.roleCustomSupport.id
+  role_definition_id = azurerm_role_definition.roleCustomSupport.role_definition_resource_id
   principal_id       = azuread_group.gManagedProjectsSupport.id
 }
 
@@ -41,9 +41,9 @@ resource "azurerm_role_definition" "roleDeploymentManagerAuditor" {
   ]
 
   //https://github.com/terraform-providers/terraform-provider-azurerm/issues/4847
-  lifecycle {
-    ignore_changes = [
-      scope,
-    ]
-  }
+  # lifecycle {
+  #   ignore_changes = [
+  #     scope,
+  #   ]
+  # }
 }
