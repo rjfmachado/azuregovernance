@@ -2,7 +2,7 @@ name: nightlyvalidation
 
 on:
   schedule:
-    - cron '0 0 * * *'
+    - cron: "0 0 * * *"
 
 defaults:
   run:
