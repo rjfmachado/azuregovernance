@@ -14,7 +14,7 @@ pr: none
 
 variables:
   - name: TF_VERSION
-    value: 0.13.5
+    value: 0.14.2
   - name: TF_INPUT
     value: "false"
   - name: TF_IN_AUTOMATION
