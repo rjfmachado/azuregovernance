@@ -145,7 +145,7 @@ STORAGE_ACCOUNT_NAME="tfazuregovernance$STAGE_NAME"
 CONTAINER_NAME="$STAGE_NAME"
 
 az group create --name "$RESOURCE_GROUP_NAME" --location "$LOCATION"
-az storage account create --resource-group "$RESOURCE_GROUP_NAME" --name "$STORAGE_ACCOUNT_NAME" --sku Standard_LRS --encryption-services blob --https-only --kind StorageV2
+az storage account create --resource-group "$RESOURCE_GROUP_NAME" --name "$STORAGE_ACCOUNT_NAME" --sku Standard_LRS --encryption-services blob --https-only --kind StorageV2 --min-tls-version TLS1_2 --allow-blob-public-access false
 az storage container create --name "$CONTAINER_NAME" --account-name "$STORAGE_ACCOUNT_NAME" --resource-group "$RESOURCE_GROUP_NAME" --auth-mode login
 
 az role assignment create --role "Contributor" --assignee $SERVICE_PRINCIPAL_ID --resource-group "$RESOURCE_GROUP_NAME"
