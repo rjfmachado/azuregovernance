@@ -59,7 +59,7 @@
     },
     "variables": {
         "tfVersion": {
-            "value": "0.14.2"
+            "value": "0.14.4"
         }
     },
     "variableGroups": [],
