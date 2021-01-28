@@ -20,7 +20,7 @@ resource "azurerm_role_assignment" "assManagedProjectsCustomSupport" {
 }
 
 resource "azuread_group" "gManagedProjectsSupport" {
-  name = "Managed Projects Support"
+  display_name = "Managed Projects Support"
 }
 
 resource "azurerm_role_definition" "roleDeploymentManagerAuditor" {
@@ -39,11 +39,4 @@ resource "azurerm_role_definition" "roleDeploymentManagerAuditor" {
   assignable_scopes = [
     azurerm_management_group.mgManaged.id
   ]
-
-  //https://github.com/terraform-providers/terraform-provider-azurerm/issues/4847
-  # lifecycle {
-  #   ignore_changes = [
-  #     scope,
-  #   ]
-  # }
 }

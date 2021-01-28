@@ -21,13 +21,6 @@ resource "azurerm_role_definition" "roleCustomSupport" {
   assignable_scopes = [
     data.azurerm_management_group.mgTenantRoot.id
   ]
-
-  //https://github.com/terraform-providers/terraform-provider-azurerm/issues/4847
-  # lifecycle {
-  #   ignore_changes = [
-  #     scope,
-  #   ]
-  # }
 }
 
 data "azuread_domains" "aad_domains" {
@@ -40,7 +33,7 @@ data "azuread_user" "example" {
 
 //Group to target with role assigment
 resource "azuread_group" "gAllSupport" {
-  name = "All Support"
+  display_name = "All Support"
   members = [
     data.azuread_user.example.object_id
   ]

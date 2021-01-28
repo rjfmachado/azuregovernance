@@ -2,26 +2,26 @@
 # Manual edits may be lost in future updates.
 
 provider "registry.terraform.io/hashicorp/azuread" {
-  version     = "1.2.2"
-  constraints = "~> 1.2.2"
+  version     = "1.3.0"
+  constraints = "~> 1.3"
   hashes = [
-    "h1:dbVkl1MqPscC8rXtUKEPpS0f5EsI9h8QEdqYZJDaDps=",
-    "zh:078579dd0be8b404f81a6d9d24eda037d37b8429bb42ad9301ade8b4d08a0e7e",
-    "zh:0ad8c048ba2aef8e6c9a8239724c900116647f297578291b4c35a23b99435973",
-    "zh:5552106a61427aa2501a43c73b3cfbb03f5fb9ea5d1798776565d1a807a0ef46",
-    "zh:70f10cce03c0d5ae2a52b3fbea54ccfc93023a3d495968d18dd17a2859409612",
-    "zh:77db2dab754320f7caf0dd2eb1185b525f4a57b9032e21e0ee8ff8f870e16a66",
-    "zh:7d287cc80665b512c6744a71634601f4a0cecab20283dcf3034c399f45102fec",
-    "zh:9651d3097756079d693592f89aafbc1a0d17f8154ea7c12a8f3718e906e26974",
-    "zh:affb3b06f3bf732c19949951100d022023811ae071d8894e860094ffeb815ad6",
-    "zh:d5df9307b5cc9421063a618e53615059ee43650c0894f08d574dd3fc2a9c918e",
-    "zh:d6d1fee370e5f3d23ef588efc43f1c56d61749794fe5acec3783e94188b6921e",
+    "h1:kk2BuvznEXuJfpEGjvLXdseihgFudwWEn3i+H6L4AOs=",
+    "zh:2ae29045dc4b169a92d950a118d3ff87bb19b5ca7a8f93cd3b255352e4f14b47",
+    "zh:5ff193b866021dd032db73797a1fc10b90c4156262082c36e5560d8665e39e95",
+    "zh:71256b8d542968fe6ba11b0875541cc3bc95228c63ce487a7d26a1d8e8143bd6",
+    "zh:713f76f8e8c6b5f6d32e2a206f6ff038a1a95c711e9f9cae3a690b5d85664cda",
+    "zh:73a5325a00098a348e999d1dbb2d59b718841d1c12415b1b8a66cd14721679c2",
+    "zh:c8b101a4c9638addb9e306f736e372f7a75d76f582379124a6bd5832c853846f",
+    "zh:c912664d10bcdae53e75885894cee2339a7e24965d48cbb270ea79f8b3a6999d",
+    "zh:dc4a04ca79bfa3534c07a219fee068369f77eb5d86267f9e9f2a7d038ef699e5",
+    "zh:e8d3d3569ce6f5ebf85da0ad78f22111186a259e1f52b55b9712f0858afbb498",
+    "zh:f66491df09c1e57384fed32a2ec148225ba3cac33342e290423a3a9781cae01d",
   ]
 }
 
 provider "registry.terraform.io/hashicorp/azurerm" {
   version     = "2.45.0"
-  constraints = "~> 2.43"
+  constraints = "~> 2.45"
   hashes = [
     "h1:eA2ghLVUU5UjgcPJGbf++gSPMrZvyxKOyoG2o2TvEOI=",
     "zh:0a583023e822dee0abc82f175956574dcd9e33e32634b91c205b3511873c8f38",
